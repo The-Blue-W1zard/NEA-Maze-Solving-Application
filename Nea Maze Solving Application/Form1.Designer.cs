@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            generateMaze = new Button();
             SuspendLayout();
+            // 
+            // generateMaze
+            // 
+            generateMaze.Location = new Point(1851, 177);
+            generateMaze.Name = "generateMaze";
+            generateMaze.Size = new Size(75, 23);
+            generateMaze.TabIndex = 0;
+            generateMaze.Text = "Generate";
+            generateMaze.UseVisualStyleBackColor = true;
+            generateMaze.Click += generateMaze_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1984, 1161);
+            Controls.Add(generateMaze);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -42,5 +54,7 @@
         }
 
         #endregion
+
+        private Button generateMaze;
     }
 }
