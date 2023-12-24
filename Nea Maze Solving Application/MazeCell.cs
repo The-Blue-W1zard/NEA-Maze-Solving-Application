@@ -15,6 +15,9 @@ namespace Nea_Maze_Solving_Application
         public bool isStartCell { get; private set; }
         public bool isEndCell { get; private set; }
 
+        private bool isOnPath = false;
+        private bool isExplored = false;
+
         public MazeCell()
         {
             btn = new Button();
@@ -60,6 +63,18 @@ namespace Nea_Maze_Solving_Application
         {
             isWall = !isWall;
             CellState(isWall, Color.Black);
+        }
+
+        public void TogglePath()
+        {
+            isOnPath = !isOnPath;
+            CellState(isOnPath, Color.Blue);
+        }
+
+        public void ToggleExplored()
+        {
+            isExplored = !isExplored;
+            CellState(isExplored, Color.Orange);
         }
 
         //public void IsStartCell()

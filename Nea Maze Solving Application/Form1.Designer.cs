@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             generateMaze = new Button();
+            Dijkstra = new Button();
             SuspendLayout();
             // 
             // generateMaze
@@ -41,11 +42,22 @@
             generateMaze.UseVisualStyleBackColor = true;
             generateMaze.Click += generateMaze_Click;
             // 
+            // Dijkstra
+            // 
+            Dijkstra.Location = new Point(1851, 206);
+            Dijkstra.Name = "Dijkstra";
+            Dijkstra.Size = new Size(75, 23);
+            Dijkstra.TabIndex = 1;
+            Dijkstra.Text = "Dijkstras";
+            Dijkstra.UseVisualStyleBackColor = true;
+            Dijkstra.Click += Dijkstra_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(Dijkstra);
             Controls.Add(generateMaze);
             Name = "Form1";
             Text = "Form1";
@@ -56,5 +68,6 @@
         #endregion
 
         private Button generateMaze;
+        private Button Dijkstra;
     }
 }

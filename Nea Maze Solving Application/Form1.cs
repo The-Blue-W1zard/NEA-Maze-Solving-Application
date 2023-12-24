@@ -2,7 +2,7 @@ namespace Nea_Maze_Solving_Application
 {
     public partial class Form1 : Form
     {
-        MazeCell[,] maze = new MazeCell[30, 50];
+        MazeCell[,] maze = new MazeCell[40, 80];
         Point startCell = new Point(0, 0);
         Point endCell = new Point(28, 48);
         public Form1()
@@ -33,7 +33,56 @@ namespace Nea_Maze_Solving_Application
             //hello
         }
 
-        private void RandomizedDFS( MazeCell[,] maze, Point start)
+        private List<Point> DijkstraVersion2(MazeCell[,] maze, Point start, Point goal, out List<Point> animationSteps)
+        {
+            UpPriQu Q = new();
+            Dictionary<Point, Point> prev = [];
+            Point None = new(-1, -1);
+            int numExplored = 0;
+            animationSteps = new List<Point>();
+
+            for (int row = 0; row < maze.GetLength(0); row++)
+            {
+                for (int col = 0; col < maze.GetLength(1); col++)
+                {
+                    Point point = new(row, col);
+                    Q.Enqueue(point, int.MaxValue);
+                    prev.Add(point, None);
+
+                }
+            }
+
+            Q.Update(start, 0);
+            Point current;
+            while (Q.Count > 0)
+            {
+                numExplored++;
+                current = Q.Dequeue();
+                animationSteps.Add(current);
+                
+                
+                if (current == goal)
+                {
+                    break;
+                }
+
+                foreach (Point neighbour in Neighbours(maze, current, 1))
+                {
+                    if (!Q.Contains(neighbour)) { continue; }
+                    int altDist = Q.Distance(current) + 1;
+                    if (altDist < Q.Distance(neighbour))
+                    {
+                        Q.Update(neighbour, altDist);
+                        prev[neighbour] = current;
+                    }
+                }
+            }
+            Console.WriteLine(numExplored);
+            return RecallPath(prev, goal);
+        }
+
+
+        private void RandomizedDFS(MazeCell[,] maze, Point start)
         {
             Queue<Point> queue = new Queue<Point>();
             //Stack<Point> stack = new Stack<Point>();
@@ -46,7 +95,7 @@ namespace Nea_Maze_Solving_Application
 
             while (queue.Count > 0)
             {
-                next = randomUnvisitedNeighbour( maze, current, ref visited);
+                next = randomUnvisitedNeighbour(maze, current, ref visited);
                 //Console.WriteLine(next);
                 if (next == none)
                 {
@@ -54,7 +103,7 @@ namespace Nea_Maze_Solving_Application
                     {
                         next = queue.Dequeue();
                         //Console.WriteLine(next);
-                        if (NeighboursMazeGen( maze, next, ref visited).Count() > 0)
+                        if (Neighbours(maze, next, 2, visited).Count() > 0)
                         {
                             //Console.WriteLine(NeighboursMazeGen(maze, next, visited).Count());
                             current = next;
@@ -68,7 +117,7 @@ namespace Nea_Maze_Solving_Application
 
                 }
 
-                ConnectCells( maze, current, next);
+                ConnectCells(maze, current, next);
                 current = next;
                 queue.Enqueue(current);
                 visited.Add(current);
@@ -79,12 +128,12 @@ namespace Nea_Maze_Solving_Application
             }
         }
 
-        private Point randomUnvisitedNeighbour( MazeCell[,] maze, Point vertex,  ref List<Point> visited)
+        private Point randomUnvisitedNeighbour(MazeCell[,] maze, Point vertex, ref List<Point> visited)
         {
             Random rand = new();
             Point next = new(-1, -1);
             Point none = new(-1, -1);
-            List<Point> neighbours = NeighboursMazeGen( maze, vertex, ref visited);
+            List<Point> neighbours = Neighbours(maze, vertex, 2, visited);
             while (neighbours.Count > 0)
             {
                 next = neighbours[rand.Next(neighbours.Count)];
@@ -96,13 +145,15 @@ namespace Nea_Maze_Solving_Application
 
         }
 
-        private List<Point> NeighboursMazeGen( MazeCell[,] maze, Point current, ref List<Point> visited)
+        private List<Point> Neighbours(MazeCell[,] maze, Point current, int dist, List<Point> visited = default)
         {
-            int[] checksRows = [0, 0, 2, -2];
-            int[] checksCols = [2, -2, 0, 0];
+            int[] checksRows = [0, 0, dist, -dist];
+            int[] checksCols = [dist, -dist, 0, 0];
             int row = current.X;
             int col = current.Y;
             List<Point> neighbours = [];
+
+            if(visited == default) { visited = new List<Point>(); }
 
             for (int t = 0; t < 4; t++)
             {
@@ -119,17 +170,75 @@ namespace Nea_Maze_Solving_Application
             return neighbours;
         }
 
-        private void ConnectCells( MazeCell[,] maze, Point first, Point second)
+
+        public List<Point> RecallPath(Dictionary<Point, Point> prev, Point goal)
+        {
+            Point None = new(-1, -1);
+            Point current = goal;
+            List<Point> path = [];
+            path.Clear();
+
+            if (prev[goal] == None)
+            {
+                Console.WriteLine("No Path Found");
+                //when integrated with UI will make this display pop up message
+            }
+
+            while (current != None)
+            {
+                path.Add(current);
+                current = prev[current];
+            }
+            path.Reverse();
+            return path;
+        }
+        private void UpdateMaze(MazeCell[,] maze, List<Point> path)
+        {
+            ////foreach (Point p in path) { Console.WriteLine(p); }
+            //Console.WriteLine("Before Update");
+            //OutputMaze(maze);
+            //MazeCell[,] tempMaze = new MazeCell[30, 50];
+            //Array.Copy(maze, tempMaze, maze.Length);
+
+            for (int i = 0; i < path.Count; i++)
+            {
+                try
+                {
+                    if (maze[path[i].X, path[i].Y].isWall) { Console.WriteLine("mucked up here"); continue; }
+                    maze[path[i].X, path[i].Y].TogglePath();
+                    Thread.Sleep(1);
+                    Application.DoEvents();
+                }
+                catch { Console.WriteLine("coordinates bad"); }
+            }
+            //Console.WriteLine("After Update");
+            //OutputMaze(maze);
+
+
+        }
+        private void AnimateMaze(MazeCell[,] maze, List<Point> path)
+        {
+            for (int i = 0; i < path.Count; i++)
+            {
+                try
+                {
+                    if (maze[path[i].X, path[i].Y].isWall) { Console.WriteLine("mucked up here"); continue; }
+                    maze[path[i].X, path[i].Y].ToggleExplored();
+                    Thread.Sleep(10);
+                    Application.DoEvents();
+                }
+                catch { Console.WriteLine("coordinates bad"); }
+            }
+            //Console.WriteLine("After Update");
+            //OutputMaze(maze);
+
+
+        }
+        private void ConnectCells(MazeCell[,] maze, Point first, Point second)
         {
             int row = (first.X + second.X) / 2;
             int col = (first.Y + second.Y) / 2;
             if (maze[row, col].isWall) { maze[row, col].ToggleWall(); }
-        }
-
-        private void generateMaze_Click(object sender, EventArgs e)
-        {
-            GenerateRowsCols(maze);
-            RandomizedDFS( maze, startCell);
         }
         private void GenerateRowsCols(MazeCell[,] maze)
         {
@@ -144,6 +253,18 @@ namespace Nea_Maze_Solving_Application
                     else if (c % 2 == 1) { maze[r, c].ToggleWall(); }
                 }
             }
+        }
+        private void generateMaze_Click(object sender, EventArgs e)
+        {
+            GenerateRowsCols(maze);
+            RandomizedDFS(maze, startCell);
+        }
+        private void Dijkstra_Click(object sender, EventArgs e)
+        {
+            List<Point> animationSteps;
+            List<Point> path = DijkstraVersion2(maze, startCell, endCell, out animationSteps);
+            AnimateMaze(maze, animationSteps);
+            UpdateMaze(maze, path);
         }
     }
 }
