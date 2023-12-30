@@ -15,8 +15,8 @@ namespace Nea_Maze_Solving_Application
         public bool isStartCell { get; private set; }
         public bool isEndCell { get; private set; }
 
-        private bool isOnPath = false;
-        private bool isExplored = false;
+        public bool isOnPath { get; private set; } = false;
+        public bool isExplored { get; private set; } = false;
 
         public MazeCell()
         {

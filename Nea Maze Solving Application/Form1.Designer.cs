@@ -30,6 +30,10 @@
         {
             generateMaze = new Button();
             Dijkstra = new Button();
+            AStar = new Button();
+            BreadthFirst = new Button();
+            ReloadMaze = new Button();
+            Clear = new Button();
             SuspendLayout();
             // 
             // generateMaze
@@ -52,11 +56,55 @@
             Dijkstra.UseVisualStyleBackColor = true;
             Dijkstra.Click += Dijkstra_Click;
             // 
+            // AStar
+            // 
+            AStar.Location = new Point(1851, 235);
+            AStar.Name = "AStar";
+            AStar.Size = new Size(75, 23);
+            AStar.TabIndex = 2;
+            AStar.Text = "AStar";
+            AStar.UseVisualStyleBackColor = true;
+            AStar.Click += AStar_Click;
+            // 
+            // BreadthFirst
+            // 
+            BreadthFirst.Location = new Point(1851, 264);
+            BreadthFirst.Name = "BreadthFirst";
+            BreadthFirst.Size = new Size(75, 23);
+            BreadthFirst.TabIndex = 3;
+            BreadthFirst.Text = "BreadthFirst";
+            BreadthFirst.UseVisualStyleBackColor = true;
+            BreadthFirst.Click += BreadthFirst_Click;
+            // 
+            // ReloadMaze
+            // 
+            ReloadMaze.Location = new Point(1851, 293);
+            ReloadMaze.Name = "ReloadMaze";
+            ReloadMaze.Size = new Size(75, 23);
+            ReloadMaze.TabIndex = 4;
+            ReloadMaze.Text = "Reload";
+            ReloadMaze.UseVisualStyleBackColor = true;
+            ReloadMaze.Click += ReloadMaze_Click;
+            // 
+            // Clear
+            // 
+            Clear.Location = new Point(1851, 322);
+            Clear.Name = "Clear";
+            Clear.Size = new Size(75, 23);
+            Clear.TabIndex = 5;
+            Clear.Text = "Clear";
+            Clear.UseVisualStyleBackColor = true;
+            Clear.Click += Clear_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(Clear);
+            Controls.Add(ReloadMaze);
+            Controls.Add(BreadthFirst);
+            Controls.Add(AStar);
             Controls.Add(Dijkstra);
             Controls.Add(generateMaze);
             Name = "Form1";
@@ -69,5 +117,9 @@
 
         private Button generateMaze;
         private Button Dijkstra;
+        private Button AStar;
+        private Button BreadthFirst;
+        private Button ReloadMaze;
+        private Button Clear;
     }
 }
