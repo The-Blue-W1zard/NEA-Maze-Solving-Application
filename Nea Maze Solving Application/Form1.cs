@@ -222,6 +222,8 @@ namespace Nea_Maze_Solving_Application
                 current = next;
                 queue.Enqueue(current);
                 visited.Add(current);
+                Application.DoEvents();
+                Thread.Sleep(1);
 
                 //foreach (Point p in queue) { Console.Write(p); }
                 //Console.WriteLine();
