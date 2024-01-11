@@ -32,12 +32,15 @@ namespace Nea_Maze_Solving_Application
             btn.Click += new EventHandler(CellClicked);
             isWall = false;
             btn.BackColor = Color.White;
+            btn.Name = Convert.ToString(location);
 
         }
 
         public void CellClicked(object sender, EventArgs e)
         {
+            
             ToggleWall();
+
 
         }
 

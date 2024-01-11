@@ -8,6 +8,9 @@ namespace Nea_Maze_Solving_Application
         MazeCell[,] backupMaze = new MazeCell[30, 50];
         Point startCell = new Point(0, 0);
         Point endCell = new Point(28, 48);
+        Point tempCell = new Point();
+        public bool changingStartCell = false;
+        public bool changingEndCell = false;
         public Form1()
         {
             InitializeComponent();
@@ -283,11 +286,11 @@ namespace Nea_Maze_Solving_Application
             List<Point> path = [];
             path.Clear();
 
-            if (prev[goal] == None)
-            {
-                Console.WriteLine("No Path Found");
-                //when integrated with UI will make this display pop up message
-            }
+            //if (prev[goal] == None)
+            //{
+            //    Console.WriteLine("No Path Found");
+            //    //when integrated with UI will make this display pop up message
+            //}
 
             while (current != None)
             {
@@ -368,13 +371,14 @@ namespace Nea_Maze_Solving_Application
         }
         private void ClearMaze()
         {
-            foreach(MazeCell cell in maze) {
-            if (cell.isWall) {cell.ToggleWall(); }
-            if (cell.isOnPath) { cell.TogglePath(); }
-            if (cell.isExplored) { cell.ToggleExplored(); }
-            if (cell.isStartCell || cell.isEndCell) { continue; }
+            foreach (MazeCell cell in maze)
+            {
+                if (cell.isWall) { cell.ToggleWall(); }
+                if (cell.isOnPath) { cell.TogglePath(); }
+                if (cell.isExplored) { cell.ToggleExplored(); }
+                if (cell.isStartCell || cell.isEndCell) { continue; }
             }
-            
+
             //Invalidate();
         }
         private void generateMaze_Click(object sender, EventArgs e)
@@ -412,21 +416,103 @@ namespace Nea_Maze_Solving_Application
 
         private void ReloadMaze_Click(object sender, EventArgs e)
         {
-            for(int r = 0; r < maze.GetLength(0);r++)
+            for (int r = 0; r < maze.GetLength(0); r++)
             {
                 for (int c = 0; c < maze.GetLength(1); c++)
                 {
-                    maze[r,c] = backupMaze[r,c];
-                    Debug.WriteLine(maze[r,c].isWall);
+                    maze[r, c] = backupMaze[r, c];
+                    Debug.WriteLine(maze[r, c].isWall);
                 }
             }
-            Invalidate();   
+            Invalidate();
+        }
+
+        private void ToggleAllCells(bool mode)
+        {
+            for (int r = 0; r < maze.GetLength(0); r++)
+            {
+                for (int c = 0; c < maze.GetLength(1); c++)
+                {
+                    maze[r, c].btn.Enabled = mode;
+
+                }
+            }
+        }
+
+        private Point CooordsToButtonPoint(int x, int y)
+        {
+            int col = x / 32 - 1;
+            int row = y / 32 - 1;
+            //MessageBox.Show($"r = {row} c = {col}");
+            return new Point(row, col);
         }
 
         private void Clear_Click(object sender, EventArgs e)
         {
             AlgorithmPrequisites();
             ClearMaze();
+        }
+
+        private void ChangeStart_Click(object sender, EventArgs e)
+        {
+            if (!changingStartCell)
+            {
+                ChangeStart.BackColor = Color.Green;
+                changingStartCell = true;
+                ToggleAllCells(false);
+                //MessageBox.Show("Button was pressed");
+
+            }
+            else if (changingStartCell)
+            {
+                ChangeStart.BackColor = Color.White;
+                ToggleAllCells(true);
+            }
+
+        }
+
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (changingStartCell)
+            {
+                //MessageBox.Show($"Mouse click at X: {e.X}, Y: {e.Y} after button press.");
+                changingStartCell = false;
+                ToggleAllCells(true);
+                ChangeStart.BackColor = Color.White;
+                tempCell = CooordsToButtonPoint(e.X, e.Y);
+                maze[startCell.X, startCell.Y].ToggleStartCell();
+                startCell = tempCell;
+                maze[startCell.X, startCell.Y].ToggleStartCell();
+            }
+            else if (changingEndCell) 
+            {
+                changingEndCell = false;
+                ToggleAllCells(true);
+                ChangeEnd.BackColor = Color.White;
+                tempCell = CooordsToButtonPoint(e.X, e.Y);
+                maze[endCell.X , endCell.Y].ToggleEndCell();
+                endCell = tempCell;
+                maze[endCell.X, endCell.Y].ToggleEndCell();
+            }
+        }
+
+        private void ChangeEnd_Click(object sender, EventArgs e)
+        {
+            if (!changingEndCell)
+            {
+                ChangeEnd.BackColor = Color.Red;
+                changingEndCell = true;
+                ToggleAllCells(false);
+                //MessageBox.Show("Button was pressed");
+
+            }
+            else if (changingEndCell)
+            {
+                ChangeEnd.BackColor = Color.White;
+                ToggleAllCells(true);
+            }
+
         }
     }
 }

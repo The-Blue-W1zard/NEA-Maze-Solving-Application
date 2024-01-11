@@ -34,6 +34,8 @@
             BreadthFirst = new Button();
             ReloadMaze = new Button();
             Clear = new Button();
+            ChangeStart = new Button();
+            ChangeEnd = new Button();
             SuspendLayout();
             // 
             // generateMaze
@@ -96,11 +98,34 @@
             Clear.UseVisualStyleBackColor = true;
             Clear.Click += Clear_Click;
             // 
+            // ChangeStart
+            // 
+            ChangeStart.Location = new Point(1732, 206);
+            ChangeStart.Name = "ChangeStart";
+            ChangeStart.Size = new Size(113, 23);
+            ChangeStart.TabIndex = 6;
+            ChangeStart.Text = "Change Start";
+            ChangeStart.UseVisualStyleBackColor = true;
+            ChangeStart.Click += ChangeStart_Click;
+            // 
+            // ChangeEnd
+            // 
+            ChangeEnd.Location = new Point(1732, 235);
+            ChangeEnd.Name = "ChangeEnd";
+            ChangeEnd.Size = new Size(113, 23);
+            ChangeEnd.TabIndex = 7;
+            ChangeEnd.Text = "Change End";
+            ChangeEnd.UseVisualStyleBackColor = true;
+            ChangeEnd.Click += ChangeEnd_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.SeaGreen;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(ChangeEnd);
+            Controls.Add(ChangeStart);
             Controls.Add(Clear);
             Controls.Add(ReloadMaze);
             Controls.Add(BreadthFirst);
@@ -110,6 +135,7 @@
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
+            MouseClick += Form1_MouseClick;
             ResumeLayout(false);
         }
 
@@ -121,5 +147,7 @@
         private Button BreadthFirst;
         private Button ReloadMaze;
         private Button Clear;
+        private Button ChangeStart;
+        private Button ChangeEnd;
     }
 }
