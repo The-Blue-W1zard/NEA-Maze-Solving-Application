@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text;
 
 namespace Nea_Maze_Solving_Application
 {
@@ -9,6 +10,7 @@ namespace Nea_Maze_Solving_Application
         Point startCell = new Point(0, 0);
         Point endCell = new Point(28, 48);
         Point tempCell = new Point();
+        Stack<MazeCell[,]> mazeHistory = new Stack<MazeCell[,]>();  
         public bool changingStartCell = false;
         public bool changingEndCell = false;
         public Form1()
@@ -23,9 +25,9 @@ namespace Nea_Maze_Solving_Application
             {
                 for (int col = 0; col < maze.GetLength(1); col++)
                 {
-                    maze[row, col] = new MazeCell();
-                    maze[row, col].location = new Point(row, col);
-                    maze[row, col].Intialize();
+                    maze[row, col] = new MazeCell(new Point(row, col));
+                    //maze[row, col].location = new Point(row, col);
+                    //maze[row, col].Intialize();
                     Controls.Add(maze[row, col].btn);
                     Invalidate();
                 }
@@ -226,7 +228,7 @@ namespace Nea_Maze_Solving_Application
                 queue.Enqueue(current);
                 visited.Add(current);
                 Application.DoEvents();
-                Thread.Sleep(1);
+                //Thread.Sleep(1);
 
                 //foreach (Point p in queue) { Console.Write(p); }
                 //Console.WriteLine();
@@ -315,7 +317,7 @@ namespace Nea_Maze_Solving_Application
                     if (maze[path[i].X, path[i].Y].isWall) { Console.WriteLine("mucked up here"); continue; }
                     if (maze[path[i].X, path[i].Y].isStartCell || maze[path[i].X, path[i].Y].isEndCell) { continue; }
                     maze[path[i].X, path[i].Y].TogglePath();
-                    Thread.Sleep(1);
+                    //Thread.Sleep(1);
                     Application.DoEvents();
                 }
                 catch { Console.WriteLine("coordinates bad"); }
@@ -334,7 +336,7 @@ namespace Nea_Maze_Solving_Application
                     if (maze[path[i].X, path[i].Y].isWall) { Console.WriteLine("mucked up here"); continue; }
                     if (maze[path[i].X, path[i].Y].isStartCell || maze[path[i].X, path[i].Y].isEndCell) { continue; }
                     maze[path[i].X, path[i].Y].ToggleExplored();
-                    Thread.Sleep(10);
+                    //Thread.Sleep(10);
                     Application.DoEvents();
                 }
                 catch { Console.WriteLine("coordinates bad"); }
@@ -366,8 +368,23 @@ namespace Nea_Maze_Solving_Application
         }
         private void AlgorithmPrequisites()
         {
+            MazeCell[,] tempMaze = new MazeCell[30, 50];
             //Things to run before actual algorithms
-            Array.Copy(maze, backupMaze, maze.Length);
+            Array.Copy(maze, tempMaze, maze.Length);
+            mazeHistory.Push(tempMaze);
+        }
+        private void WriteOverMaze(MazeCell[,] originalMaze, MazeCell[,] newMaze) 
+        {
+            for (int r = 0; r < originalMaze.GetLength(0); r++)
+            {
+                for (int c = 0; c < originalMaze.GetLength(1); c++)
+                {
+                    originalMaze[r, c].OverwriteCell(newMaze[r, c]);
+                    //originalMaze[r,c] = newMaze[r, c];
+                    Application.DoEvents();
+                }
+            }
+
         }
         private void ClearMaze()
         {
@@ -407,24 +424,21 @@ namespace Nea_Maze_Solving_Application
 
         private void BreadthFirst_Click(object sender, EventArgs e)
         {
-            AlgorithmPrequisites();
-            List<Point> animationSteps;
-            List<Point> path = BreadthFirstSearch(maze, startCell, endCell, out animationSteps);
-            AnimateMaze(maze, animationSteps);
-            UpdateMaze(maze, path);
+            //AlgorithmPrequisites();
+            //List<Point> animationSteps;
+            //List<Point> path = BreadthFirstSearch(maze, startCell, endCell, out animationSteps);
+            //AnimateMaze(maze, animationSteps);
+            //UpdateMaze(maze, path);
+            CSVToMaze();
         }
 
         private void ReloadMaze_Click(object sender, EventArgs e)
         {
-            for (int r = 0; r < maze.GetLength(0); r++)
-            {
-                for (int c = 0; c < maze.GetLength(1); c++)
-                {
-                    maze[r, c] = backupMaze[r, c];
-                    Debug.WriteLine(maze[r, c].isWall);
-                }
-            }
-            Invalidate();
+            //MazeCell[,] prevMaze = mazeHistory.Pop();
+            //WriteOverMaze(maze,prevMaze);
+            MazeToCSVFile();
+            
+
         }
 
         private void ToggleAllCells(bool mode)
@@ -451,6 +465,7 @@ namespace Nea_Maze_Solving_Application
         {
             AlgorithmPrequisites();
             ClearMaze();
+            //CSVToMaze();
         }
 
         private void ChangeStart_Click(object sender, EventArgs e)
@@ -513,6 +528,66 @@ namespace Nea_Maze_Solving_Application
                 ToggleAllCells(true);
             }
 
+        }
+
+        private void MazeToCSVFile()
+        {
+            //var csv = new StringBuilder();
+            string path = @"C:\Users\josep\Downloads\Output2.csv";
+
+            using (var w = new StreamWriter(path))
+            {
+                for (int r = 0; r < maze.GetLength(0); r++)
+                {
+                    for (int c = 0; c < maze.GetLength(1); c++)
+                    {
+                        MazeCell tempMazeCell = maze[r, c];
+                        var location = tempMazeCell.location;
+                        var isWall = tempMazeCell.isWall;
+                        var isStartCell = tempMazeCell.isStartCell;
+                        var isEndCell = tempMazeCell.isEndCell;
+                        var isOnPath = tempMazeCell.isOnPath;
+                        var isExplored = tempMazeCell.isExplored;
+                        var newline =  $"{location.X},{location.Y},{isWall},{isStartCell},{isEndCell},{isOnPath},{isExplored}";
+                        //Debug.WriteLine(newline);   
+                        w.WriteLine(newline);
+                        w.Flush();
+
+                    }
+                }
+            }
+            //File.WriteAllText(path, csv.ToString());
+        }
+        public bool checkBool(string str)
+        {
+            if(str == "True") { return true; }
+            return false;
+        }
+        private void CSVToMaze()
+        {
+            string path = @"C:\Users\josep\Downloads\Output2.csv";
+            Controls.Clear();
+
+            using (var r = new StreamReader(File.OpenRead(path)))
+            {
+
+                while (!r.EndOfStream)
+                {
+                    var line = r.ReadLine();
+                    var splitLine = line.Replace(" ", string.Empty).Split(',');
+                    var location = new Point(Convert.ToInt32(splitLine[0]),Convert.ToInt32(splitLine[1]));
+                    var isWall = checkBool(splitLine[2]);
+                    var isStartCell = checkBool(splitLine[3]);
+                    var isEndCell = checkBool(splitLine[4]);
+                    var isOnPath = checkBool(splitLine[5]);
+                    var isExplored = checkBool(splitLine[6]);
+                    MazeCell newCell = new MazeCell(location, isWall, isStartCell, isEndCell, isOnPath, isExplored);
+                    //Controls.Remove(maze[location.X, location.Y].btn);
+                    maze[location.X,location.Y] = newCell;
+                    Controls.Add(maze[location.X, location.Y].btn);
+
+                }
+            }
         }
     }
 }
