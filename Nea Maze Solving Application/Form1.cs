@@ -556,6 +556,7 @@ namespace Nea_Maze_Solving_Application
                     }
                 }
             }
+            MessageBox.Show("Finished Exporting");
             //File.WriteAllText(path, csv.ToString());
         }
         public bool checkBool(string str)
@@ -566,7 +567,7 @@ namespace Nea_Maze_Solving_Application
         private void CSVToMaze()
         {
             string path = @"C:\Users\josep\Downloads\Output2.csv";
-            Controls.Clear();
+            
 
             using (var r = new StreamReader(File.OpenRead(path)))
             {
@@ -575,19 +576,26 @@ namespace Nea_Maze_Solving_Application
                 {
                     var line = r.ReadLine();
                     var splitLine = line.Replace(" ", string.Empty).Split(',');
-                    var location = new Point(Convert.ToInt32(splitLine[0]),Convert.ToInt32(splitLine[1]));
-                    var isWall = checkBool(splitLine[2]);
-                    var isStartCell = checkBool(splitLine[3]);
-                    var isEndCell = checkBool(splitLine[4]);
-                    var isOnPath = checkBool(splitLine[5]);
-                    var isExplored = checkBool(splitLine[6]);
-                    MazeCell newCell = new MazeCell(location, isWall, isStartCell, isEndCell, isOnPath, isExplored);
+                    Point location = new Point(Convert.ToInt32(splitLine[0]),Convert.ToInt32(splitLine[1]));
+                    bool isWall = checkBool(splitLine[2]);
+                    bool isStartCell = checkBool(splitLine[3]);
+                    bool isEndCell = checkBool(splitLine[4]);
+                    bool isOnPath = checkBool(splitLine[5]);
+                    bool isExplored = checkBool(splitLine[6]);
+                    Debug.WriteLine($"{location} + {isWall}");
+                    maze[location.X, location.Y].RefreshCell(isWall, isStartCell, isEndCell, isOnPath, isExplored);
+                    //maze[location.X, location.Y].
+                    //MazeCell newCell = new MazeCell(location, isWall, isStartCell, isEndCell, isOnPath, isExplored);
                     //Controls.Remove(maze[location.X, location.Y].btn);
-                    maze[location.X,location.Y] = newCell;
-                    Controls.Add(maze[location.X, location.Y].btn);
+                    //maze[location.X,location.Y] = newCell;
+                    //Application.DoEvents();
+                    //Controls.Add(maze[location.X, location.Y].btn);
+                    //maze[location.X, location.Y].RefreshCell();
+
 
                 }
             }
+            Invalidate();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nea_Maze_Solving_Application
 {
-    internal class MazeCell
+    internal class MazeCell:Button
     {
         public Point location;   
         private Size size = new Size(32, 32);
@@ -20,47 +20,46 @@ namespace Nea_Maze_Solving_Application
 
         public MazeCell(Point location, bool isWall = false, bool isStartCell = false, bool isEndCell = false, bool isOnPath = false, bool isExplored = false)
         {
-            btn = new Button();
             this.location = location;
             this.isWall = isWall;
             this.isStartCell = isStartCell;
             this.isEndCell = isEndCell;
             this.isOnPath = isOnPath;
             this.isExplored = isExplored;
-            btn.Size = size;
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.Location = new Point((location.Y + 1) * 32, (location.X + 1) * 32);
-            btn.Click += new EventHandler(CellClicked);
-            btn.BackColor = Color.White;
-            btn.Name = Convert.ToString(location);
+            Size = size;
+            FlatStyle = FlatStyle.Flat;
+            Location = new Point((location.Y + 1) * 32, (location.X + 1) * 32);
+            Click += new EventHandler(CellClicked);
+            BackColor = Color.White;
+            Name = Convert.ToString(location);
         }
 
         public void Intialize()
         {
-            btn.Size = size;
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.Location = new Point((location.Y+1)*32, (location.X+1)*32);
-            btn.Click += new EventHandler(CellClicked);
+            Size = size;
+            FlatStyle = FlatStyle.Flat;
+            Location = new Point((location.Y+1)*32, (location.X+1)*32);
+            Click += new EventHandler(CellClicked);
             isWall = false;
             isOnPath = false;
             isExplored = false;
-            btn.BackColor = Color.White;
-            btn.Name = Convert.ToString(location);
+            BackColor = Color.White;
+            Name = Convert.ToString(location);
 
         }
 
         public void CellClicked(object sender, EventArgs e)
         {
-            
-            ToggleWall();
+            Visible = false;
+            //ToggleWall();
 
 
         }
 
         private void CellState(bool state, Color color)
         {
-            if (state) { btn.BackColor = color; }
-            else { btn.BackColor = Color.White; }
+            if (state) { BackColor = color; }
+            else { BackColor = Color.White; }
         }
 
         public void ToggleStartCell()
@@ -93,6 +92,21 @@ namespace Nea_Maze_Solving_Application
             CellState(isExplored, Color.Orange);
         }
 
+        public void RefreshCell(bool isWall, bool isStartCell, bool isEndCell, bool isOnPath, bool isExplored)
+        {
+            this.isWall = isWall;
+            this.isStartCell = isStartCell;
+            this.isEndCell = isEndCell;
+            this.isOnPath = isOnPath;
+            this.isExplored = isExplored;
+            CellState(isStartCell, Color.Green);
+            CellState(isEndCell, Color.Red);
+            CellState(isWall, Color.Black);
+            CellState(isOnPath, Color.Blue);
+            CellState(isExplored, Color.Orange);
+            
+        }
+
         public void OverwriteCell(MazeCell cell)
         {
             isWall = cell.isWall;
@@ -105,8 +119,6 @@ namespace Nea_Maze_Solving_Application
             CellState(isWall, Color.Black);
             CellState(isOnPath, Color.Blue);
             CellState(isExplored, Color.Orange);
-
-
 
 
         }
