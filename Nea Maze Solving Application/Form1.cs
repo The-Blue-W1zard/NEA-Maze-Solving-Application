@@ -28,7 +28,7 @@ namespace Nea_Maze_Solving_Application
                     maze[row, col] = new MazeCell(new Point(row, col));
                     //maze[row, col].location = new Point(row, col);
                     //maze[row, col].Intialize();
-                    Controls.Add(maze[row, col].btn);
+                    Controls.Add(maze[row, col]);
                     Invalidate();
                 }
             }
@@ -447,7 +447,7 @@ namespace Nea_Maze_Solving_Application
             {
                 for (int c = 0; c < maze.GetLength(1); c++)
                 {
-                    maze[r, c].btn.Enabled = mode;
+                    maze[r, c].Enabled = mode;
 
                 }
             }
@@ -582,7 +582,7 @@ namespace Nea_Maze_Solving_Application
                     bool isEndCell = checkBool(splitLine[4]);
                     bool isOnPath = checkBool(splitLine[5]);
                     bool isExplored = checkBool(splitLine[6]);
-                    Debug.WriteLine($"{location} + {isWall}");
+                    //Debug.WriteLine($"{location} + {isWall}");
                     maze[location.X, location.Y].RefreshCell(isWall, isStartCell, isEndCell, isOnPath, isExplored);
                     //maze[location.X, location.Y].
                     //MazeCell newCell = new MazeCell(location, isWall, isStartCell, isEndCell, isOnPath, isExplored);
@@ -595,7 +595,7 @@ namespace Nea_Maze_Solving_Application
 
                 }
             }
-            Invalidate();
+            //maze[5, 3].BackColor = Color.Goldenrod;
         }
     }
 }

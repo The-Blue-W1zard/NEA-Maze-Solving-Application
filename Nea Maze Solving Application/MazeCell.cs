@@ -10,7 +10,6 @@ namespace Nea_Maze_Solving_Application
     {
         public Point location;   
         private Size size = new Size(32, 32);
-        public Button btn;
         public bool isWall {  get; private set; }
         public bool isStartCell { get; private set; }
         public bool isEndCell { get; private set; }
@@ -99,11 +98,14 @@ namespace Nea_Maze_Solving_Application
             this.isEndCell = isEndCell;
             this.isOnPath = isOnPath;
             this.isExplored = isExplored;
-            CellState(isStartCell, Color.Green);
-            CellState(isEndCell, Color.Red);
-            CellState(isWall, Color.Black);
-            CellState(isOnPath, Color.Blue);
-            CellState(isExplored, Color.Orange);
+            if (isStartCell) { CellState(isStartCell, Color.Green); }
+            else if (isEndCell) { CellState(isEndCell, Color.Red); }      
+            else if (isWall) { CellState(isWall, Color.Black); }
+            else if (isOnPath) { CellState(isOnPath, Color.Blue); }
+            else if (isExplored) { CellState(isExplored, Color.Orange); }
+            else { BackColor = Color.White; }
+            //Application.DoEvents();
+
             
         }
 
@@ -114,11 +116,12 @@ namespace Nea_Maze_Solving_Application
             isEndCell = cell.isEndCell;
             isOnPath = cell.isOnPath;
             isExplored = cell.isExplored;
-            CellState(isStartCell, Color.Green);
-            CellState(isEndCell, Color.Red);
-            CellState(isWall, Color.Black);
-            CellState(isOnPath, Color.Blue);
-            CellState(isExplored, Color.Orange);
+            if (cell.isWall) { cell.BackColor = Color.Black; }
+            //CellState(isStartCell, Color.Green);
+            //CellState(isEndCell, Color.Red);
+            //CellState(isWall, Color.Black);
+            //CellState(isOnPath, Color.Blue);
+            //CellState(isExplored, Color.Orange);
 
 
         }
