@@ -10,13 +10,14 @@ namespace Nea_Maze_Solving_Application
         Point startCell = new Point(0, 0);
         Point endCell = new Point(28, 48);
         Point tempCell = new Point();
-        Stack<MazeCell[,]> mazeHistory = new Stack<MazeCell[,]>();  
+        Stack<string> mazeHistory = new Stack<string>();  
         public bool changingStartCell = false;
         public bool changingEndCell = false;
         public Form1()
         {
             InitializeComponent();
             CreateBlankMaze();
+            GenerateAppData();
         }
 
         private void CreateBlankMaze()
@@ -368,12 +369,13 @@ namespace Nea_Maze_Solving_Application
         }
         private void AlgorithmPrequisites()
         {
-            MazeCell[,] tempMaze = new MazeCell[30, 50];
-            //Things to run before actual algorithms
-            Array.Copy(maze, tempMaze, maze.Length);
-            mazeHistory.Push(tempMaze);
+            ExportTimedFile();
+            //MazeCell[,] tempMaze = new MazeCell[30, 50];
+            ////Things to run before actual algorithms
+            //Array.Copy(maze, tempMaze, maze.Length);                      
+            //mazeHistory.Push(tempMaze);
         }
-        private void WriteOverMaze(MazeCell[,] originalMaze, MazeCell[,] newMaze) 
+        private void WriteOverMaze(MazeCell[,] originalMaze, MazeCell[,] newMaze)
         {
             for (int r = 0; r < originalMaze.GetLength(0); r++)
             {
@@ -424,20 +426,28 @@ namespace Nea_Maze_Solving_Application
 
         private void BreadthFirst_Click(object sender, EventArgs e)
         {
-            //AlgorithmPrequisites();
-            //List<Point> animationSteps;
-            //List<Point> path = BreadthFirstSearch(maze, startCell, endCell, out animationSteps);
-            //AnimateMaze(maze, animationSteps);
-            //UpdateMaze(maze, path);
-            CSVToMaze();
+            AlgorithmPrequisites();
+            List<Point> animationSteps;
+            List<Point> path = BreadthFirstSearch(maze, startCell, endCell, out animationSteps);
+            AnimateMaze(maze, animationSteps);
+            UpdateMaze(maze, path);
+
+            //temporary while buttons still funky
+            //string filePath = GetFilePath("Output.csv");
+            //CSVToMaze(filePath);
         }
 
         private void ReloadMaze_Click(object sender, EventArgs e)
         {
             //MazeCell[,] prevMaze = mazeHistory.Pop();
             //WriteOverMaze(maze,prevMaze);
-            MazeToCSVFile();
+
+            //temporary while buttons still funky
             
+            string prevMazeFile = mazeHistory.Pop();
+            CSVToMaze(prevMazeFile);
+            
+
 
         }
 
@@ -500,13 +510,13 @@ namespace Nea_Maze_Solving_Application
                 startCell = tempCell;
                 maze[startCell.X, startCell.Y].ToggleStartCell();
             }
-            else if (changingEndCell) 
+            else if (changingEndCell)
             {
                 changingEndCell = false;
                 ToggleAllCells(true);
                 ChangeEnd.BackColor = Color.White;
                 tempCell = CooordsToButtonPoint(e.X, e.Y);
-                maze[endCell.X , endCell.Y].ToggleEndCell();
+                maze[endCell.X, endCell.Y].ToggleEndCell();
                 endCell = tempCell;
                 maze[endCell.X, endCell.Y].ToggleEndCell();
             }
@@ -530,12 +540,12 @@ namespace Nea_Maze_Solving_Application
 
         }
 
-        private void MazeToCSVFile()
+        private void MazeToCSVFile(string filePath)
         {
             //var csv = new StringBuilder();
-            string path = @"C:\Users\josep\Downloads\Output2.csv";
-
-            using (var w = new StreamWriter(path))
+            //string path = @"C:\Users\josep\Downloads\Output2.csv";#
+            MessageBox.Show(filePath);
+            using (var w = new StreamWriter(filePath))
             {
                 for (int r = 0; r < maze.GetLength(0); r++)
                 {
@@ -548,7 +558,7 @@ namespace Nea_Maze_Solving_Application
                         var isEndCell = tempMazeCell.isEndCell;
                         var isOnPath = tempMazeCell.isOnPath;
                         var isExplored = tempMazeCell.isExplored;
-                        var newline =  $"{location.X},{location.Y},{isWall},{isStartCell},{isEndCell},{isOnPath},{isExplored}";
+                        var newline = $"{location.X},{location.Y},{isWall},{isStartCell},{isEndCell},{isOnPath},{isExplored}";
                         //Debug.WriteLine(newline);   
                         w.WriteLine(newline);
                         w.Flush();
@@ -561,22 +571,46 @@ namespace Nea_Maze_Solving_Application
         }
         public bool checkBool(string str)
         {
-            if(str == "True") { return true; }
+            if (str == "True") { return true; }
             return false;
         }
-        private void CSVToMaze()
+        private void GenerateAppData()
         {
-            string path = @"C:\Users\josep\Downloads\Output2.csv";
-            
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string appDataFolder = Path.Combine(localAppData, "NEAMazeSolver");
 
-            using (var r = new StreamReader(File.OpenRead(path)))
+            if (!Directory.Exists(appDataFolder))
+            {
+                Directory.CreateDirectory(appDataFolder);
+            }
+        }
+
+        private string GetFilePath(string fileName)
+        {
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string appDataFolder = Path.Combine(localAppData, "NEAMazeSolver");
+            string path = Path.Combine(appDataFolder, fileName);
+            //if (!File.Exists(path))
+            //{
+            //    throw new Exception("File Name Invalid");
+            //}
+            MessageBox.Show(path);
+            return path;
+
+        }
+        private void CSVToMaze(string filePath)
+        {
+
+            //string filePath = GetFilePath("Output.csv");
+
+            using (var r = new StreamReader(File.OpenRead(filePath)))
             {
 
                 while (!r.EndOfStream)
                 {
                     var line = r.ReadLine();
                     var splitLine = line.Replace(" ", string.Empty).Split(',');
-                    Point location = new Point(Convert.ToInt32(splitLine[0]),Convert.ToInt32(splitLine[1]));
+                    Point location = new Point(Convert.ToInt32(splitLine[0]), Convert.ToInt32(splitLine[1]));
                     bool isWall = checkBool(splitLine[2]);
                     bool isStartCell = checkBool(splitLine[3]);
                     bool isEndCell = checkBool(splitLine[4]);
@@ -596,6 +630,49 @@ namespace Nea_Maze_Solving_Application
                 }
             }
             //maze[5, 3].BackColor = Color.Goldenrod;
+        }
+
+        private void ReloadFromFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NEAMazeSolver"),
+                Title = "Select Maze File",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "csv",
+                Filter = "CSV Files (*.csv)|*.csv",
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true,
+
+            };
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                CSVToMaze(ofd.FileName);
+            }
+
+        }
+
+        private void ExportTimedFile()
+        {
+            DateTime currentDate = DateTime.Now;
+            string time =  currentDate.ToString("dd-MM-yyyy-HH-mm-ss");
+            string filePath = GetFilePath(time + ".csv");
+            mazeHistory.Push(filePath);
+            MazeToCSVFile(filePath);
+
+        }
+
+        private void ExportToFile_Click(object sender, EventArgs e)
+        {
+            //string temp = GetCurrentTime() + ".csv";
+            //MessageBox.Show(temp);
+            ExportTimedFile();
         }
     }
 }

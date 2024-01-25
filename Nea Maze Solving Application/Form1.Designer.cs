@@ -36,6 +36,8 @@
             Clear = new Button();
             ChangeStart = new Button();
             ChangeEnd = new Button();
+            ReloadFromFile = new Button();
+            ExportToFile = new Button();
             SuspendLayout();
             // 
             // generateMaze
@@ -84,7 +86,7 @@
             ReloadMaze.Name = "ReloadMaze";
             ReloadMaze.Size = new Size(75, 23);
             ReloadMaze.TabIndex = 4;
-            ReloadMaze.Text = "Reload";
+            ReloadMaze.Text = "Undo";
             ReloadMaze.UseVisualStyleBackColor = true;
             ReloadMaze.Click += ReloadMaze_Click;
             // 
@@ -118,12 +120,34 @@
             ChangeEnd.UseVisualStyleBackColor = true;
             ChangeEnd.Click += ChangeEnd_Click;
             // 
+            // ReloadFromFile
+            // 
+            ReloadFromFile.Location = new Point(1732, 322);
+            ReloadFromFile.Name = "ReloadFromFile";
+            ReloadFromFile.Size = new Size(113, 23);
+            ReloadFromFile.TabIndex = 8;
+            ReloadFromFile.Text = "Reload From File";
+            ReloadFromFile.UseVisualStyleBackColor = true;
+            ReloadFromFile.Click += ReloadFromFile_Click;
+            // 
+            // ExportToFile
+            // 
+            ExportToFile.Location = new Point(1732, 293);
+            ExportToFile.Name = "ExportToFile";
+            ExportToFile.Size = new Size(113, 23);
+            ExportToFile.TabIndex = 9;
+            ExportToFile.Text = "Export To File";
+            ExportToFile.UseVisualStyleBackColor = true;
+            ExportToFile.Click += ExportToFile_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaGreen;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(ExportToFile);
+            Controls.Add(ReloadFromFile);
             Controls.Add(ChangeEnd);
             Controls.Add(ChangeStart);
             Controls.Add(Clear);
@@ -149,5 +173,7 @@
         private Button Clear;
         private Button ChangeStart;
         private Button ChangeEnd;
+        private Button ReloadFromFile;
+        private Button ExportToFile;
     }
 }
