@@ -10,9 +10,10 @@ namespace Nea_Maze_Solving_Application
         Point startCell = new Point(0, 0);
         Point endCell = new Point(28, 48);
         Point tempCell = new Point();
-        Stack<string> mazeHistory = new Stack<string>();  
+        Stack<string> mazeHistory = new Stack<string>();
         public bool changingStartCell = false;
         public bool changingEndCell = false;
+        public bool clicked = false;
         public Form1()
         {
             InitializeComponent();
@@ -369,11 +370,30 @@ namespace Nea_Maze_Solving_Application
         }
         private void AlgorithmPrequisites()
         {
-            ExportTimedFile();
+            string undoQueuePath = GetDefaultFolderPath("UndoQueue");
+            ExportTimedFile(undoQueuePath);
             //MazeCell[,] tempMaze = new MazeCell[30, 50];
             ////Things to run before actual algorithms
             //Array.Copy(maze, tempMaze, maze.Length);                      
             //mazeHistory.Push(tempMaze);
+        }
+        private void UpdateMazeHistory()
+        {
+            string mazeHistoryPath = GetDefaultFolderPath("MazeHistory");
+            DirectoryInfo dir = new DirectoryInfo(mazeHistoryPath);
+            if (dir.GetFiles().Length < 10) { ExportTimedFile(mazeHistoryPath); }
+            else
+            {
+                FileInfo oldestFile = new FileInfo(@"C:\NotRealFile.txt");
+                foreach (FileInfo file in dir.GetFiles())
+                {
+                    if (file.LastWriteTime.CompareTo(oldestFile.LastWriteTime) > 0) { oldestFile = file; }
+                }
+                Debug.WriteLine(oldestFile.FullName);
+                oldestFile.Delete();
+                ExportTimedFile(mazeHistoryPath);
+            }
+
         }
         private void WriteOverMaze(MazeCell[,] originalMaze, MazeCell[,] newMaze)
         {
@@ -402,10 +422,15 @@ namespace Nea_Maze_Solving_Application
         }
         private void generateMaze_Click(object sender, EventArgs e)
         {
-            AlgorithmPrequisites();
-            GenerateRowsCols(maze);
+            GenerateRowsCols(maze);            
             RandomizedDFS(maze, startCell);
+            UpdateMazeHistory();
+            MessageBox.Show("Change the start and end cells using the buttons highlighted to the left");
+            ChangeStart.BackColor = Color.Yellow; ChangeEnd.BackColor = Color.Yellow;
+            
         }
+
+
         private void Dijkstra_Click(object sender, EventArgs e)
         {
             AlgorithmPrequisites();
@@ -443,10 +468,14 @@ namespace Nea_Maze_Solving_Application
             //WriteOverMaze(maze,prevMaze);
 
             //temporary while buttons still funky
-            
-            string prevMazeFile = mazeHistory.Pop();
-            CSVToMaze(prevMazeFile);
-            
+            try
+            {
+                string prevMazeFile = mazeHistory.Pop();
+                CSVToMaze(prevMazeFile);
+
+            }
+            catch { MessageBox.Show("Error - Nothing to undo"); }
+
 
 
         }
@@ -478,6 +507,7 @@ namespace Nea_Maze_Solving_Application
             //CSVToMaze();
         }
 
+
         private void ChangeStart_Click(object sender, EventArgs e)
         {
             if (!changingStartCell)
@@ -485,6 +515,7 @@ namespace Nea_Maze_Solving_Application
                 ChangeStart.BackColor = Color.Green;
                 changingStartCell = true;
                 ToggleAllCells(false);
+                return;
                 //MessageBox.Show("Button was pressed");
 
             }
@@ -492,6 +523,7 @@ namespace Nea_Maze_Solving_Application
             {
                 ChangeStart.BackColor = Color.White;
                 ToggleAllCells(true);
+                return;
             }
 
         }
@@ -499,6 +531,7 @@ namespace Nea_Maze_Solving_Application
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
+            clicked = true; 
             if (changingStartCell)
             {
                 //MessageBox.Show($"Mouse click at X: {e.X}, Y: {e.Y} after button press.");
@@ -522,7 +555,7 @@ namespace Nea_Maze_Solving_Application
             }
         }
 
-        private void ChangeEnd_Click(object sender, EventArgs e)
+        private void ChangeEndCell()
         {
             if (!changingEndCell)
             {
@@ -537,6 +570,10 @@ namespace Nea_Maze_Solving_Application
                 ChangeEnd.BackColor = Color.White;
                 ToggleAllCells(true);
             }
+        }
+        private void ChangeEnd_Click(object sender, EventArgs e)
+        {
+            ChangeEndCell();
 
         }
 
@@ -544,7 +581,7 @@ namespace Nea_Maze_Solving_Application
         {
             //var csv = new StringBuilder();
             //string path = @"C:\Users\josep\Downloads\Output2.csv";#
-            MessageBox.Show(filePath);
+            //MessageBox.Show(filePath);
             using (var w = new StreamWriter(filePath))
             {
                 for (int r = 0; r < maze.GetLength(0); r++)
@@ -576,26 +613,43 @@ namespace Nea_Maze_Solving_Application
         }
         private void GenerateAppData()
         {
-            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string appDataFolder = Path.Combine(localAppData, "NEAMazeSolver");
+            //string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            //string appDataFolder = Path.Combine(localAppData, "NEAMazeSolver");
+            string appDataFolder = GetDefaultFolderPath();
+            //string mazeHistoryFolder = Path.Combine(appDataFolder, "MazeHistory");
+            string mazeHistoryFolder = GetDefaultFolderPath("MazeHistory");
+            string UndoQueueFolder = GetDefaultFolderPath("UndoQueue");
 
             if (!Directory.Exists(appDataFolder))
             {
                 Directory.CreateDirectory(appDataFolder);
             }
+            if (!Directory.Exists(mazeHistoryFolder))
+            {
+                Directory.CreateDirectory(mazeHistoryFolder);
+            }
+            if (!Directory.Exists(UndoQueueFolder))
+            {
+                Directory.CreateDirectory(UndoQueueFolder);
+            }
+            foreach (FileInfo file in new DirectoryInfo(UndoQueueFolder).GetFiles()) { file.Delete(); }
+            
+            
         }
 
-        private string GetFilePath(string fileName)
+        private string GetDefaultFolderPath(string folderExtension = null)
         {
             string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string appDataFolder = Path.Combine(localAppData, "NEAMazeSolver");
-            string path = Path.Combine(appDataFolder, fileName);
+            try { return Path.Combine(appDataFolder, folderExtension); }
+            catch { return appDataFolder; }
+
             //if (!File.Exists(path))
             //{
             //    throw new Exception("File Name Invalid");
             //}
-            MessageBox.Show(path);
-            return path;
+            //MessageBox.Show(path);
+            //return path;
 
         }
         private void CSVToMaze(string filePath)
@@ -632,11 +686,11 @@ namespace Nea_Maze_Solving_Application
             //maze[5, 3].BackColor = Color.Goldenrod;
         }
 
-        private void ReloadFromFile_Click(object sender, EventArgs e)
+        private void OpenFileExplorer(string initialDirectory)
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NEAMazeSolver"),
+                InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), initialDirectory),
                 Title = "Select Maze File",
 
                 CheckFileExists = true,
@@ -655,14 +709,18 @@ namespace Nea_Maze_Solving_Application
             {
                 CSVToMaze(ofd.FileName);
             }
+        }
+        private void ReloadFromFile_Click(object sender, EventArgs e)
+        {
+            OpenFileExplorer("NEAMazeSolver");
 
         }
 
-        private void ExportTimedFile()
+        private void ExportTimedFile(string folderPath)
         {
             DateTime currentDate = DateTime.Now;
-            string time =  currentDate.ToString("dd-MM-yyyy-HH-mm-ss");
-            string filePath = GetFilePath(time + ".csv");
+            string time = currentDate.ToString("dd-MM-yyyy-HH-mm-ss");
+            string filePath = Path.Combine(folderPath, time + ".csv");
             mazeHistory.Push(filePath);
             MazeToCSVFile(filePath);
 
@@ -672,7 +730,13 @@ namespace Nea_Maze_Solving_Application
         {
             //string temp = GetCurrentTime() + ".csv";
             //MessageBox.Show(temp);
-            ExportTimedFile();
+            ExportTimedFile(GetDefaultFolderPath());
+        }
+
+        private void RecentMazeHistory_Click(object sender, EventArgs e)
+        {
+            string path = Path.Combine("NEAMazeSolver", "MazeHistory");
+            OpenFileExplorer(path);
         }
     }
 }

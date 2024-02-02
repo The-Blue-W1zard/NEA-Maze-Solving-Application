@@ -38,13 +38,14 @@
             ChangeEnd = new Button();
             ReloadFromFile = new Button();
             ExportToFile = new Button();
+            RecentMazeHistory = new Button();
             SuspendLayout();
             // 
             // generateMaze
             // 
-            generateMaze.Location = new Point(1851, 177);
+            generateMaze.Location = new Point(1720, 138);
             generateMaze.Name = "generateMaze";
-            generateMaze.Size = new Size(75, 23);
+            generateMaze.Size = new Size(206, 23);
             generateMaze.TabIndex = 0;
             generateMaze.Text = "Generate";
             generateMaze.UseVisualStyleBackColor = true;
@@ -52,9 +53,9 @@
             // 
             // Dijkstra
             // 
-            Dijkstra.Location = new Point(1851, 206);
+            Dijkstra.Location = new Point(1720, 208);
             Dijkstra.Name = "Dijkstra";
-            Dijkstra.Size = new Size(75, 23);
+            Dijkstra.Size = new Size(102, 23);
             Dijkstra.TabIndex = 1;
             Dijkstra.Text = "Dijkstras";
             Dijkstra.UseVisualStyleBackColor = true;
@@ -62,49 +63,49 @@
             // 
             // AStar
             // 
-            AStar.Location = new Point(1851, 235);
+            AStar.Location = new Point(1828, 208);
             AStar.Name = "AStar";
-            AStar.Size = new Size(75, 23);
+            AStar.Size = new Size(102, 23);
             AStar.TabIndex = 2;
-            AStar.Text = "AStar";
+            AStar.Text = "A Star";
             AStar.UseVisualStyleBackColor = true;
             AStar.Click += AStar_Click;
             // 
             // BreadthFirst
             // 
-            BreadthFirst.Location = new Point(1851, 264);
+            BreadthFirst.Location = new Point(1720, 237);
             BreadthFirst.Name = "BreadthFirst";
-            BreadthFirst.Size = new Size(75, 23);
+            BreadthFirst.Size = new Size(102, 23);
             BreadthFirst.TabIndex = 3;
-            BreadthFirst.Text = "BreadthFirst";
+            BreadthFirst.Text = "Breadth First";
             BreadthFirst.UseVisualStyleBackColor = true;
             BreadthFirst.Click += BreadthFirst_Click;
             // 
             // ReloadMaze
             // 
-            ReloadMaze.Location = new Point(1851, 293);
+            ReloadMaze.Location = new Point(1720, 276);
             ReloadMaze.Name = "ReloadMaze";
-            ReloadMaze.Size = new Size(75, 23);
+            ReloadMaze.Size = new Size(102, 23);
             ReloadMaze.TabIndex = 4;
-            ReloadMaze.Text = "Undo";
+            ReloadMaze.Text = "Undo Action";
             ReloadMaze.UseVisualStyleBackColor = true;
             ReloadMaze.Click += ReloadMaze_Click;
             // 
             // Clear
             // 
-            Clear.Location = new Point(1851, 322);
+            Clear.Location = new Point(1828, 276);
             Clear.Name = "Clear";
-            Clear.Size = new Size(75, 23);
+            Clear.Size = new Size(98, 23);
             Clear.TabIndex = 5;
-            Clear.Text = "Clear";
+            Clear.Text = "Clear Maze";
             Clear.UseVisualStyleBackColor = true;
             Clear.Click += Clear_Click;
             // 
             // ChangeStart
             // 
-            ChangeStart.Location = new Point(1732, 206);
+            ChangeStart.Location = new Point(1720, 167);
             ChangeStart.Name = "ChangeStart";
-            ChangeStart.Size = new Size(113, 23);
+            ChangeStart.Size = new Size(102, 23);
             ChangeStart.TabIndex = 6;
             ChangeStart.Text = "Change Start";
             ChangeStart.UseVisualStyleBackColor = true;
@@ -112,9 +113,9 @@
             // 
             // ChangeEnd
             // 
-            ChangeEnd.Location = new Point(1732, 235);
+            ChangeEnd.Location = new Point(1828, 167);
             ChangeEnd.Name = "ChangeEnd";
-            ChangeEnd.Size = new Size(113, 23);
+            ChangeEnd.Size = new Size(102, 23);
             ChangeEnd.TabIndex = 7;
             ChangeEnd.Text = "Change End";
             ChangeEnd.UseVisualStyleBackColor = true;
@@ -122,23 +123,33 @@
             // 
             // ReloadFromFile
             // 
-            ReloadFromFile.Location = new Point(1732, 322);
+            ReloadFromFile.Location = new Point(1720, 375);
             ReloadFromFile.Name = "ReloadFromFile";
-            ReloadFromFile.Size = new Size(113, 23);
+            ReloadFromFile.Size = new Size(206, 23);
             ReloadFromFile.TabIndex = 8;
-            ReloadFromFile.Text = "Reload From File";
+            ReloadFromFile.Text = "Reload Maze From File";
             ReloadFromFile.UseVisualStyleBackColor = true;
             ReloadFromFile.Click += ReloadFromFile_Click;
             // 
             // ExportToFile
             // 
-            ExportToFile.Location = new Point(1732, 293);
+            ExportToFile.Location = new Point(1720, 346);
             ExportToFile.Name = "ExportToFile";
-            ExportToFile.Size = new Size(113, 23);
+            ExportToFile.Size = new Size(206, 23);
             ExportToFile.TabIndex = 9;
-            ExportToFile.Text = "Export To File";
+            ExportToFile.Text = "Export Maze To File";
             ExportToFile.UseVisualStyleBackColor = true;
             ExportToFile.Click += ExportToFile_Click;
+            // 
+            // RecentMazeHistory
+            // 
+            RecentMazeHistory.Location = new Point(1720, 305);
+            RecentMazeHistory.Name = "RecentMazeHistory";
+            RecentMazeHistory.Size = new Size(206, 23);
+            RecentMazeHistory.TabIndex = 10;
+            RecentMazeHistory.Text = "Recent Maze History";
+            RecentMazeHistory.UseVisualStyleBackColor = true;
+            RecentMazeHistory.Click += RecentMazeHistory_Click;
             // 
             // Form1
             // 
@@ -146,6 +157,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaGreen;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(RecentMazeHistory);
             Controls.Add(ExportToFile);
             Controls.Add(ReloadFromFile);
             Controls.Add(ChangeEnd);
@@ -175,5 +187,6 @@
         private Button ChangeEnd;
         private Button ReloadFromFile;
         private Button ExportToFile;
+        private Button RecentMazeHistory;
     }
 }

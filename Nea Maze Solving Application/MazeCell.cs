@@ -49,8 +49,8 @@ namespace Nea_Maze_Solving_Application
 
         public void CellClicked(object sender, EventArgs e)
         {
-            Visible = false;
-            //ToggleWall();
+            //Visible = false;
+            ToggleWall();
 
 
         }
