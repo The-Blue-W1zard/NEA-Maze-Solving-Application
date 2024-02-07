@@ -39,6 +39,17 @@
             ReloadFromFile = new Button();
             ExportToFile = new Button();
             RecentMazeHistory = new Button();
+            label1 = new Label();
+            label2 = new Label();
+            Slow = new Button();
+            Medium = new Button();
+            Fast = new Button();
+            SolveMaze = new Button();
+            radioButton1 = new RadioButton();
+            groupBox1 = new GroupBox();
+            radioButton2 = new RadioButton();
+            radioButton3 = new RadioButton();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // generateMaze
@@ -53,7 +64,7 @@
             // 
             // Dijkstra
             // 
-            Dijkstra.Location = new Point(1720, 208);
+            Dijkstra.Location = new Point(1720, 226);
             Dijkstra.Name = "Dijkstra";
             Dijkstra.Size = new Size(102, 23);
             Dijkstra.TabIndex = 1;
@@ -63,7 +74,7 @@
             // 
             // AStar
             // 
-            AStar.Location = new Point(1828, 208);
+            AStar.Location = new Point(1828, 226);
             AStar.Name = "AStar";
             AStar.Size = new Size(102, 23);
             AStar.TabIndex = 2;
@@ -73,7 +84,7 @@
             // 
             // BreadthFirst
             // 
-            BreadthFirst.Location = new Point(1720, 237);
+            BreadthFirst.Location = new Point(1720, 255);
             BreadthFirst.Name = "BreadthFirst";
             BreadthFirst.Size = new Size(102, 23);
             BreadthFirst.TabIndex = 3;
@@ -83,7 +94,7 @@
             // 
             // ReloadMaze
             // 
-            ReloadMaze.Location = new Point(1720, 276);
+            ReloadMaze.Location = new Point(1720, 461);
             ReloadMaze.Name = "ReloadMaze";
             ReloadMaze.Size = new Size(102, 23);
             ReloadMaze.TabIndex = 4;
@@ -93,7 +104,7 @@
             // 
             // Clear
             // 
-            Clear.Location = new Point(1828, 276);
+            Clear.Location = new Point(1828, 461);
             Clear.Name = "Clear";
             Clear.Size = new Size(98, 23);
             Clear.TabIndex = 5;
@@ -123,7 +134,7 @@
             // 
             // ReloadFromFile
             // 
-            ReloadFromFile.Location = new Point(1720, 375);
+            ReloadFromFile.Location = new Point(1720, 560);
             ReloadFromFile.Name = "ReloadFromFile";
             ReloadFromFile.Size = new Size(206, 23);
             ReloadFromFile.TabIndex = 8;
@@ -133,7 +144,7 @@
             // 
             // ExportToFile
             // 
-            ExportToFile.Location = new Point(1720, 346);
+            ExportToFile.Location = new Point(1720, 531);
             ExportToFile.Name = "ExportToFile";
             ExportToFile.Size = new Size(206, 23);
             ExportToFile.TabIndex = 9;
@@ -143,7 +154,7 @@
             // 
             // RecentMazeHistory
             // 
-            RecentMazeHistory.Location = new Point(1720, 305);
+            RecentMazeHistory.Location = new Point(1720, 490);
             RecentMazeHistory.Name = "RecentMazeHistory";
             RecentMazeHistory.Size = new Size(206, 23);
             RecentMazeHistory.TabIndex = 10;
@@ -151,12 +162,124 @@
             RecentMazeHistory.UseVisualStyleBackColor = true;
             RecentMazeHistory.Click += RecentMazeHistory_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.FlatStyle = FlatStyle.Flat;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(1720, 202);
+            label1.Name = "label1";
+            label1.Size = new Size(158, 21);
+            label1.TabIndex = 11;
+            label1.Text = "Choose an algorithm.";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.FlatStyle = FlatStyle.Flat;
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(1720, 291);
+            label2.Name = "label2";
+            label2.Size = new Size(122, 21);
+            label2.TabIndex = 12;
+            label2.Text = "Choose a speed.";
+            // 
+            // Slow
+            // 
+            Slow.Location = new Point(1720, 315);
+            Slow.Name = "Slow";
+            Slow.Size = new Size(102, 23);
+            Slow.TabIndex = 13;
+            Slow.Text = "Slow";
+            Slow.UseVisualStyleBackColor = true;
+            // 
+            // Medium
+            // 
+            Medium.Location = new Point(1828, 315);
+            Medium.Name = "Medium";
+            Medium.Size = new Size(102, 23);
+            Medium.TabIndex = 14;
+            Medium.Text = "Medium";
+            Medium.UseVisualStyleBackColor = true;
+            // 
+            // Fast
+            // 
+            Fast.Location = new Point(1720, 344);
+            Fast.Name = "Fast";
+            Fast.Size = new Size(102, 23);
+            Fast.TabIndex = 15;
+            Fast.Text = "Fast";
+            Fast.UseVisualStyleBackColor = true;
+            // 
+            // SolveMaze
+            // 
+            SolveMaze.Location = new Point(1720, 386);
+            SolveMaze.Name = "SolveMaze";
+            SolveMaze.Size = new Size(206, 32);
+            SolveMaze.TabIndex = 16;
+            SolveMaze.Text = "Solve Maze";
+            SolveMaze.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(6, 22);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(94, 19);
+            radioButton1.TabIndex = 17;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "radioButton1";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(radioButton3);
+            groupBox1.Controls.Add(radioButton2);
+            groupBox1.Controls.Add(radioButton1);
+            groupBox1.Location = new Point(1481, 624);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(200, 100);
+            groupBox1.TabIndex = 18;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "groupBox1";
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(6, 47);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(94, 19);
+            radioButton2.TabIndex = 18;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "radioButton2";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            radioButton3.AutoSize = true;
+            radioButton3.Location = new Point(6, 72);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(94, 19);
+            radioButton3.TabIndex = 19;
+            radioButton3.TabStop = true;
+            radioButton3.Text = "radioButton3";
+            radioButton3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaGreen;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(groupBox1);
+            Controls.Add(SolveMaze);
+            Controls.Add(Fast);
+            Controls.Add(Medium);
+            Controls.Add(Slow);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(RecentMazeHistory);
             Controls.Add(ExportToFile);
             Controls.Add(ReloadFromFile);
@@ -172,7 +295,10 @@
             Text = "Form1";
             Load += Form1_Load;
             MouseClick += Form1_MouseClick;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -188,5 +314,15 @@
         private Button ReloadFromFile;
         private Button ExportToFile;
         private Button RecentMazeHistory;
+        private Label label1;
+        private Label label2;
+        private Button Slow;
+        private Button Medium;
+        private Button Fast;
+        private Button SolveMaze;
+        private RadioButton radioButton1;
+        private GroupBox groupBox1;
+        private RadioButton radioButton3;
+        private RadioButton radioButton2;
     }
 }

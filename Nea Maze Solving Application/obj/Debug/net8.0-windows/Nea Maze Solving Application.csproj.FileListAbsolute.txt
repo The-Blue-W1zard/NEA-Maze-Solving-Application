@@ -1,20 +1,3 @@
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.exe
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.deps.json
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.runtimeconfig.json
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.dll
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.pdb
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea_Maze_Solving_Application.Form1.resources
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.csproj.GenerateResource.cache
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.GeneratedMSBuildEditorConfig.editorconfig
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.AssemblyInfoInputs.cache
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.AssemblyInfo.cs
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.csproj.CoreCompileInputs.cache
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.sourcelink.json
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.dll
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\refint\Nea Maze Solving Application.dll
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.pdb
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.genruntimeconfig.cache
-C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\ref\Nea Maze Solving Application.dll
 C:\ActualStuff\NEA\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.exe
 C:\ActualStuff\NEA\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.deps.json
 C:\ActualStuff\NEA\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.runtimeconfig.json
@@ -32,3 +15,20 @@ C:\ActualStuff\NEA\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj
 C:\ActualStuff\NEA\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.pdb
 C:\ActualStuff\NEA\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.genruntimeconfig.cache
 C:\ActualStuff\NEA\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\ref\Nea Maze Solving Application.dll
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea_Maze_Solving_Application.Form1.resources
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.csproj.GenerateResource.cache
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.AssemblyInfoInputs.cache
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.AssemblyInfo.cs
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.csproj.CoreCompileInputs.cache
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.sourcelink.json
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.exe
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.deps.json
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.runtimeconfig.json
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.dll
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\bin\Debug\net8.0-windows\Nea Maze Solving Application.pdb
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.dll
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\refint\Nea Maze Solving Application.dll
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.pdb
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\Nea Maze Solving Application.genruntimeconfig.cache
+C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\obj\Debug\net8.0-windows\ref\Nea Maze Solving Application.dll
