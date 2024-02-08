@@ -5,6 +5,7 @@ namespace Nea_Maze_Solving_Application
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+
         [STAThread]
         static void Main()
         {

@@ -7,7 +7,6 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	<RadioButton Style="{StaticResource {x:Type ToggleButton}}" />
 
   </PropertyGroup>
 
