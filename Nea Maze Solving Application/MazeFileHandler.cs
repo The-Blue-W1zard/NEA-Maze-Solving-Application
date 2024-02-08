@@ -35,7 +35,7 @@ namespace Nea_Maze_Solving_Application
                     }
                 }
             }
-            MessageBox.Show("Finished Exporting");
+            //MessageBox.Show("Finished Exporting");
             //File.WriteAllText(path, csv.ToString());
         }
         public void CSVToMaze(string filePath)

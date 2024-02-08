@@ -71,11 +71,13 @@ namespace Nea_Maze_Solving_Application
                 }
                 catch { Console.WriteLine("coordinates bad"); }
             }
+            
             //Console.WriteLine("After Update");
             //OutputMaze(maze);
 
 
         }
+
 
 
 

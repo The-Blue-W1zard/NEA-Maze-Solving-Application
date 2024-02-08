@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             generateMaze = new Button();
-            Dijkstra = new Button();
-            AStar = new Button();
-            BreadthFirst = new Button();
             ReloadMaze = new Button();
             Clear = new Button();
             ChangeStart = new Button();
@@ -45,6 +42,9 @@
             Medium = new Button();
             Fast = new Button();
             SolveMaze = new Button();
+            Dijkstra = new Button();
+            BreadthFirst = new Button();
+            AStar = new Button();
             SuspendLayout();
             // 
             // generateMaze
@@ -56,36 +56,6 @@
             generateMaze.Text = "Generate";
             generateMaze.UseVisualStyleBackColor = true;
             generateMaze.Click += generateMaze_Click;
-            // 
-            // Dijkstra
-            // 
-            Dijkstra.Location = new Point(1720, 226);
-            Dijkstra.Name = "Dijkstra";
-            Dijkstra.Size = new Size(102, 23);
-            Dijkstra.TabIndex = 1;
-            Dijkstra.Text = "Dijkstras";
-            Dijkstra.UseVisualStyleBackColor = true;
-            Dijkstra.Click += Dijkstra_Click;
-            // 
-            // AStar
-            // 
-            AStar.Location = new Point(1828, 226);
-            AStar.Name = "AStar";
-            AStar.Size = new Size(102, 23);
-            AStar.TabIndex = 2;
-            AStar.Text = "A Star";
-            AStar.UseVisualStyleBackColor = true;
-            AStar.Click += AStar_Click;
-            // 
-            // BreadthFirst
-            // 
-            BreadthFirst.Location = new Point(1720, 255);
-            BreadthFirst.Name = "BreadthFirst";
-            BreadthFirst.Size = new Size(102, 23);
-            BreadthFirst.TabIndex = 3;
-            BreadthFirst.Text = "Breadth First";
-            BreadthFirst.UseVisualStyleBackColor = true;
-            BreadthFirst.Click += BreadthFirst_Click;
             // 
             // ReloadMaze
             // 
@@ -218,12 +188,42 @@
             SolveMaze.UseVisualStyleBackColor = true;
             SolveMaze.Click += SolveMaze_Click;
             // 
+            // Dijkstra
+            // 
+            Dijkstra.Location = new Point(1720, 226);
+            Dijkstra.Name = "Dijkstra";
+            Dijkstra.Size = new Size(102, 23);
+            Dijkstra.TabIndex = 17;
+            Dijkstra.Text = "Dijkstras";
+            Dijkstra.UseVisualStyleBackColor = true;
+            // 
+            // BreadthFirst
+            // 
+            BreadthFirst.Location = new Point(1828, 226);
+            BreadthFirst.Name = "BreadthFirst";
+            BreadthFirst.Size = new Size(102, 23);
+            BreadthFirst.TabIndex = 18;
+            BreadthFirst.Text = "Breadth First";
+            BreadthFirst.UseVisualStyleBackColor = true;
+            // 
+            // AStar
+            // 
+            AStar.Location = new Point(1720, 255);
+            AStar.Name = "AStar";
+            AStar.Size = new Size(102, 23);
+            AStar.TabIndex = 19;
+            AStar.Text = "A Star";
+            AStar.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaGreen;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(AStar);
+            Controls.Add(BreadthFirst);
+            Controls.Add(Dijkstra);
             Controls.Add(SolveMaze);
             Controls.Add(Fast);
             Controls.Add(Medium);
@@ -237,12 +237,9 @@
             Controls.Add(ChangeStart);
             Controls.Add(Clear);
             Controls.Add(ReloadMaze);
-            Controls.Add(BreadthFirst);
-            Controls.Add(AStar);
-            Controls.Add(Dijkstra);
             Controls.Add(generateMaze);
             Name = "Form1";
-            Text = "Form1";
+            Text = "NEA Maze Solver";
             Load += Form1_Load;
             MouseClick += Form1_MouseClick;
             ResumeLayout(false);
@@ -252,9 +249,6 @@
         #endregion
 
         private Button generateMaze;
-        private Button Dijkstra;
-        private Button AStar;
-        private Button BreadthFirst;
         private Button ReloadMaze;
         private Button Clear;
         private Button ChangeStart;
@@ -268,5 +262,8 @@
         private Button Medium;
         private Button Fast;
         private Button SolveMaze;
+        private Button Dijkstra;
+        private Button BreadthFirst;
+        private Button AStar;
     }
 }

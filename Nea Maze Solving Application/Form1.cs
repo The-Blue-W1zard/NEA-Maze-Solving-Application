@@ -12,7 +12,7 @@ namespace Nea_Maze_Solving_Application
         MazeFileHandler mazeFileHandler;
         MazeFunctions mazeFunctions;
         Button[] speedButtons;
-        Button[] algorithmsButtons;
+        Button[] algorithmButtons;
 
         Point startCell = new Point(0, 0);
         Point endCell = new Point(28, 48);
@@ -46,9 +46,9 @@ namespace Nea_Maze_Solving_Application
         private void InitializeGroupedButtons()
         {
             speedButtons = new Button[3] { Slow, Medium, Fast };
-            algorithmsButtons = new Button[3] { Dijkstra, BreadthFirst, AStar };
+            algorithmButtons = new Button[3] { Dijkstra, BreadthFirst, AStar };
             foreach (Button button in speedButtons) { button.Click += speedButton_Click; }
-            foreach (Button button in algorithmsButtons) { button.Click += algorithmButton_Click; }
+            foreach (Button button in algorithmButtons) { button.Click += algorithmButton_Click; }
 
         }
 
@@ -75,7 +75,7 @@ namespace Nea_Maze_Solving_Application
         {
             Button clickedButton = sender as Button;
 
-            foreach (Button button in speedButtons)
+            foreach (Button button in algorithmButtons)
             {
                 if (button == clickedButton)
                 {
@@ -121,30 +121,30 @@ namespace Nea_Maze_Solving_Application
             ChangeStart.BackColor = Color.Yellow; ChangeEnd.BackColor = Color.Yellow;
 
         }
-        private void Dijkstra_Click(object sender, EventArgs e)
-        {
-            AlgorithmPrequisites();
-            List<Point> animationSteps;
-            List<Point> path = solver.DijkstraSearch(maze, startCell, endCell, out animationSteps);
-            mazeFunctions.AnimateMaze(maze, animationSteps, animationDelay);
-            mazeFunctions.UpdateMaze(maze, path);
-        }
-        private void AStar_Click(object sender, EventArgs e)
-        {
-            AlgorithmPrequisites();
-            List<Point> animationSteps;
-            List<Point> path = solver.AStarSearch(maze, startCell, endCell, out animationSteps);
-            mazeFunctions.AnimateMaze(maze, animationSteps, animationDelay);
-            mazeFunctions.UpdateMaze(maze, path);
-        }
-        private void BreadthFirst_Click(object sender, EventArgs e)
-        {
-            AlgorithmPrequisites();
-            List<Point> animationSteps;
-            List<Point> path = solver.BreadthFirstSearch(maze, startCell, endCell, out animationSteps);
-            mazeFunctions.AnimateMaze(maze, animationSteps, animationDelay);
-            mazeFunctions.UpdateMaze(maze, path);
-        }
+        //private void Dijkstra_Click(object sender, EventArgs e)
+        //{
+        //    AlgorithmPrequisites();
+        //    List<Point> animationSteps;
+        //    List<Point> path = solver.DijkstraSearch(maze, startCell, endCell, out animationSteps);
+        //    mazeFunctions.AnimateMaze(maze, animationSteps, animationDelay);
+        //    mazeFunctions.UpdateMaze(maze, path);
+        //}
+        //private void AStar_Click(object sender, EventArgs e)
+        //{
+        //    AlgorithmPrequisites();
+        //    List<Point> animationSteps;
+        //    List<Point> path = solver.AStarSearch(maze, startCell, endCell, out animationSteps);
+        //    mazeFunctions.AnimateMaze(maze, animationSteps, animationDelay);
+        //    mazeFunctions.UpdateMaze(maze, path);
+        //}
+        //private void BreadthFirst_Click(object sender, EventArgs e)
+        //{
+        //    AlgorithmPrequisites();
+        //    List<Point> animationSteps;
+        //    List<Point> path = solver.BreadthFirstSearch(maze, startCell, endCell, out animationSteps);
+        //    mazeFunctions.AnimateMaze(maze, animationSteps, animationDelay);
+        //    mazeFunctions.UpdateMaze(maze, path);
+        //}
         private void ReloadMaze_Click(object sender, EventArgs e)
         {
             try
@@ -250,8 +250,18 @@ namespace Nea_Maze_Solving_Application
             else if (algorithm == "BreadthFirst") { path = solver.BreadthFirstSearch(maze, startCell, endCell, out animationSteps); }
             mazeFunctions.AnimateMaze(maze, animationSteps, animationDelay);
             mazeFunctions.UpdateMaze(maze, path);
+            FinishedAnimating();
 
-
+        }
+        private void FinishedAnimating()
+        {
+            Form2 finished = new Form2();
+            finished.ShowDialog();
+            if (finished.clearMaze == true) { mazeFunctions.ClearMaze(maze); }
+            else if (finished.revertToPrev == true) {
+                string prevMazeFilePath = mazeHistory.Pop();
+                mazeFileHandler.CSVToMaze(prevMazeFilePath);
+            }
 
         }
     }
