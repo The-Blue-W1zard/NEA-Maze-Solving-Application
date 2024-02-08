@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace Nea_Maze_Solving_Application
 {
-    internal class MazeGenerator : AlgorithmFunctions
+    /// <summary>
+    /// Generates solvable mazes using a randomized depth first search.
+    /// </summary>
+    /// <param name="maze">Maze algorithm will be excecuted on</param>
+    internal class MazeGenerator(MazeCell[,] maze) : AlgorithmFunctions 
     {
-        private void GenerateRowsCols(MazeCell[,] maze)
+        /// <summary>
+        /// Creates grid of walls using modulo operator
+        /// </summary>
+        private void GenerateRowsCols()
         {
             //int r = maze.GetLength(0);
             //int c = maze.GetLength(1);
@@ -22,7 +29,12 @@ namespace Nea_Maze_Solving_Application
                 }
             }
         }
-        private void RandomizedDFS(MazeCell[,] maze, Point start)
+
+        /// <summary>
+        /// Executes a randomized depth first search on the maze, creating a solvable maze.
+        /// </summary>
+        /// <param name="start">Cell that maze will be generated from</param>
+        private void RandomizedDFS(Point start)
         {
             Queue<Point> queue = new Queue<Point>();
             //Stack<Point> stack = new Stack<Point>();
@@ -69,11 +81,14 @@ namespace Nea_Maze_Solving_Application
 
             }
         }
-
-        public void GenerateDFSMaze(MazeCell[,] maze, Point start)
+        /// <summary>
+        /// Accesible function that creates grid then maze.
+        /// </summary>
+        /// <param name="start"></param>
+        public void GenerateDFSMaze(Point start)
         {
-            GenerateRowsCols(maze);
-            RandomizedDFS(maze, start);
+            GenerateRowsCols();
+            RandomizedDFS(start);
         }
 
     }

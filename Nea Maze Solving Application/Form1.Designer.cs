@@ -55,7 +55,7 @@
             generateMaze.TabIndex = 0;
             generateMaze.Text = "Generate";
             generateMaze.UseVisualStyleBackColor = true;
-            generateMaze.Click += generateMaze_Click;
+            generateMaze.Click += GenerateMaze_Click;
             // 
             // ReloadMaze
             // 

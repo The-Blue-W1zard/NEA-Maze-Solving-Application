@@ -7,8 +7,6 @@ namespace Nea_Maze_Solving_Application
     {
 
         MazeCell[,] maze = new MazeCell[30, 50];
-        MazeSolver solver;
-        MazeGenerator generator;
         MazeFileHandler mazeFileHandler;
         MazeFunctions mazeFunctions;
         Button[] speedButtons;
@@ -30,9 +28,7 @@ namespace Nea_Maze_Solving_Application
         {
             InitializeComponent();
             CreateBlankMaze();
-            solver = new MazeSolver();
-            generator = new MazeGenerator();
-            mazeFunctions = new MazeFunctions();
+            mazeFunctions = new MazeFunctions(maze);
             mazeFileHandler = new MazeFileHandler(maze);
             mazeFileHandler.GenerateAppData();
             InitializeGroupedButtons();
@@ -47,12 +43,12 @@ namespace Nea_Maze_Solving_Application
         {
             speedButtons = new Button[3] { Slow, Medium, Fast };
             algorithmButtons = new Button[3] { Dijkstra, BreadthFirst, AStar };
-            foreach (Button button in speedButtons) { button.Click += speedButton_Click; }
-            foreach (Button button in algorithmButtons) { button.Click += algorithmButton_Click; }
+            foreach (Button button in speedButtons) { button.Click += SpeedButton_Click; }
+            foreach (Button button in algorithmButtons) { button.Click += AlgorithmButton_Click; }
 
         }
 
-        private void speedButton_Click(object sender, EventArgs e)
+        private void SpeedButton_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             Dictionary<string, int> speeds = new Dictionary<string, int> { { "Fast", 0 }, { "Medium", 10 }, { "Slow", 20 } };
@@ -71,7 +67,7 @@ namespace Nea_Maze_Solving_Application
             }
 
         }
-        private void algorithmButton_Click(Object sender, EventArgs e)
+        private void AlgorithmButton_Click(Object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
 
@@ -112,10 +108,11 @@ namespace Nea_Maze_Solving_Application
             mazeFileHandler.ExportTimedFile(ref mazeHistory, undoQueuePath);
 
         }
-        private void generateMaze_Click(object sender, EventArgs e)
+        private void GenerateMaze_Click(object sender, EventArgs e)
         {
-            mazeFunctions.ClearMaze(maze);
-            generator.GenerateDFSMaze(maze, startCell);
+            MazeGenerator generator = new MazeGenerator(maze);
+            mazeFunctions.ClearMaze();
+            generator.GenerateDFSMaze(startCell);
             mazeFileHandler.UpdateGeneratedMazeHistory(ref mazeHistory);
             MessageBox.Show("Change the start and end cells using the buttons highlighted to the right.");
             ChangeStart.BackColor = Color.Yellow; ChangeEnd.BackColor = Color.Yellow;
@@ -158,7 +155,7 @@ namespace Nea_Maze_Solving_Application
         private void Clear_Click(object sender, EventArgs e)
         {
             AlgorithmPrequisites();
-            mazeFunctions.ClearMaze(maze);
+            mazeFunctions.ClearMaze();
             //CSVToMaze();
         }
         private void ChangeStart_Click(object sender, EventArgs e)
@@ -167,7 +164,7 @@ namespace Nea_Maze_Solving_Application
             {
                 ChangeStart.BackColor = Color.Green;
                 changingStartCell = true;
-                mazeFunctions.ToggleAllMazeCells(false, maze);
+                mazeFunctions.ToggleAllMazeCells(false);
                 return;
                 //MessageBox.Show("Button was pressed");
 
@@ -175,7 +172,7 @@ namespace Nea_Maze_Solving_Application
             else if (changingStartCell)
             {
                 ChangeStart.BackColor = Color.White;
-                mazeFunctions.ToggleAllMazeCells(true, maze);
+                mazeFunctions.ToggleAllMazeCells(true);
                 return;
             }
 
@@ -187,7 +184,7 @@ namespace Nea_Maze_Solving_Application
             {
                 //MessageBox.Show($"Mouse click at X: {e.X}, Y: {e.Y} after button press.");
                 changingStartCell = false;
-                mazeFunctions.ToggleAllMazeCells(true, maze);
+                mazeFunctions.ToggleAllMazeCells(true);
                 ChangeStart.BackColor = Color.White;
                 tempCell = mazeFunctions.CoordsToButtonPoint(e.X, e.Y);
                 maze[startCell.X, startCell.Y].ToggleStartCell();
@@ -197,7 +194,7 @@ namespace Nea_Maze_Solving_Application
             else if (changingEndCell)
             {
                 changingEndCell = false;
-                mazeFunctions.ToggleAllMazeCells(true, maze);
+                mazeFunctions.ToggleAllMazeCells(true);
                 ChangeEnd.BackColor = Color.White;
                 tempCell = mazeFunctions.CoordsToButtonPoint(e.X, e.Y);
                 maze[endCell.X, endCell.Y].ToggleEndCell();
@@ -211,14 +208,14 @@ namespace Nea_Maze_Solving_Application
             {
                 ChangeEnd.BackColor = Color.Red;
                 changingEndCell = true;
-                mazeFunctions.ToggleAllMazeCells(false, maze);
+                mazeFunctions.ToggleAllMazeCells(false);
                 //MessageBox.Show("Button was pressed");
 
             }
             else if (changingEndCell)
             {
                 ChangeEnd.BackColor = Color.White;
-                mazeFunctions.ToggleAllMazeCells(true, maze);
+                mazeFunctions.ToggleAllMazeCells(true);
             }
         }
         private void ReloadFromFile_Click(object sender, EventArgs e)
@@ -241,15 +238,16 @@ namespace Nea_Maze_Solving_Application
 
         private void SolveMaze_Click(object sender, EventArgs e)
         {
+            MazeSolver solver = new MazeSolver(maze,startCell,endCell);
             AlgorithmPrequisites();
             List<Point> animationSteps = new();
             List<Point> path = new();
             if(algorithm == "None") { MessageBox.Show("No algorithm selected."); return; }
-            else if (algorithm == "AStar"){path = solver.AStarSearch(maze, startCell, endCell, out animationSteps);}
-            else if (algorithm == "Dijkstra") { path = solver.DijkstraSearch(maze, startCell, endCell, out animationSteps); }
-            else if (algorithm == "BreadthFirst") { path = solver.BreadthFirstSearch(maze, startCell, endCell, out animationSteps); }
-            mazeFunctions.AnimateMaze(maze, animationSteps, animationDelay);
-            mazeFunctions.UpdateMaze(maze, path);
+            else if (algorithm == "AStar"){path = solver.AStarSearch(out animationSteps);}
+            else if (algorithm == "Dijkstra") { path = solver.DijkstraSearch(out animationSteps); }
+            else if (algorithm == "BreadthFirst") { path = solver.BreadthFirstSearch(out animationSteps); }
+            mazeFunctions.AnimateMaze(animationSteps, animationDelay);
+            mazeFunctions.UpdateMaze(path);
             FinishedAnimating();
 
         }
@@ -257,7 +255,7 @@ namespace Nea_Maze_Solving_Application
         {
             Form2 finished = new Form2();
             finished.ShowDialog();
-            if (finished.clearMaze == true) { mazeFunctions.ClearMaze(maze); }
+            if (finished.clearMaze == true) { mazeFunctions.ClearMaze(); }
             else if (finished.revertToPrev == true) {
                 string prevMazeFilePath = mazeHistory.Pop();
                 mazeFileHandler.CSVToMaze(prevMazeFilePath);

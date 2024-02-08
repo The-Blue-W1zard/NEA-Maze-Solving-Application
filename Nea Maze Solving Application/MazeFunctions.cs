@@ -7,10 +7,17 @@ using System.Threading.Tasks;
 
 namespace Nea_Maze_Solving_Application
 {
-    internal class MazeFunctions
+    /// <summary>
+    /// Group of functions used to change various aspects of related maze
+    /// </summary>
+    /// <param name="maze">Maze that functions will be applied to</param>
+    internal class MazeFunctions(MazeCell[,] maze)
     {
-        
-        public void ToggleAllMazeCells(bool mode, MazeCell[,] maze)
+        /// <summary>
+        /// Ittertaes through maze enabling/disabling all buttons
+        /// </summary>
+        /// <param name="mode">Boolean value buttons will be toggled too</param>
+        public void ToggleAllMazeCells(bool mode)
         {
             for (int r = 0; r < maze.GetLength(0); r++)
             {
@@ -21,6 +28,13 @@ namespace Nea_Maze_Solving_Application
                 }
             }
         }
+
+        /// <summary>
+        /// Converts (x,y) coordinates of click to location of a button. 
+        /// </summary>
+        /// <param name="x">X coordinate of click</param>
+        /// <param name="y">Y coordinate of click</param>
+        /// <returns>Point sepcifying which button was clicked</returns>
         public Point CoordsToButtonPoint(int x, int y)
         {
             int col = x / 32 - 1;
@@ -28,7 +42,11 @@ namespace Nea_Maze_Solving_Application
             //MessageBox.Show($"r = {row} c = {col}");
             return new Point(row, col);
         }
-        public void ClearMaze(MazeCell[,] maze)
+
+        /// <summary>
+        /// itterate sthrough the maze disabling all features of maze cells.
+        /// </summary>
+        public void ClearMaze()
         {
             foreach (MazeCell cell in maze)
             {
@@ -40,7 +58,11 @@ namespace Nea_Maze_Solving_Application
 
             //Invalidate();
         }
-        public void UpdateMaze(MazeCell[,] maze, List<Point> path)
+        /// <summary>
+        /// Updates maze to have path displayed on it.
+        /// </summary>
+        /// <param name="path">List of points path follows</param>
+        public void UpdateMaze(List<Point> path)
         {
 
             for (int i = 0; i < path.Count; i++)
@@ -57,7 +79,12 @@ namespace Nea_Maze_Solving_Application
             }
 
         }
-        public void AnimateMaze(MazeCell[,] maze, List<Point> path, int delay)
+        /// <summary>
+        /// Updates maze with cells explored, animating them in order.
+        /// </summary>
+        /// <param name="path">List of points showing order cells where explored</param>
+        /// <param name="delay">Delay between changing each cell</param>
+        public void AnimateMaze(List<Point> path, int delay)
         {
             for (int i = 0; i < path.Count; i++)
             {

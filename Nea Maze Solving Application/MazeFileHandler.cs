@@ -9,6 +9,11 @@ namespace Nea_Maze_Solving_Application
 {
     internal class MazeFileHandler(MazeCell[,] maze)
     {
+        /// <summary>
+        /// Itterates through maze storing each cells location and variables as a line of common seperated values.
+        /// Writes each line to a CSV file/ 
+        /// </summary>
+        /// <param name="filePath">location and name of file</param>
         public void MazeToCSVFile(string filePath)
         {
             //var csv = new StringBuilder();
@@ -38,6 +43,12 @@ namespace Nea_Maze_Solving_Application
             //MessageBox.Show("Finished Exporting");
             //File.WriteAllText(path, csv.ToString());
         }
+
+        /// <summary>
+        /// Itterates through every line of a csv file converting values to attributes of maze cell.
+        /// Updates desired maze cell at specified location to have related values.
+        /// </summary>
+        /// <param name="filePath">Location csv file accessed from</param>
         public void CSVToMaze(string filePath)
         {
 
@@ -60,6 +71,10 @@ namespace Nea_Maze_Solving_Application
                 }
             }
         }
+        /// <summary>
+        /// Opens a file explorer window where user can select a csv file to load maze from.
+        /// </summary>
+        /// <param name="initialDirectory">Initial location file explorer will be</param>
         public void OpenFileExplorer(string initialDirectory)
         {
             OpenFileDialog ofd = new OpenFileDialog()
@@ -84,6 +99,9 @@ namespace Nea_Maze_Solving_Application
                 CSVToMaze(ofd.FileName);
             }
         }
+        /// <summary>
+        /// Checks if required directories/folders exist, if they don't creates them.
+        /// </summary>
         public void GenerateAppData()
         {
             //string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -109,6 +127,12 @@ namespace Nea_Maze_Solving_Application
 
 
         }
+        /// <summary>
+        /// Gets local data folder file path and combines it with application name 
+        /// Combines it with extension provided if possible
+        /// </summary>
+        /// <param name="folderExtension">Folder in app data folder trying to be accessed</param>
+        /// <returns>String showing whole folder path</returns>
         public string GetDefaultFolderPath(string folderExtension = null)
         {
             string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -116,6 +140,12 @@ namespace Nea_Maze_Solving_Application
             try { return Path.Combine(appDataFolder, folderExtension); }
             catch { return appDataFolder; }
         }
+
+        /// <summary>
+        /// Stores 10 most recent changes to maze - deltes oldest. 
+        /// Enables undo function to work.
+        /// </summary>
+        /// <param name="mazeHistory">Stack of file paths for recent changes</param>
         public void UpdateGeneratedMazeHistory(ref Stack<string> mazeHistory)
         {
             string mazeHistoryPath = GetDefaultFolderPath("MazeHistory");
@@ -134,6 +164,11 @@ namespace Nea_Maze_Solving_Application
             }
 
         }
+        /// <summary>
+        /// Exports maze as a file with name time created
+        /// </summary>
+        /// <param name="mazeHistory"> Stack of file paths for recent changes</param>
+        /// <param name="folderPath">Extension of app data folder file should be stored</param>
         public void ExportTimedFile(ref Stack<string> mazeHistory, string folderPath = null )
         {
             DateTime currentDate = DateTime.Now;
@@ -144,6 +179,12 @@ namespace Nea_Maze_Solving_Application
             MazeToCSVFile(filePath);
 
         }
+
+        /// <summary>
+        /// Checks if string value is true or false
+        /// </summary>
+        /// <param name="str">string to be checked</param>
+        /// <returns>If string shows true or false</returns>
         private bool checkBool(string str)
         {
             if (str == "True") { return true; }

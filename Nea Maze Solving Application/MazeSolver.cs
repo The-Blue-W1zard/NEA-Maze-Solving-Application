@@ -1,14 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Nea_Maze_Solving_Application
 {
-    internal class MazeSolver : AlgorithmFunctions
+    /// <summary>
+    /// Excecutes Maze Search algorithms on the specified maze, returning the path found from the start to goal cell if possible.
+    /// </summary>
+    /// <param name="maze">Maze that the algorithms will be excecuted on</param>
+    /// <param name="start">Start cell location</param>
+    /// <param name="goal">Goal cell location</param>
+    internal class MazeSolver(MazeCell[,] maze, Point start, Point goal) : AlgorithmFunctions
     {
-        public List<Point> DijkstraSearch(MazeCell[,] maze, Point start, Point goal, out List<Point> animationSteps)
+        /// <summary>
+        /// Excecutes a Dijkstra Search on the maze.
+        /// Algorithm starts at start point and searches till it reaches the end point or all cells are explored.
+        /// </summary>
+        /// <param name="animationSteps">Order that cells where explored so can be animated correctly</param>
+        /// <returns>List of points specifying the path found between the two points</returns>
+        public List<Point> DijkstraSearch(out List<Point> animationSteps)
         {
             UpPriQu Q = new();
             Dictionary<Point, Point> prev = [];
@@ -57,7 +70,12 @@ namespace Nea_Maze_Solving_Application
 
 
         }
-        public List<Point> BreadthFirstSearch(MazeCell[,] maze, Point start, Point goal, out List<Point> animationSteps)
+        /// <summary>
+        /// Excecutes Breadth First Search on the maze.
+        /// </summary>
+        /// <param name="animationSteps">Order that cells where explored so can be animated correctly</param>
+        /// <returns>List of points specifying the path found between the two points</returns>
+        public List<Point> BreadthFirstSearch(out List<Point> animationSteps)
         {
             Queue<Point> Q = new();
             Dictionary<Point, Point> cameFrom = [];
@@ -98,7 +116,12 @@ namespace Nea_Maze_Solving_Application
             return RecallPath(cameFrom, goal);
 
         }
-        public List<Point> AStarSearch(MazeCell[,] maze, Point start, Point goal, out List<Point> animationSteps)
+        /// <summary>
+        /// Exxcecutes an A Star search on the maze using a euclidian distance heuristic.
+        /// </summary>
+        /// <param name="animationSteps">Order that cells where explored so can be animated correctly</param>
+        /// <returns>List of points specifying the path found between the two points</returns>
+        public List<Point> AStarSearch(out List<Point> animationSteps)
         {
             //This rendition of Updatable priority queue has the point then the fscore as thats what have to get minimum from
             UpPriQu Q = new UpPriQu();
