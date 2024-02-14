@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Nea_Maze_Solving_Application
 {
     /// <summary>
-    /// Generates solvable mazes using a randomized depth first search.
+    /// Generates solvable mazes using a randomized depth first search with help of inheritted algorithm functions.
     /// </summary>
     /// <param name="maze">Maze algorithm will be excecuted on</param>
     internal class MazeGenerator(MazeCell[,] maze) : AlgorithmFunctions 
