@@ -120,7 +120,7 @@ namespace Nea_Maze_Solving_Application
         /// Exxcecutes an A Star search on the maze using a euclidian distance heuristic.
         /// </summary>
         /// <param name="animationSteps">Order that cells where explored so can be animated correctly</param>
-        /// <returns>List of points specifying the path found between the two points</returns>
+        /// <returns>List of points specifying the path found between the two pointsz</returns>
         public List<Point> AStarSearch(out List<Point> animationSteps)
         {
             //This rendition of Updatable priority queue has the point then the fscore as thats what have to get minimum from
