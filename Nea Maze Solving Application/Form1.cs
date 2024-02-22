@@ -9,13 +9,13 @@ namespace Nea_Maze_Solving_Application
         MazeCell[,] maze = new MazeCell[30, 50];
         MazeFileHandler mazeFileHandler;
         MazeFunctions mazeFunctions;
-        Button[] speedButtons;
+        Button[] speedButtons;  
         Button[] algorithmButtons;
+        Button[] generatorButtons;
 
         Point startCell = new Point(0, 0);
         Point endCell = new Point(28, 48);
-        Point tempCell = new Point();
-
+            
         Stack<string> mazeHistory = new Stack<string>();
 
         public bool changingStartCell = false;
@@ -41,8 +41,9 @@ namespace Nea_Maze_Solving_Application
 
         private void InitializeGroupedButtons()
         {
-            speedButtons = new Button[3] { Slow, Medium, Fast };
-            algorithmButtons = new Button[3] { Dijkstra, BreadthFirst, AStar };
+            speedButtons = [Slow, Medium, Fast];
+            algorithmButtons = [Dijkstra, BreadthFirst, AStar];
+            //generatorButtons = [RandomDFS, RecursiveBacktracker;
             foreach (Button button in speedButtons) { button.Click += SpeedButton_Click; }
             foreach (Button button in algorithmButtons) { button.Click += AlgorithmButton_Click; }
 
@@ -67,6 +68,11 @@ namespace Nea_Maze_Solving_Application
             }
 
         }
+
+        //private void GeneratorButton_Click()
+        //{
+
+        //}
         private void AlgorithmButton_Click(Object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
@@ -102,17 +108,18 @@ namespace Nea_Maze_Solving_Application
             maze[startCell.X, startCell.Y].ToggleStartCell();
             maze[endCell.X, endCell.Y].ToggleEndCell();
         }
-        public void AlgorithmPrequisites()
+        private void AlgorithmPrequisites()
         {
             string undoQueuePath = mazeFileHandler.GetDefaultFolderPath("UndoQueue");
             mazeFileHandler.ExportTimedFile(ref mazeHistory, undoQueuePath);
 
-        }
+        }   
         private void GenerateMaze_Click(object sender, EventArgs e)
         {
             MazeGenerator generator = new MazeGenerator(maze);
             mazeFunctions.ClearMaze();
-            generator.GenerateDFSMaze(startCell);
+            //generator.GenerateDFSMaze(startCell);
+            generator.GenerateBacktrackedMaze(startCell);    
             mazeFileHandler.UpdateGeneratedMazeHistory(ref mazeHistory);
             MessageBox.Show("Change the start and end cells using the buttons highlighted to the right.");
             ChangeStart.BackColor = Color.Yellow; ChangeEnd.BackColor = Color.Yellow;
@@ -186,7 +193,7 @@ namespace Nea_Maze_Solving_Application
                 changingStartCell = false;
                 mazeFunctions.ToggleAllMazeCells(true);
                 ChangeStart.BackColor = Color.White;
-                tempCell = mazeFunctions.CoordsToButtonPoint(e.X, e.Y);
+                Point tempCell = mazeFunctions.CoordsToButtonPoint(e.X, e.Y);
                 maze[startCell.X, startCell.Y].ToggleStartCell();
                 startCell = tempCell;
                 maze[startCell.X, startCell.Y].ToggleStartCell();
@@ -196,7 +203,7 @@ namespace Nea_Maze_Solving_Application
                 changingEndCell = false;
                 mazeFunctions.ToggleAllMazeCells(true);
                 ChangeEnd.BackColor = Color.White;
-                tempCell = mazeFunctions.CoordsToButtonPoint(e.X, e.Y);
+                Point tempCell = mazeFunctions.CoordsToButtonPoint(e.X, e.Y);
                 maze[endCell.X, endCell.Y].ToggleEndCell();
                 endCell = tempCell;
                 maze[endCell.X, endCell.Y].ToggleEndCell();

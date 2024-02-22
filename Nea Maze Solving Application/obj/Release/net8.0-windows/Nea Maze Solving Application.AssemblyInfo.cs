@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nea Maze Solving Application")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59a7fae8eb5e9d43c8302c450f6aca2b88dfdda0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nea Maze Solving Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nea Maze Solving Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

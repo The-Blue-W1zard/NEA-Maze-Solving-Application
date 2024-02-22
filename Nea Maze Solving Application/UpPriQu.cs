@@ -81,7 +81,7 @@ namespace Nea_Maze_Solving_Application
         /// </summary>
         /// <param name="point">Maze cell trying to get value from</param>
         /// <returns>Value asociated with maze cell</returns>
-        public int Distance(Point point)
+        public int GetValue(Point point)
         {
             if (sortedDict.TryGetValue(point, out int result)) return result;
             return -1;
@@ -91,7 +91,7 @@ namespace Nea_Maze_Solving_Application
         /// Dequeues coordinates of maze cell with shortest asociated value.
         /// </summary>
         /// <returns>Location of maze cell</returns>
-        public virtual Point Dequeue()
+        public Point Dequeue()
         {
             Point shortest = new Point();
             foreach (Point point in sortedDict.Keys)

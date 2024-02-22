@@ -71,21 +71,16 @@ namespace Nea_Maze_Solving_Application
         /// <summary>
         /// Works through dictionary of previous cells finding path from end to start.
         /// </summary>
-        /// <param name="prev">Initial Cell</param>
-        /// <param name="goal">Target Cell</param>
+        /// <param name="prev">Dictionary of each cells previous cell</param>
+        /// <param name="goal">Cell backtracking from, target cell of solving algorithm</param>
         /// <returns>List containing coordinates of cells that make the path</returns>
-        public List<Point> RecallPath(Dictionary<Point, Point> prev, Point goal)
+        public List<Point> RecallPath(Dictionary<Point, Point> prev, Point initial)
         {
             Point None = new(-1, -1);
-            Point current = goal;
+            Point current = initial;
             List<Point> path = [];
             path.Clear();
 
-            //if (prev[goal] == None)
-            //{
-            //    Console.WriteLine("No Path Found");
-            //    //when integrated with UI will make this display pop up message
-            //}
 
             while (current != None)
             {
@@ -122,5 +117,20 @@ namespace Nea_Maze_Solving_Application
             if (maze[row, col].isWall) { maze[row, col].ToggleWall(); }
         }
 
+        public List<Point> ShuffleList(List<Point> list) 
+        {
+            Random rand = new Random();
+            int n = list.Count;
+            while(n > 1)
+            {
+                n--;
+                int k = rand.Next(n+1);
+                Point value = list[k];
+                list[k] = list[n]; 
+                list[n] = value;    
+
+            }
+            return list;
+        }
     }
 }

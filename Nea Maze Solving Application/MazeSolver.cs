@@ -57,8 +57,8 @@ namespace Nea_Maze_Solving_Application
                 foreach (Point neighbour in Neighbours(maze, current, 1))
                 {
                     if (!Q.Contains(neighbour)) { continue; }
-                    int altDist = Q.Distance(current) + 1;
-                    if (altDist < Q.Distance(neighbour))
+                    int altDist = Q.GetValue(current) + 1;
+                    if (altDist < Q.GetValue(neighbour))
                     {
                         Q.Update(neighbour, altDist);
                         prev[neighbour] = current;

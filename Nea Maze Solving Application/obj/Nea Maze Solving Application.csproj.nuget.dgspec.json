@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj": {}
+    "C:\\ActualStuff\\NEA\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj": {}
   },
   "projects": {
-    "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj": {
+    "C:\\ActualStuff\\NEA\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj",
+        "projectUniqueName": "C:\\ActualStuff\\NEA\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj",
         "projectName": "Nea Maze Solving Application",
-        "projectPath": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj",
+        "projectPath": "C:\\ActualStuff\\NEA\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj",
         "packagesPath": "C:\\Users\\josep\\.nuget\\packages\\",
-        "outputPath": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\obj\\",
+        "outputPath": "C:\\ActualStuff\\NEA\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -38,11 +38,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -67,7 +62,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

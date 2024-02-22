@@ -24,6 +24,7 @@ namespace Nea_Maze_Solving_Application
             {
                 for (int c = 0; c < maze.GetLength(1); c++)
                 {
+                    if (maze[r,c].isStartCell || maze[r, c].isEndCell) { continue; }
                     if (r % 2 == 1) { maze[r, c].ToggleWall(); }
                     else if (c % 2 == 1) { maze[r, c].ToggleWall(); }
                 }
@@ -81,6 +82,47 @@ namespace Nea_Maze_Solving_Application
 
             }
         }
+
+        /// <summary>
+        /// Randomly works its way through the maze recursively connecting cells together.
+        /// </summary>
+        /// <param name="start">Cell currently being explored</param>
+        /// <param name="visited">List of visited cells</param>
+        private void RecursiveBacktracker(Point start, ref List<Point> visited)
+        {
+            visited.Add(start);
+            List<Point> possiblenNeighbours = Neighbours(maze,start,2,visited.ToList());
+            possiblenNeighbours = ShuffleList(possiblenNeighbours);
+            
+            foreach(Point p in possiblenNeighbours)
+            {
+                if (!visited.Contains(p))
+                {
+                    ConnectCells(maze, start, p);
+                    Application.DoEvents();
+                    RecursiveBacktracker(p, ref visited);
+
+                }
+
+            }
+
+        }
+
+        /// <summary>
+        /// Accesible function that starts excecuting the recursive backtracker algorithm on the maze
+        /// </summary>
+        /// <param name="start">Cell algorithm starts from</param>
+        public void GenerateBacktrackedMaze(Point start)
+        {
+            List<Point> visited = new();
+            //List<Point> visited = new();
+            GenerateRowsCols();
+            RecursiveBacktracker(start, ref visited);
+        }
+
+
+
+
         /// <summary>
         /// Accesible function that creates grid then maze.
         /// </summary>
