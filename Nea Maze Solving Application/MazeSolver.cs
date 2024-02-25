@@ -13,7 +13,7 @@ namespace Nea_Maze_Solving_Application
     /// <param name="maze">Maze that the algorithms will be excecuted on</param>
     /// <param name="start">Start cell location</param>
     /// <param name="goal">Goal cell location</param>
-    internal class MazeSolver(MazeCell[,] maze, Point start, Point goal) : AlgorithmFunctions
+    internal class MazeSolver(MazeCell[,] maze, Point start, Point goal) : AlgorithmFunctions   
     {
         /// <summary>
         /// Excecutes a Dijkstra Search on the maze.

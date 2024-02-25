@@ -91,10 +91,10 @@ namespace Nea_Maze_Solving_Application
         private void RecursiveBacktracker(Point start, ref List<Point> visited)
         {
             visited.Add(start);
-            List<Point> possiblenNeighbours = Neighbours(maze,start,2,visited.ToList());
-            possiblenNeighbours = ShuffleList(possiblenNeighbours);
-            
-            foreach(Point p in possiblenNeighbours)
+            List<Point> possibleNeighbours = Neighbours(maze,start,2,visited.ToList());
+            possibleNeighbours = ShuffleList(possibleNeighbours);
+             
+            foreach(Point p in possibleNeighbours)
             {
                 if (!visited.Contains(p))
                 {

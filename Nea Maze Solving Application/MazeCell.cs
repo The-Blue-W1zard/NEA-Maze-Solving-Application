@@ -8,8 +8,8 @@ namespace Nea_Maze_Solving_Application
 {
     internal class MazeCell:Button
     {
-        public Point location;   
         private Size size = new Size(32, 32);
+        public Point location { get; private set; }   
         public bool isWall {  get; private set; }
         public bool isStartCell { get; private set; }
         public bool isEndCell { get; private set; }
