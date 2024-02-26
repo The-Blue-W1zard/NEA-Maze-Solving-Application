@@ -79,11 +79,12 @@ namespace Nea_Maze_Solving_Application
         {
             Queue<Point> Q = new();
             Dictionary<Point, Point> cameFrom = [];
-            List<Point> visitedCells = [];
+            //List<Point> visitedCells = [];
+            HashSet<Point> visited = new HashSet<Point>();
             animationSteps = new List<Point>();
             Point none = new(-1, -1);
 
-            visitedCells.Add(start);
+            visited.Add(start);
             Q.Enqueue(start);
             cameFrom[start] = none;
 
@@ -101,10 +102,10 @@ namespace Nea_Maze_Solving_Application
                 animationSteps.Add(currentCell);
                 foreach (Point nextCell in Neighbours(maze, currentCell, 1))
                 {
-                    if (!visitedCells.Contains(nextCell))
+                    if (!visited.Contains(nextCell))
                     {
                         Q.Enqueue(nextCell);
-                        visitedCells.Add(nextCell);
+                        visited.Add(nextCell);
                         cameFrom.Add(nextCell, currentCell);
                     }
                 }

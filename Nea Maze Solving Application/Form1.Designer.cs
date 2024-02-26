@@ -45,6 +45,8 @@
             Dijkstra = new Button();
             BreadthFirst = new Button();
             AStar = new Button();
+            RandomDFS = new Button();
+            RecursiveBacktracker = new Button();
             SuspendLayout();
             // 
             // generateMaze
@@ -215,12 +217,32 @@
             AStar.Text = "A Star";
             AStar.UseVisualStyleBackColor = true;
             // 
+            // RandomDFS
+            // 
+            RandomDFS.Location = new Point(1720, 109);
+            RandomDFS.Name = "RandomDFS";
+            RandomDFS.Size = new Size(102, 23);
+            RandomDFS.TabIndex = 20;
+            RandomDFS.Text = "Random DFS";
+            RandomDFS.UseVisualStyleBackColor = true;
+            // 
+            // RecursiveBacktracker
+            // 
+            RecursiveBacktracker.Location = new Point(1828, 109);
+            RecursiveBacktracker.Name = "RecursiveBacktracker";
+            RecursiveBacktracker.Size = new Size(102, 23);
+            RecursiveBacktracker.TabIndex = 21;
+            RecursiveBacktracker.Text = "Rec Backtracker";
+            RecursiveBacktracker.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaGreen;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(RecursiveBacktracker);
+            Controls.Add(RandomDFS);
             Controls.Add(AStar);
             Controls.Add(BreadthFirst);
             Controls.Add(Dijkstra);
@@ -265,5 +287,7 @@
         private Button Dijkstra;
         private Button BreadthFirst;
         private Button AStar;
+        private Button RandomDFS;
+        private Button RecursiveBacktracker;
     }
 }

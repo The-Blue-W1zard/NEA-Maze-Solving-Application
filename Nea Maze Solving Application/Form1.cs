@@ -23,6 +23,7 @@ namespace Nea_Maze_Solving_Application
         public bool clicked = false;
         public int animationDelay = 0;
         public string algorithm = "None";
+        public string generatorAlgorithm = "None";
 
         public Form1()
         {
@@ -43,9 +44,10 @@ namespace Nea_Maze_Solving_Application
         {
             speedButtons = [Slow, Medium, Fast];
             algorithmButtons = [Dijkstra, BreadthFirst, AStar];
-            //generatorButtons = [RandomDFS, RecursiveBacktracker;
+            generatorButtons = [RandomDFS, RecursiveBacktracker];
             foreach (Button button in speedButtons) { button.Click += SpeedButton_Click; }
             foreach (Button button in algorithmButtons) { button.Click += AlgorithmButton_Click; }
+            foreach (Button button in generatorButtons) {  button.Click += GeneratorButton_Click; }
 
         }
 
@@ -92,6 +94,25 @@ namespace Nea_Maze_Solving_Application
             }
         }
 
+        private void GeneratorButton_Click(Object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+
+            foreach (Button button in generatorButtons)
+            {
+                if (button == clickedButton)
+                {
+                    button.BackColor = Color.Gray;
+                    generatorAlgorithm = button.Name;
+
+                }
+                else
+                {
+                    button.BackColor = Color.FromArgb(224, 238, 249);
+                }
+            }
+        }
+
         private void CreateBlankMaze()
         {
             for (int row = 0; row < maze.GetLength(0); row++)
@@ -118,8 +139,9 @@ namespace Nea_Maze_Solving_Application
         {
             MazeGenerator generator = new MazeGenerator(maze);
             mazeFunctions.ClearMaze();
-            //generator.GenerateDFSMaze(startCell);
-            generator.GenerateBacktrackedMaze(startCell);    
+            if (generatorAlgorithm == "None") { MessageBox.Show("No algorithm selected."); return; }
+            else if (generatorAlgorithm == "RandomDFS") { generator.GenerateDFSMaze(startCell); return; }
+            else if (generatorAlgorithm == "RecursiveBacktracker") { generator.GenerateBacktrackedMaze(startCell); return; }    
             mazeFileHandler.UpdateGeneratedMazeHistory(ref mazeHistory);
             MessageBox.Show("Change the start and end cells using the buttons highlighted to the right.");
             ChangeStart.BackColor = Color.Yellow; ChangeEnd.BackColor = Color.Yellow;
@@ -235,6 +257,7 @@ namespace Nea_Maze_Solving_Application
             //string temp = GetCurrentTime() + ".csv";
             //MessageBox.Show(temp);
             mazeFileHandler.ExportTimedFile(ref mazeHistory);
+            MessageBox.Show("Finished Exporting Maze");
         }
 
         private void RecentMazeHistory_Click(object sender, EventArgs e)
@@ -254,8 +277,12 @@ namespace Nea_Maze_Solving_Application
             else if (algorithm == "Dijkstra") { path = solver.DijkstraSearch(out animationSteps); }
             else if (algorithm == "BreadthFirst") { path = solver.BreadthFirstSearch(out animationSteps); }
             mazeFunctions.AnimateMaze(animationSteps, animationDelay);
-            mazeFunctions.UpdateMaze(path);
-            FinishedAnimating();
+            if (path.Count == 1) { MessageBox.Show("No path found"); }
+            else
+            {
+                mazeFunctions.UpdateMaze(path);
+                FinishedAnimating();
+            }
 
         }
         private void FinishedAnimating()

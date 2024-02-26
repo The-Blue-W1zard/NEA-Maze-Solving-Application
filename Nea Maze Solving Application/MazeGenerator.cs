@@ -15,7 +15,7 @@ namespace Nea_Maze_Solving_Application
         /// <summary>
         /// Creates grid of walls using modulo operator
         /// </summary>
-        private void GenerateRowsCols()
+        private void GenerateGrid()
         {
             //int r = maze.GetLength(0);
             //int c = maze.GetLength(1);
@@ -116,7 +116,7 @@ namespace Nea_Maze_Solving_Application
         {
             List<Point> visited = new();
             //List<Point> visited = new();
-            GenerateRowsCols();
+            GenerateGrid();
             RecursiveBacktracker(start, ref visited);
         }
 
@@ -129,7 +129,7 @@ namespace Nea_Maze_Solving_Application
         /// <param name="start"></param>
         public void GenerateDFSMaze(Point start)
         {
-            GenerateRowsCols();
+            GenerateGrid();
             RandomizedDFS(start);
         }
 
