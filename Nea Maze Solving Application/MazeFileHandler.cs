@@ -19,7 +19,7 @@ namespace Nea_Maze_Solving_Application
             //var csv = new StringBuilder();
             //string path = @"C:\Users\josep\Downloads\Output2.csv";#
             //MessageBox.Show(filePath);
-            using (var w = new StreamWriter(filePath))
+            using (StreamWriter w = new StreamWriter(filePath))
             {
                 for (int r = 0; r < maze.GetLength(0); r++)
                 {
@@ -32,7 +32,7 @@ namespace Nea_Maze_Solving_Application
                         var isEndCell = tempMazeCell.isEndCell;
                         var isOnPath = tempMazeCell.isOnPath;
                         var isExplored = tempMazeCell.isExplored;
-                        var newline = $"{location.X},{location.Y},{isWall},{isStartCell},{isEndCell},{isOnPath},{isExplored}";
+                        string newline = $"{location.X},{location.Y},{isWall},{isStartCell},{isEndCell},{isOnPath},{isExplored}";
                         //Debug.WriteLine(newline);   
                         w.WriteLine(newline);
                         w.Flush();
@@ -52,13 +52,13 @@ namespace Nea_Maze_Solving_Application
         public void CSVToMaze(string filePath)
         {
 
-            using (var r = new StreamReader(File.OpenRead(filePath)))
+            using (StreamReader r = new StreamReader(File.OpenRead(filePath)))
             {
 
                 while (!r.EndOfStream)
                 {
                     var line = r.ReadLine();
-                    var splitLine = line.Replace(" ", string.Empty).Split(',');
+                    string[] splitLine = line.Replace(" ", string.Empty).Split(',');
                     Point location = new Point(Convert.ToInt32(splitLine[0]), Convert.ToInt32(splitLine[1]));
                     bool isWall = checkBool(splitLine[2]);
                     bool isStartCell = checkBool(splitLine[3]);

@@ -1,6 +1,6 @@
 ﻿namespace Nea_Maze_Solving_Application
 {
-    partial class Form2
+    partial class FinishedForm
     {
         /// <summary>
         /// Required designer variable.

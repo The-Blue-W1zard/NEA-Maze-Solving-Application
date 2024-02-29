@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Nea_Maze_Solving_Application
 {
-    public partial class Form2 : Form
+    public partial class FinishedForm : Form
     {
         public bool revertToPrev = false;
         public bool clearMaze = false;
-        public Form2()
+        public FinishedForm()
         {
             InitializeComponent();
         }

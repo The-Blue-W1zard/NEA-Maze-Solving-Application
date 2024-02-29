@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,13 @@ namespace Nea_Maze_Solving_Application
     internal class UpPriQu
     {
         private Dictionary<Point, int> sortedDict;
-        private int numItems;
         private int capacity;
         private Point None = new Point(-1, -1);
 
         /// <summary>
         /// Returns number of items in the priority queue 
         /// </summary>
-        public int Count { get { return numItems; } }
+        public int Count { get { return sortedDict.Count; } }
 
         /// <summary>
         /// Sets the default capacity to 1500 if no other value specified
@@ -31,7 +31,6 @@ namespace Nea_Maze_Solving_Application
         {
             sortedDict = new Dictionary<Point, int>(capacity);
             this.capacity = capacity;
-            numItems = 0;
         }
 
         /// <summary>
@@ -46,11 +45,15 @@ namespace Nea_Maze_Solving_Application
         /// <param name="value">Value asociated with maze cell</param>
         public void Enqueue(Point point, int value)
         {
-            sortedDict.Add(point, value);
-            numItems++;
-            //Uses LinQ to order items in the dictionary
-            var tempDict = from entry in sortedDict orderby entry.Value ascending select entry;
-            sortedDict = tempDict.ToDictionary();
+            if (sortedDict.Count <= capacity)
+            {
+                sortedDict.Add(point, value);
+                //Uses LinQ to order items in the dictionary
+                var tempDict = from entry in sortedDict orderby entry.Value ascending select entry;
+                sortedDict = tempDict.ToDictionary();
+            }
+            else { Debug.Write("Priority Queue Full"); }
+           
         }
 
         /// <summary>
@@ -101,7 +104,6 @@ namespace Nea_Maze_Solving_Application
                 break;
             }
 
-            numItems--;
             return shortest;
 
 

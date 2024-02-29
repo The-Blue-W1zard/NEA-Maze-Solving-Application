@@ -23,7 +23,7 @@ namespace Nea_Maze_Solving_Application
         /// <returns>List of points specifying the path found between the two points</returns>
         public List<Point> DijkstraSearch(out List<Point> animationSteps)
         {
-            UpPriQu Q = new();
+            UpPriQu priorityQueue = new();
             Dictionary<Point, Point> prev = [];
             Point None = new(-1, -1);
             int numExplored = 0;
@@ -34,18 +34,18 @@ namespace Nea_Maze_Solving_Application
                 for (int col = 0; col < maze.GetLength(1); col++)
                 {
                     Point point = new(row, col);
-                    Q.Enqueue(point, int.MaxValue);
+                    priorityQueue.Enqueue(point, int.MaxValue);
                     prev.Add(point, None);
 
                 }
             }
 
-            Q.Update(start, 0);
+            priorityQueue.Update(start, 0);
             Point current;
-            while (Q.Count > 0)
+            while (priorityQueue.Count > 0)
             {
                 numExplored++;
-                current = Q.Dequeue();
+                current = priorityQueue.Dequeue();
                 animationSteps.Add(current);
 
 
@@ -56,11 +56,11 @@ namespace Nea_Maze_Solving_Application
 
                 foreach (Point neighbour in Neighbours(maze, current, 1))
                 {
-                    if (!Q.Contains(neighbour)) { continue; }
-                    int altDist = Q.GetValue(current) + 1;
-                    if (altDist < Q.GetValue(neighbour))
+                    if (!priorityQueue.Contains(neighbour)) { continue; }
+                    int altDist = priorityQueue.GetValue(current) + 1;
+                    if (altDist < priorityQueue.GetValue(neighbour))
                     {
-                        Q.Update(neighbour, altDist);
+                        priorityQueue.Update(neighbour, altDist);
                         prev[neighbour] = current;
                     }
                 }
@@ -77,7 +77,7 @@ namespace Nea_Maze_Solving_Application
         /// <returns>List of points specifying the path found between the two points</returns>
         public List<Point> BreadthFirstSearch(out List<Point> animationSteps)
         {
-            Queue<Point> Q = new();
+            Queue<Point> queue = new();
             Dictionary<Point, Point> cameFrom = [];
             //List<Point> visitedCells = [];
             HashSet<Point> visited = new HashSet<Point>();
@@ -85,7 +85,7 @@ namespace Nea_Maze_Solving_Application
             Point none = new(-1, -1);
 
             visited.Add(start);
-            Q.Enqueue(start);
+            queue.Enqueue(start);
             cameFrom[start] = none;
 
             Point currentCell;
@@ -93,7 +93,7 @@ namespace Nea_Maze_Solving_Application
             do
             {
                 numExplored++;
-                currentCell = Q.Dequeue();
+                currentCell = queue.Dequeue();
                 if (currentCell.Equals(goal))
                 {
                     //Console.WriteLine("Reached End");
@@ -104,14 +104,14 @@ namespace Nea_Maze_Solving_Application
                 {
                     if (!visited.Contains(nextCell))
                     {
-                        Q.Enqueue(nextCell);
+                        queue.Enqueue(nextCell);
                         visited.Add(nextCell);
                         cameFrom.Add(nextCell, currentCell);
                     }
                 }
 
             }
-            while (Q.Count > 0);
+            while (queue.Count > 0);
 
             //Console.WriteLine(numExplored);
             return RecallPath(cameFrom, goal);
@@ -125,13 +125,12 @@ namespace Nea_Maze_Solving_Application
         public List<Point> AStarSearch(out List<Point> animationSteps)
         {
             //This rendition of Updatable priority queue has the point then the fscore as thats what have to get minimum from
-            UpPriQu Q = new UpPriQu();
+            UpPriQu priorityQueue = new UpPriQu();
             Dictionary<Point, int> gScore = new();
             Dictionary<Point, int> fScore = new();
             Dictionary<Point, Point> prev = new();
             animationSteps = new List<Point>();
             Point None = new(-1, -1);
-            int numExplored = 0;
 
             for (int row = 0; row < maze.GetLength(0); row++)
             {
@@ -145,12 +144,11 @@ namespace Nea_Maze_Solving_Application
             }
             gScore[start] = 0;
             fScore[start] = EuclidianDistance(start, goal);
-            Q.Enqueue(start, fScore[start]);
+            priorityQueue.Enqueue(start, fScore[start]);
 
-            while (Q.Count > 0)
+            while (priorityQueue.Count > 0)
             {
-                numExplored++;
-                Point current = Q.Dequeue();
+                Point current = priorityQueue.Dequeue();
                 if (current == goal) { break; }
                 animationSteps.Add(current);
 
@@ -162,9 +160,9 @@ namespace Nea_Maze_Solving_Application
                         prev[neighbour] = current;
                         gScore[neighbour] = tentative_gScore;
                         fScore[neighbour] = tentative_gScore + EuclidianDistance(current, goal);
-                        if (!Q.Contains(neighbour))
+                        if (!priorityQueue.Contains(neighbour))
                         {
-                            Q.Enqueue(neighbour, fScore[neighbour]);
+                            priorityQueue.Enqueue(neighbour, fScore[neighbour]);
                         }
                     }
 

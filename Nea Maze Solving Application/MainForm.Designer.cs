@@ -1,6 +1,6 @@
 ﻿namespace Nea_Maze_Solving_Application
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -235,7 +235,7 @@
             RecursiveBacktracker.Text = "Rec Backtracker";
             RecursiveBacktracker.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -260,7 +260,7 @@
             Controls.Add(Clear);
             Controls.Add(ReloadMaze);
             Controls.Add(generateMaze);
-            Name = "Form1";
+            Name = "MainForm";
             Text = "NEA Maze Solver";
             Load += Form1_Load;
             MouseClick += Form1_MouseClick;

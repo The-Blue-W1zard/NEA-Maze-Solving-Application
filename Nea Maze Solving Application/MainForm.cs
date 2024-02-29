@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Nea_Maze_Solving_Application
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
 
         MazeCell[,] maze = new MazeCell[30, 50];
@@ -25,7 +25,7 @@ namespace Nea_Maze_Solving_Application
         public string algorithm = "None";
         public string generatorAlgorithm = "None";
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             CreateBlankMaze();
@@ -137,6 +137,7 @@ namespace Nea_Maze_Solving_Application
         }   
         private void GenerateMaze_Click(object sender, EventArgs e)
         {
+            AlgorithmPrequisites();
             MazeGenerator generator = new MazeGenerator(maze);
             mazeFunctions.ClearMaze();
             if (generatorAlgorithm == "None") { MessageBox.Show("No algorithm selected."); return; }
@@ -145,7 +146,7 @@ namespace Nea_Maze_Solving_Application
             mazeFileHandler.UpdateGeneratedMazeHistory(ref mazeHistory);
             MessageBox.Show("Change the start and end cells using the buttons highlighted to the right.");
             ChangeStart.BackColor = Color.Yellow; ChangeEnd.BackColor = Color.Yellow;
-
+            
         }
         //private void Dijkstra_Click(object sender, EventArgs e)
         //{
@@ -189,6 +190,7 @@ namespace Nea_Maze_Solving_Application
         }
         private void ChangeStart_Click(object sender, EventArgs e)
         {
+            AlgorithmPrequisites();
             if (!changingStartCell)
             {
                 ChangeStart.BackColor = Color.Green;
@@ -233,6 +235,7 @@ namespace Nea_Maze_Solving_Application
         }
         private void ChangeEnd_Click(object sender, EventArgs e)
         {
+            AlgorithmPrequisites();
             if (!changingEndCell)
             {
                 ChangeEnd.BackColor = Color.Red;
@@ -249,6 +252,7 @@ namespace Nea_Maze_Solving_Application
         }
         private void ReloadFromFile_Click(object sender, EventArgs e)
         {
+            AlgorithmPrequisites();
             mazeFileHandler.OpenFileExplorer("NEAMazeSolver");
 
         }
@@ -256,12 +260,14 @@ namespace Nea_Maze_Solving_Application
         {
             //string temp = GetCurrentTime() + ".csv";
             //MessageBox.Show(temp);
+            AlgorithmPrequisites();
             mazeFileHandler.ExportTimedFile(ref mazeHistory);
             MessageBox.Show("Finished Exporting Maze");
         }
 
         private void RecentMazeHistory_Click(object sender, EventArgs e)
         {
+            AlgorithmPrequisites();
             string path = Path.Combine("NEAMazeSolver", "MazeHistory");
             mazeFileHandler.OpenFileExplorer(path);
         }
@@ -287,7 +293,7 @@ namespace Nea_Maze_Solving_Application
         }
         private void FinishedAnimating()
         {
-            Form2 finished = new Form2();
+            FinishedForm finished = new FinishedForm();
             finished.ShowDialog();
             if (finished.clearMaze == true) { mazeFunctions.ClearMaze(); }
             else if (finished.revertToPrev == true) {
