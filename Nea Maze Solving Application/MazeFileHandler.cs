@@ -3,12 +3,51 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
+using Newtonsoft.Json;
 
 namespace Nea_Maze_Solving_Application
 {
     internal class MazeFileHandler(MazeCell[,] maze)
     {
+        private class TestCell
+        {
+            public Point location { get; set; }
+            public bool isWall { get; set; }
+            public bool isStartCell { get; set; }
+            public bool isEndCell { get; set; }
+            public bool isOnPath { get; set; }
+            public bool isExplored { get; set; }
+
+        }
+
+        public void MazeToJSONFile(string filePath)
+        {
+            List<TestCell> cells = new List<TestCell>();
+            for (int r = 0; r < maze.GetLength(0); r++)
+            {
+                for (int c = 0; c < maze.GetLength(1); c++)
+                {
+                    var temp = new TestCell()
+                    {
+                        location = maze[r, c].location,
+                        isWall = maze[r, c].isWall,
+                        isStartCell = maze[r, c].isStartCell,
+                        isEndCell = maze[r, c].isEndCell,
+                        isOnPath = maze[r, c].isOnPath,
+                        isExplored = maze[r, c].isExplored,
+                    };
+                    cells.Add(temp);
+                    //string jsonString = JsonConvert.SerializeObject(temp,Newtonsoft.Json.Formatting.Indented,new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore});                    
+                }
+            }
+            string jsonString = JsonConvert.SerializeObject(cells, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText(filePath, jsonString);
+
+
+        }
         /// <summary>
         /// Itterates through maze storing each cells location and variables as a line of common seperated values.
         /// Writes each line to a CSV file/ 
@@ -44,6 +83,18 @@ namespace Nea_Maze_Solving_Application
             //File.WriteAllText(path, csv.ToString());
         }
 
+        public void JSONToMaze(string filePath)
+        {
+
+            string jsonString = File.ReadAllText(filePath);
+
+            var list = JsonConvert.DeserializeObject<List<TestCell>>(jsonString);
+            foreach (TestCell t in list)
+            {
+                maze[t.location.X, t.location.Y].RefreshCell(t.isWall, t.isStartCell, t.isEndCell, t.isOnPath, t.isExplored);
+            }
+           
+        }
         /// <summary>
         /// Itterates through every line of a csv file converting values to attributes of maze cell.
         /// Updates desired maze cell at specified location to have related values.
@@ -85,8 +136,8 @@ namespace Nea_Maze_Solving_Application
                 CheckFileExists = true,
                 CheckPathExists = true,
 
-                DefaultExt = "csv",
-                Filter = "CSV Files (*.csv)|*.csv",
+                DefaultExt = "json",
+                Filter = "JSON Files (*.json)|*.json",
                 RestoreDirectory = true,
 
                 ReadOnlyChecked = true,
@@ -96,7 +147,7 @@ namespace Nea_Maze_Solving_Application
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                CSVToMaze(ofd.FileName);
+                JSONToMaze(ofd.FileName);
             }
         }
         /// <summary>
@@ -174,9 +225,10 @@ namespace Nea_Maze_Solving_Application
             DateTime currentDate = DateTime.Now;
             string time = currentDate.ToString("dd-MM-yyyy-HH-mm-ss");
             if (string.IsNullOrEmpty(folderPath)) { folderPath = GetDefaultFolderPath(); }
-            string filePath = Path.Combine(folderPath, time + ".csv");
+            string filePath = Path.Combine(folderPath, time + ".json");
             mazeHistory.Push(filePath);
-            MazeToCSVFile(filePath);
+            //MazeToCSVFile(filePath);
+            MazeToJSONFile(filePath);
 
         }
 

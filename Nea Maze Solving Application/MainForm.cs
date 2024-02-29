@@ -140,9 +140,9 @@ namespace Nea_Maze_Solving_Application
             AlgorithmPrequisites();
             MazeGenerator generator = new MazeGenerator(maze);
             mazeFunctions.ClearMaze();
-            if (generatorAlgorithm == "None") { MessageBox.Show("No algorithm selected."); return; }
-            else if (generatorAlgorithm == "RandomDFS") { generator.GenerateDFSMaze(startCell); return; }
-            else if (generatorAlgorithm == "RecursiveBacktracker") { generator.GenerateBacktrackedMaze(startCell); return; }    
+            if (generatorAlgorithm == "None") { MessageBox.Show("No algorithm selected."); }
+            else if (generatorAlgorithm == "RandomDFS") { generator.GenerateDFSMaze(startCell); }
+            else if (generatorAlgorithm == "RecursiveBacktracker") { generator.GenerateBacktrackedMaze(startCell); }    
             mazeFileHandler.UpdateGeneratedMazeHistory(ref mazeHistory);
             MessageBox.Show("Change the start and end cells using the buttons highlighted to the right.");
             ChangeStart.BackColor = Color.Yellow; ChangeEnd.BackColor = Color.Yellow;
@@ -177,7 +177,7 @@ namespace Nea_Maze_Solving_Application
             try
             {
                 string prevMazeFilePath = mazeHistory.Pop();
-                mazeFileHandler.CSVToMaze(prevMazeFilePath);
+                mazeFileHandler.JSONToMaze(prevMazeFilePath);
 
             }
             catch { MessageBox.Show("Error - Nothing to undo"); }
@@ -298,7 +298,7 @@ namespace Nea_Maze_Solving_Application
             if (finished.clearMaze == true) { mazeFunctions.ClearMaze(); }
             else if (finished.revertToPrev == true) {
                 string prevMazeFilePath = mazeHistory.Pop();
-                mazeFileHandler.CSVToMaze(prevMazeFilePath);
+                mazeFileHandler.JSONToMaze(prevMazeFilePath);
             }
 
         }
