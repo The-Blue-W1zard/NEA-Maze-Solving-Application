@@ -12,14 +12,14 @@ namespace Nea_Maze_Solving_Application
     internal class AlgorithmFunctions
     {
         /// <summary>
-        /// Checks surrounding cells in 4D in the maze and returns a list of accesible univisted ones.
+        /// Checks for unvisited, accessible cells in 4 dimensions around the inputted cell.
         /// </summary>
-        /// <param name="maze">Maze that is being checked</param>
-        /// <param name="current">Initial cell searching from</param>
-        /// <param name="dist">How far out cells should be searched</param>
-        /// <param name="visited">List containing cells that have already been explored</param>
-        /// <returns>List of possible cell locations</returns>
-        public List<Point> Neighbours(MazeCell[,] maze, Point current, int dist, List<Point> visited = default)
+        /// <param name="maze">Maze to be checked.</param>
+        /// <param name="current">Initial cell to search from.</param>
+        /// <param name="dist">How far out cells should be searched.</param>
+        /// <param name="visited">List containing all previously explored cells.</param>
+        /// <returns>List of possible neighbour cell locations.</returns>
+        public static List<Point> Neighbours(MazeCell[,] maze, Point current, int dist, List<Point> visited = default)
         {
             int[] checksRows = [0, 0, dist, -dist];
             int[] checksCols = [dist, -dist, 0, 0];
@@ -33,6 +33,7 @@ namespace Nea_Maze_Solving_Application
             {
                 try
                 {
+                    //Nested in a try loop in case tries to access maze cell outside the boundaries of the 2D array 
                     if (!maze[row + checksRows[t], col + checksCols[t]].isWall && !visited.Contains(new Point(row + checksRows[t], col + checksCols[t])))
                     {
                         neighbours.Add(new Point(row + checksRows[t], col + checksCols[t]));
@@ -45,13 +46,13 @@ namespace Nea_Maze_Solving_Application
         }
 
         /// <summary>
-        /// Gets a random neighbour cell 
+        /// Gets a random unvisited neighbour cell. 
         /// </summary>
-        /// <param name="maze">Maze being checked</param>
-        /// <param name="current">Initial cell searching from</param>
-        /// <param name="visited">List containing cells that have already been explored</param>
-        /// <returns>Point if one is possible or default value if none are</returns>
-        public Point randomUnvisitedNeighbour(MazeCell[,] maze, Point current, ref List<Point> visited)
+        /// <param name="maze">Maze being checked.</param>
+        /// <param name="current">Initial cell searching from.</param>
+        /// <param name="visited">List containing all previously explored cells.</param>
+        /// <returns>Point specifying cell if one is possible, else a default none value.</returns>
+        public Point RandomUnvisitedNeighbour(MazeCell[,] maze, Point current, ref List<Point> visited)
         {
             Random rand = new();
             Point next = new(-1, -1);
@@ -71,9 +72,9 @@ namespace Nea_Maze_Solving_Application
         /// <summary>
         /// Works through dictionary of previous cells finding path from end to start.
         /// </summary>
-        /// <param name="prev">Dictionary of each cells previous cell</param>
-        /// <param name="goal">Cell backtracking from, target cell of solving algorithm</param>
-        /// <returns>List containing coordinates of cells that make the path</returns>
+        /// <param name="prev">Dictionary of each cells previous cell.</param>
+        /// <param name="goal">Cell backtracking from, target cell of solving algorithm.</param>
+        /// <returns>List containing coordinates of cells that make the found path.</returns>
         public List<Point> RecallPath(Dictionary<Point, Point> prev, Point initial)
         {
             Point None = new(-1, -1);
@@ -92,24 +93,24 @@ namespace Nea_Maze_Solving_Application
         }
 
         /// <summary>
-        /// Calculates the eucilidan distance between two points
+        /// Calculates the eucilidan distance between two inputted points.
         /// </summary>
-        /// <param name="start">First point</param>
-        /// <param name="goal">Second point</param>
-        /// <returns>Distance between the points</returns>
+        /// <param name="start">First point.</param>
+        /// <param name="goal">Second point.</param>
+        /// <returns>Distance between the points.</returns>
         public int EuclidianDistance(Point start, Point goal)
         {
+            //Gets the square root of the sum of the differences in x and y posisitons squared
             double h = Math.Sqrt(Math.Pow(start.X - goal.X, 2) + Math.Pow(start.Y - goal.Y, 2));
-            //return (int)h;
             return (int)Math.Round(h);
         }
 
         /// <summary>
-        /// Toggles wall between two specified cells
+        /// Toggles wall between two specified cells.
         /// </summary>
-        /// <param name="maze">Maze being changed</param>
-        /// <param name="first">First cell</param>
-        /// <param name="second">Second cell</param>
+        /// <param name="maze">Maze being changed.</param>
+        /// <param name="first">First cell.</param>
+        /// <param name="second">Second cell.</param>
         public void ConnectCells(MazeCell[,] maze, Point first, Point second)
         {
             int row = (first.X + second.X) / 2;
@@ -117,7 +118,12 @@ namespace Nea_Maze_Solving_Application
             if (maze[row, col].isWall) { maze[row, col].ToggleWall(); }
         }
 
-        public List<Point> ShuffleList(List<Point> list) 
+        /// <summary>
+        /// Randomizes the locations of items in an inputted list.
+        /// </summary>
+        /// <param name="list">List of Points to be shuffled.</param>
+        /// <returns>Shuffled list of points.</returns>
+        public List<Point> ShuffleList(List<Point> list)
         {
             Random rand = new Random();
             int n = list.Count;
@@ -125,10 +131,7 @@ namespace Nea_Maze_Solving_Application
             {
                 n--;
                 int k = rand.Next(n+1);
-                Point value = list[k];
-                list[k] = list[n]; 
-                list[n] = value;    
-
+                (list[n], list[k]) = (list[k], list[n]);
             }
             return list;
         }

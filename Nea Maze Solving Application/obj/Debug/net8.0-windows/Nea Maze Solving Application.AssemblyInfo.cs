@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nea Maze Solving Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6c9dbc912e15506f614a2ee809e5a26393595fb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f15c8f1a5999fad795d12034990a0b2f53bddf3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nea Maze Solving Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nea Maze Solving Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
