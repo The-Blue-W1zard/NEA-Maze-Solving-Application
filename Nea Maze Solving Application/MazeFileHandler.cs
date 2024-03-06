@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nea_Maze_Solving_Application
@@ -11,7 +10,7 @@ namespace Nea_Maze_Solving_Application
     internal class MazeFileHandler(MazeCell[,] maze)
     {
         /// <summary>
-        /// Temporary cell class used for (de)serlialization. Stores key maze cell attributes. 
+        /// Temporary cell class used for (de)serialization. Stores key maze cell attributes. 
         /// </summary>
         private class TempCell
         {
@@ -25,16 +24,18 @@ namespace Nea_Maze_Solving_Application
         }
 
         /// <summary>
-        /// Itterates though every cell storing attributes to a JSON file.
+        /// Iterates though every cell storing attributes to a JSON file.
         /// </summary>
         /// <param name="filePath">Location file will be stored</param>
-        public void MazeToJSONFile(string filePath)
+        public void MazeToJsonFile(string filePath)
         {
+            //Creates list to store all TempCells before serialization
             List<TempCell> cells = new List<TempCell>();
             for (int r = 0; r < maze.GetLength(0); r++)
             {
                 for (int c = 0; c < maze.GetLength(1); c++)
                 {
+                    //Creates a TempCell from each Maze Cells attributes and adds it to the list of TempCells
                     var temp = new TempCell()
                     {
                         location = maze[r, c].location,
@@ -47,21 +48,25 @@ namespace Nea_Maze_Solving_Application
                     cells.Add(temp);
                 }
             }
+            //Serializes the list using newtonsofts' Json Convert
             string jsonString = JsonConvert.SerializeObject(cells, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+            //And writes it to a file
             File.WriteAllText(filePath, jsonString);
 
         }
 
         /// <summary>
-        /// Deserealizes JSON file then updates and outputs maze.
+        /// Deserializes JSON file then updates and outputs maze.
         /// </summary>
         /// <param name="filePath">File being loaded.</param>
-        public void JSONToMaze(string filePath)
+        public void JsonToMaze(string filePath)
         {
 
             string jsonString = File.ReadAllText(filePath);
+            //Makes sure that the inputted file type ends with json so doesn't try to load wrong
             if (!jsonString.EndsWith(".json")) { MessageBox.Show("Wrong File Type");return; }
 
+            //Converting back from TempCells to MazeCells nested in try catch in case erroneous data is inputted and serialization/conversion breaks
             try
             {
                 var list = JsonConvert.DeserializeObject<List<TempCell>>(jsonString);
@@ -70,6 +75,7 @@ namespace Nea_Maze_Solving_Application
                     maze[t.location.X, t.location.Y].RefreshCell(t.isWall, t.isStartCell, t.isEndCell, t.isOnPath, t.isExplored);
                 }
             }
+            //Outputs error message if loading maze fails
             catch { MessageBox.Show("Erroneous File Inputted"); }
                                               
         }
@@ -81,28 +87,35 @@ namespace Nea_Maze_Solving_Application
         /// <param name="initialDirectory">Folder file explorer will start at.</param>
         public void OpenFileExplorer(string initialDirectory)
         {
+            //Opens file explorer window with settings to make sure...
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), initialDirectory),
+                //It opens in the correct directory
+                InitialDirectory = GetDefaultFolderPath(initialDirectory),
                 Title = "Select Maze File",
 
                 CheckFileExists = true,
                 CheckPathExists = true,
 
+                //Only the correct file types are shown and can be selected
                 DefaultExt = "json",
                 Filter = "JSON Files (*.json)|*.json",
                 RestoreDirectory = true,
 
+                //File isn't readonly 
                 ReadOnlyChecked = true,
                 ShowReadOnly = true,
 
             };
 
+            //If the user selects an ok file
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                JSONToMaze(ofd.FileName);
+                //Loads the file to the maze
+                JsonToMaze(ofd.FileName);
             }
         }
+
         /// <summary>
         /// Verifies/Creates required directories/folders.
         /// </summary>
@@ -110,8 +123,8 @@ namespace Nea_Maze_Solving_Application
         {
             string appDataFolder = GetDefaultFolderPath();
             string mazeHistoryFolder = GetDefaultFolderPath("MazeHistory");
-            string UndoQueueFolder = GetDefaultFolderPath("UndoQueue");
-            //Checks that all the desired directories exist
+            string undoQueueFolder = GetDefaultFolderPath("UndoQueue");
+            //Checks that all the desired directories exist, and if they don't creates them
             if (!Directory.Exists(appDataFolder))
             {
                 Directory.CreateDirectory(appDataFolder);
@@ -120,25 +133,28 @@ namespace Nea_Maze_Solving_Application
             {
                 Directory.CreateDirectory(mazeHistoryFolder);
             }
-            if (!Directory.Exists(UndoQueueFolder))
+            if (!Directory.Exists(undoQueueFolder))
             {
-                Directory.CreateDirectory(UndoQueueFolder);
+                Directory.CreateDirectory(undoQueueFolder);
             }
-            foreach (FileInfo file in new DirectoryInfo(UndoQueueFolder).GetFiles()) { file.Delete(); }
+            //Also clears the undoQueue folder to prevent it from getting filled up with lots of files
+            foreach (FileInfo file in new DirectoryInfo(undoQueueFolder).GetFiles()) { file.Delete(); }
 
 
         }
         /// <summary>
-        /// Gets local data folder file path and combines it with application name as well as any folder extension if provided. 
+        /// Gets local data folder file path and combines it with application name as well as any folder extension provided. 
         /// </summary>
         /// <param name="folderExtension">Folder in app data folder to be accessed.</param>
         /// <returns>String containing whole folder path</returns>
-        public string GetDefaultFolderPath(string folderExtension = null)
+        public string GetDefaultFolderPath(string? folderExtension = null)
         {
             string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string appDataFolder = Path.Combine(localAppData, "NEAMazeSolver");
-            try { return Path.Combine(appDataFolder, folderExtension); }
-            catch { return appDataFolder; }
+            //If no folder extension is provided returns just the default folder path
+            if(string.IsNullOrEmpty(folderExtension)){ return appDataFolder; }
+            //Else returns the combined one
+            return Path.Combine(appDataFolder, folderExtension);
         }
 
         /// <summary>
@@ -147,10 +163,10 @@ namespace Nea_Maze_Solving_Application
         /// <param name="mazeHistory">Stack of file paths for recent changes</param>
         public void UpdateGeneratedMazeHistory(ref Stack<string> mazeHistory)
         {   
-            string mazeHistoryPath = GetDefaultFolderPath("MazeHistory");
-            DirectoryInfo dir = new DirectoryInfo(mazeHistoryPath);
-            //If theres less than 10 files stored simply exports it
-            if (dir.GetFiles().Length < 10) { ExportTimedFile(ref mazeHistory, mazeHistoryPath); }
+             
+            DirectoryInfo dir = new DirectoryInfo(GetDefaultFolderPath("MazeHistory"));
+            //If there's less than 10 files stored simply exports it
+            if (dir.GetFiles().Length < 10) { ExportTimedFile(ref mazeHistory, "MazeHistory"); }
             else
             {
                 //Else deletes the oldest one then exports the file
@@ -162,7 +178,7 @@ namespace Nea_Maze_Solving_Application
                 }
                 Debug.WriteLine(oldestFile.FullName);
                 oldestFile.Delete();
-                ExportTimedFile(ref mazeHistory, mazeHistoryPath);
+                ExportTimedFile(ref mazeHistory, "MazeHistory");
             }
 
         }
@@ -170,16 +186,17 @@ namespace Nea_Maze_Solving_Application
         /// Exports the maze setting the file name to the current date and time.
         /// </summary>
         /// <param name="mazeHistory">Stack of file paths showing locations of exported files.</param>
-        /// <param name="folderPath">Optional folder path extension to store file at.</param>
-        public void ExportTimedFile(ref Stack<string> mazeHistory, string folderPath = null )
-        {            
+        /// <param name="extensionPath">Optional folder path extension to store file at.</param>
+        public void ExportTimedFile(ref Stack<string> mazeHistory, string? extensionPath = null )
+        {           
+            //Gets the current date to use as the file name using DateTime
             DateTime currentDate = DateTime.Now;
             string time = currentDate.ToString("dd-MM-yyyy-HH-mm-ss");
-            if (string.IsNullOrEmpty(folderPath)) { folderPath = GetDefaultFolderPath(); }
-            string filePath = Path.Combine(folderPath, time + ".json");
+            //Gets the full file path from the folder path with the extension combined with the filename from the time prepended to .json                           
+            string filePath = Path.Combine(GetDefaultFolderPath(extensionPath), time + ".json");
+            //Adds the file path to the stack of file paths, and then converts to the maze to a json stored at the file paths location
             mazeHistory.Push(filePath);
-            //MazeToCSVFile(filePath);
-            MazeToJSONFile(filePath);
+            MazeToJsonFile(filePath);
 
         }
 

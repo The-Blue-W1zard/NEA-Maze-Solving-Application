@@ -11,7 +11,7 @@ namespace Nea_Maze_Solving_Application
     internal class MazeFunctions(MazeCell[,] maze)
     {
         /// <summary>
-        /// Itterates through maze enabling/disabling all buttons.
+        /// Iterates through maze enabling/disabling all buttons.
         /// </summary>
         /// <param name="mode">Boolean value buttons will be toggled too.</param>
         public void ToggleAllMazeCells(bool mode)
@@ -31,10 +31,9 @@ namespace Nea_Maze_Solving_Application
         /// </summary>
         /// <param name="x">X coordinate of click.</param>
         /// <param name="y">Y coordinate of click.</param>
-        /// <returns>Point sepcifying which button was clicked.</returns>
+        /// <returns>Point specifying which button was clicked.</returns>
         public Point CoordsToButtonPoint(int x, int y)
         {
-            MessageBox.Show($"{maze.GetLength(0)},{maze.GetLength(1)}");
             int col = x / 32 - 1;
             int row = y / 32 - 1;
             //Checks that the user has clicked within the bounds of the maze, if not sets the location to be the closest possible cell.
@@ -49,7 +48,7 @@ namespace Nea_Maze_Solving_Application
         }
 
         /// <summary>
-        /// Itterates through the maze disabling all features of each cells.
+        /// Iterates through the maze disabling all the features of each cell except whether it's the start/end cell.
         /// </summary>
         public void ClearMaze()
         {
@@ -67,19 +66,18 @@ namespace Nea_Maze_Solving_Application
         /// <param name="path">List of points path follows.</param>
         public void UpdateMaze(List<Point> path)
         {
-            for (int i = 0; i < path.Count; i++)
+            foreach (Point p in path)
             {
                 try
                 {
-                    //checks if the cell is the start or end cell, preventing the program from changing its colour.
-                    if (maze[path[i].X, path[i].Y].isStartCell || maze[path[i].X, path[i].Y].isEndCell) { continue; }
-                    maze[path[i].X, path[i].Y].TogglePath();
-                    //Forces the program to update the colours of the maze cells, so path is smoothly animated on.
+                    //Checks if the cell is the start or end cell, preventing the program from changing its colour.
+                    if (maze[p.X, p.Y].isStartCell || maze[p.X, p.Y].isEndCell) { continue; }
+                    maze[p.X, p.Y].TogglePath();
+                    //Forces the program to update the colours of the maze cells, so path is smoothly animated onto the form.
                     Application.DoEvents();
                 }
-                catch { Debug.WriteLine("coordinates bad"); }
+                catch { Debug.WriteLine("Coordinates bad"); }
             }
-
         }
         /// <summary>
         /// Updates maze with explored cells, animating them in order.
@@ -88,18 +86,18 @@ namespace Nea_Maze_Solving_Application
         /// <param name="delay">Delay between changing each cell.</param>
         public void AnimateMaze(List<Point> path, int delay)
         {
-            for (int i = 0; i < path.Count; i++)
+            foreach (Point p in path)
             {
                 try
                 {
-                    if (maze[path[i].X, path[i].Y].isStartCell || maze[path[i].X, path[i].Y].isEndCell) { continue; }
-                    maze[path[i].X, path[i].Y].ToggleExplored();
+                    //Checks if the cell is the start or end cell, preventing the program from changing its colour.
+                    if (maze[p.X, p.Y].isStartCell || maze[p.X, p.Y].isEndCell) { continue; }
+                    maze[p.X, p.Y].ToggleExplored();
                     Thread.Sleep(delay);
                     Application.DoEvents();
                 }
-                catch { Debug.WriteLine("coordinates bad"); }
+                catch { Debug.WriteLine("Coordinates bad"); }
             }
-
         }
 
         

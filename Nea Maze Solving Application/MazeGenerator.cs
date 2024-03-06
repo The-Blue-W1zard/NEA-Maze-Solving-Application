@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Nea_Maze_Solving_Application
 {
     /// <summary>
-    /// Generates solvable mazes using a randomized depth first search or by recursive backtracking using inheritted algorithm functions.
+    /// Generates solvable mazes using a randomized depth first search or by recursive backtracking using inherited algorithm functions.
     /// </summary>
     /// <param name="maze">Maze algorithm will be executed on</param>
     internal class MazeGenerator(MazeCell[,] maze) : AlgorithmFunctions 
@@ -48,11 +48,11 @@ namespace Nea_Maze_Solving_Application
             while (queue.Count > 0)
             {
                 //Gets a random unvisited neighbour of the currently selected cell to explore next
-                Point next = RandomUnvisitedNeighbour(maze, current, ref visited);
-                //If cell doesnt have any neighbours...
+                Point next = RandomUnvisitedNeighbour(maze, current,2, ref visited);
+                //If cell doesn't have any neighbours...
                 if (next == none)
                 {
-                    //Works its way back up the queue of cells to explore till it finds a cell with an unvisted neighbour
+                    //Works its way back up the queue of cells to explore till it finds a cell with an unvisited neighbour
                     while (queue.Count > 0)
                     {
                         next = queue.Dequeue();
@@ -92,16 +92,16 @@ namespace Nea_Maze_Solving_Application
             List<Point> possibleNeighbours = Neighbours(maze,start,2,visited);
             possibleNeighbours = ShuffleList(possibleNeighbours);
              
-            //Itterates through each neighbour cell...
+            //Iterates through each neighbour cell...
             foreach(Point p in possibleNeighbours)
             {
-                //Checking that it hasnt been visited in another recursive calls exploration
+                //Checking that it hasn't been visited in another recursive calls exploration
                 if (!visited.Contains(p))
                 {
-                    //If it hasnt it connects the neighbouring cell to the start cell
+                    //If it hasn't it connects the neighbouring cell to the start cell
                     ConnectCells(maze, start, p);
                     Application.DoEvents();
-                    //And starts exploring the the neighbour cell
+                    //And starts exploring the neighbour cell
                     RecursiveBacktracker(p, ref visited);
 
                 }
@@ -113,7 +113,7 @@ namespace Nea_Maze_Solving_Application
         }
 
         /// <summary>
-        /// Accesible function that starts executing the recursive backtracker algorithm on the maze.
+        /// Accessible function that starts executing the recursive backtracked algorithm on the maze.
         /// </summary>
         /// <param name="start">Cell algorithm starts generating the maze from.</param>
         public void GenerateBacktrackedMaze(Point start)
@@ -125,7 +125,7 @@ namespace Nea_Maze_Solving_Application
 
 
         /// <summary>
-        /// Accesible function that creates a grid then excecutes a randomized DFS on it.
+        /// Accessible function that creates a grid then executes a randomized DFS on it.
         /// </summary>
         /// <param name="start">Cell algorithm starts generating the maze from.</param>
         public void GenerateDFSMaze(Point start)

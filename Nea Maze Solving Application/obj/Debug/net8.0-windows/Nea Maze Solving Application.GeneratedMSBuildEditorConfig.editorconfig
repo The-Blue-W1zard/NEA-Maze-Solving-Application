@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Nea_Maze_Solving_Application
-build_property.ProjectDir = C:\ActualStuff\NEA\NEA-Maze-Solving-Application\Nea Maze Solving Application\
+build_property.ProjectDir = C:\Actual Files\CodingProjects\Nea Maze Solving Application\NEA-Maze-Solving-Application\Nea Maze Solving Application\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

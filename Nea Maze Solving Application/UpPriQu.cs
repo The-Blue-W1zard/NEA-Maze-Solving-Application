@@ -11,7 +11,6 @@ namespace Nea_Maze_Solving_Application
     {
         private Dictionary<Point, int> sortedDict;
         private int capacity;
-        private Point None = new Point(-1, -1);
 
         /// <summary>
         /// Returns number of items in the priority queue 
@@ -19,7 +18,7 @@ namespace Nea_Maze_Solving_Application
         public int Count { get { return sortedDict.Count; } }
 
         /// <summary>
-        /// Sets the default capacity to 1500 if no other value specified
+        /// Sets the default capacity to 1500 if no other value specified, as this is the capacity the application is designed to hold.
         /// </summary>
         public UpPriQu() : this(capacity: 1500) { }
 
@@ -42,13 +41,13 @@ namespace Nea_Maze_Solving_Application
         /// Adds an item to the dictionary then sorts it so that item is in the correct position.
         /// </summary>
         /// <param name="point">Coordinates of maze cell</param>
-        /// <param name="value">Value asociated with maze cell</param>
+        /// <param name="value">Value associated with maze cell</param>
         public void Enqueue(Point point, int value)
         {
             if (sortedDict.Count <= capacity)
             {
                 sortedDict.Add(point, value);
-                //Uses LinQ to order items in the dictionary
+                //Uses LinQ to order items in the dictionary by associated value
                 var tempDict = from entry in sortedDict orderby entry.Value ascending select entry;
                 sortedDict = tempDict.ToDictionary();
             }
@@ -64,6 +63,7 @@ namespace Nea_Maze_Solving_Application
         public void Update(Point point, int newValue)
         {
             sortedDict[point] = newValue;
+            //Uses LinQ to order items in the dictionary by associated value
             var tempDict = from entry in sortedDict orderby entry.Value ascending select entry;
             sortedDict = tempDict.ToDictionary();
         }
@@ -75,27 +75,26 @@ namespace Nea_Maze_Solving_Application
         /// <returns>Bool of whether dictionary contains cell</returns>
         public bool Contains(Point point)
         {
-            if (sortedDict.ContainsKey(point)) return true;
-            return false;
+            return sortedDict.ContainsKey(point);
         }
 
         /// <summary>
-        /// Gets value asociated with coordinates of maze cell 
+        /// Gets value associated with coordinates of maze cell 
         /// </summary>
         /// <param name="point">Maze cell trying to get value from</param>
-        /// <returns>Value asociated with maze cell</returns>
+        /// <returns>Value associated with maze cell</returns>
         public int GetValue(Point point)
         {
-            if (sortedDict.TryGetValue(point, out int result)) return result;
-            return -1;
+            return sortedDict.GetValueOrDefault(point, -1);
         }
 
         /// <summary>
-        /// Dequeues coordinates of maze cell with shortest asociated value.
+        /// Dequeues coordinates of maze cell with the shortest associated value.
         /// </summary>
         /// <returns>Location of maze cell</returns>
         public Point Dequeue()
         {
+            //Returns the first item in the dictionary, found by using foreach loop which does one iteration
             Point shortest = new Point();
             foreach (Point point in sortedDict.Keys)
             {
@@ -105,8 +104,6 @@ namespace Nea_Maze_Solving_Application
             }
 
             return shortest;
-
-
 
         }
     }

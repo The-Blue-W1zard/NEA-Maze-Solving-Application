@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dPhlgiwVxhA6EU1ItQAYcBTs65RU/wnNU+LkE4AO8UdyFT2mDWroZTcMh3fA946bkZP2bpcCOix4+B3KN7R43g==",
+  "dgSpecHash": "DWtDk5VIcADmpf4zrIDlM1HkPcqiDvnfiVc8IE5fJVyvjbmgCMTOXK/W0dYFubUAl8YdKYWEAMYqoGryVFqG9g==",
   "success": true,
-  "projectFilePath": "C:\\ActualStuff\\NEA\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj",
+  "projectFilePath": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Nea Maze Solving Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\josep\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],

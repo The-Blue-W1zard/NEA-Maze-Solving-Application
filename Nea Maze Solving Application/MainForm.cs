@@ -120,8 +120,6 @@ namespace Nea_Maze_Solving_Application
                 for (int col = 0; col < maze.GetLength(1); col++)
                 {
                     maze[row, col] = new MazeCell(new Point(row, col));
-                    //maze[row, col].location = new Point(row, col);
-                    //maze[row, col].Intialize();
                     Controls.Add(maze[row, col]);
                     Invalidate();
                 }
@@ -129,15 +127,14 @@ namespace Nea_Maze_Solving_Application
             maze[startCell.X, startCell.Y].ToggleStartCell();
             maze[endCell.X, endCell.Y].ToggleEndCell();
         }
-        private void AlgorithmPrequisites()
+        private void UpdateUndoQueue()
         {
-            string undoQueuePath = mazeFileHandler.GetDefaultFolderPath("UndoQueue");
-            mazeFileHandler.ExportTimedFile(ref mazeHistory, undoQueuePath);
+            mazeFileHandler.ExportTimedFile(ref mazeHistory, "UndoQueue");
 
         }   
         private void GenerateMaze_Click(object sender, EventArgs e)
         {
-            AlgorithmPrequisites();
+            UpdateUndoQueue();
             MazeGenerator generator = new MazeGenerator(maze);
             mazeFunctions.ClearMaze();
             if (generatorAlgorithm == "None") { MessageBox.Show("No algorithm selected."); }
@@ -177,20 +174,20 @@ namespace Nea_Maze_Solving_Application
             try
             {
                 string prevMazeFilePath = mazeHistory.Pop();
-                mazeFileHandler.JSONToMaze(prevMazeFilePath);
+                mazeFileHandler.JsonToMaze(prevMazeFilePath);
 
             }
             catch { MessageBox.Show("Error - Nothing to undo"); }
         }
         private void Clear_Click(object sender, EventArgs e)
         {
-            AlgorithmPrequisites();
+            UpdateUndoQueue();
             mazeFunctions.ClearMaze();
             //CSVToMaze();
         }
         private void ChangeStart_Click(object sender, EventArgs e)
         {
-            AlgorithmPrequisites();
+            UpdateUndoQueue();
             if (!changingStartCell)
             {
                 ChangeStart.BackColor = Color.Green;
@@ -235,7 +232,7 @@ namespace Nea_Maze_Solving_Application
         }
         private void ChangeEnd_Click(object sender, EventArgs e)
         {
-            AlgorithmPrequisites();
+            UpdateUndoQueue();
             if (!changingEndCell)
             {
                 ChangeEnd.BackColor = Color.Red;
@@ -252,7 +249,7 @@ namespace Nea_Maze_Solving_Application
         }
         private void ReloadFromFile_Click(object sender, EventArgs e)
         {
-            AlgorithmPrequisites();
+            UpdateUndoQueue();
             mazeFileHandler.OpenFileExplorer("NEAMazeSolver");
 
         }
@@ -260,14 +257,14 @@ namespace Nea_Maze_Solving_Application
         {
             //string temp = GetCurrentTime() + ".csv";
             //MessageBox.Show(temp);
-            AlgorithmPrequisites();
+            UpdateUndoQueue();
             mazeFileHandler.ExportTimedFile(ref mazeHistory);
             MessageBox.Show("Finished Exporting Maze");
         }
 
         private void RecentMazeHistory_Click(object sender, EventArgs e)
         {
-            AlgorithmPrequisites();
+            UpdateUndoQueue();
             string path = Path.Combine("NEAMazeSolver", "MazeHistory");
             mazeFileHandler.OpenFileExplorer(path);
         }
@@ -275,7 +272,7 @@ namespace Nea_Maze_Solving_Application
         private void SolveMaze_Click(object sender, EventArgs e)
         {
             MazeSolver solver = new MazeSolver(maze,startCell,endCell);
-            AlgorithmPrequisites();
+            UpdateUndoQueue();
             List<Point> animationSteps = new();
             List<Point> path = new();
             if(algorithm == "None") { MessageBox.Show("No algorithm selected."); return; }
@@ -298,7 +295,7 @@ namespace Nea_Maze_Solving_Application
             if (finished.clearMaze == true) { mazeFunctions.ClearMaze(); }
             else if (finished.revertToPrev == true) {
                 string prevMazeFilePath = mazeHistory.Pop();
-                mazeFileHandler.JSONToMaze(prevMazeFilePath);
+                mazeFileHandler.JsonToMaze(prevMazeFilePath);
             }
 
         }
