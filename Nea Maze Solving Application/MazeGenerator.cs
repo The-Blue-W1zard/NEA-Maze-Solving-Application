@@ -31,10 +31,10 @@ namespace Nea_Maze_Solving_Application
         }
 
         /// <summary>
-        /// Executes a randomized depth first search on the maze, creating a solvable maze.
+        /// Executes a randomised depth first search on the maze, creating a solvable maze.
         /// </summary>
         /// <param name="start">Cell that maze will be generated from.</param>
-        private void RandomizedDFS(Point start)
+        private void RandomisedDFS(Point start)
         {   
             //Queue used to store which cells to visit and list stores cells that have been visited so far
             Queue<Point> queue = new Queue<Point>();
@@ -131,7 +131,7 @@ namespace Nea_Maze_Solving_Application
         public void GenerateDFSMaze(Point start)
         {
             GenerateGrid();
-            RandomizedDFS(start);
+            RandomisedDFS(start);
         }
 
     }

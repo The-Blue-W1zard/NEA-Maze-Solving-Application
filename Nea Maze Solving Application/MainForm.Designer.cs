@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             generateMaze = new Button();
-            ReloadMaze = new Button();
             Clear = new Button();
             ChangeStart = new Button();
             ChangeEnd = new Button();
@@ -47,6 +46,7 @@
             AStar = new Button();
             RandomDFS = new Button();
             RecursiveBacktracker = new Button();
+            UndoAction = new Button();
             SuspendLayout();
             // 
             // generateMaze
@@ -58,16 +58,6 @@
             generateMaze.Text = "Generate";
             generateMaze.UseVisualStyleBackColor = true;
             generateMaze.Click += GenerateMaze_Click;
-            // 
-            // ReloadMaze
-            // 
-            ReloadMaze.Location = new Point(1720, 461);
-            ReloadMaze.Name = "ReloadMaze";
-            ReloadMaze.Size = new Size(102, 23);
-            ReloadMaze.TabIndex = 4;
-            ReloadMaze.Text = "Undo Action";
-            ReloadMaze.UseVisualStyleBackColor = true;
-            ReloadMaze.Click += ReloadMaze_Click;
             // 
             // Clear
             // 
@@ -235,12 +225,23 @@
             RecursiveBacktracker.Text = "Rec Backtracker";
             RecursiveBacktracker.UseVisualStyleBackColor = true;
             // 
+            // UndoAction
+            // 
+            UndoAction.Location = new Point(1720, 461);
+            UndoAction.Name = "UndoAction";
+            UndoAction.Size = new Size(102, 23);
+            UndoAction.TabIndex = 22;
+            UndoAction.Text = "Undo Action";
+            UndoAction.UseVisualStyleBackColor = true;
+            UndoAction.Click += UndoAction_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaGreen;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(UndoAction);
             Controls.Add(RecursiveBacktracker);
             Controls.Add(RandomDFS);
             Controls.Add(AStar);
@@ -258,7 +259,6 @@
             Controls.Add(ChangeEnd);
             Controls.Add(ChangeStart);
             Controls.Add(Clear);
-            Controls.Add(ReloadMaze);
             Controls.Add(generateMaze);
             Name = "MainForm";
             Text = "NEA Maze Solver";
@@ -271,7 +271,6 @@
         #endregion
 
         private Button generateMaze;
-        private Button ReloadMaze;
         private Button Clear;
         private Button ChangeStart;
         private Button ChangeEnd;
@@ -289,5 +288,6 @@
         private Button AStar;
         private Button RandomDFS;
         private Button RecursiveBacktracker;
+        private Button UndoAction;
     }
 }

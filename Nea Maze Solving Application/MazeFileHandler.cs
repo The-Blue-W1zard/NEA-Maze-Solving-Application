@@ -64,7 +64,8 @@ namespace Nea_Maze_Solving_Application
 
             string jsonString = File.ReadAllText(filePath);
             //Makes sure that the inputted file type ends with json so doesn't try to load wrong
-            if (!jsonString.EndsWith(".json")) { MessageBox.Show("Wrong File Type");return; }
+            //CHANGE BACK BEFORE HAND IN
+            //if (!jsonString.EndsWith("json")) { MessageBox.Show(filePath);return; }
 
             //Converting back from TempCells to MazeCells nested in try catch in case erroneous data is inputted and serialization/conversion breaks
             try
