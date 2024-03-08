@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mazefunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mazefunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mazefilehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mazefilehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|c:\\actual files\\codingprojects\\nea maze solving application\\nea-maze-solving-application\\nea maze solving application\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\finishedform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\finishedform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\finishedform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\finishedform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\uppriqu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\uppriqu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mazesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mazesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\algorithmfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,32 +43,12 @@
       "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mazecell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mazefunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mazefunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\uppriqu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\uppriqu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|c:\\actual files\\codingprojects\\nea maze solving application\\nea-maze-solving-application\\nea maze solving application\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mazesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mazesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\finishedform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\finishedform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\finishedform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,10 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\finishedform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|solutionrelative:nea maze solving application\\finishedform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CABC2CEE-2483-4366-91B1-5086A08FB9A6}|Nea Maze Solving Application\\Nea Maze Solving Application.csproj|C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\nea maze solving application\\nea maze solving application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -94,15 +94,92 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
+              "Title": "UpPriQu.cs",
+              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\UpPriQu.cs",
+              "RelativeDocumentMoniker": "Nea Maze Solving Application\\UpPriQu.cs",
+              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\UpPriQu.cs",
+              "RelativeToolTip": "Nea Maze Solving Application\\UpPriQu.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAUwG4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-07T23:23:48.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FinishedForm.cs [Design]",
+              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.cs",
+              "RelativeDocumentMoniker": "Nea Maze Solving Application\\FinishedForm.cs",
+              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.cs [Design]",
+              "RelativeToolTip": "Nea Maze Solving Application\\FinishedForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-08T00:36:01.653Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FinishedForm.cs",
+              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.cs",
+              "RelativeDocumentMoniker": "Nea Maze Solving Application\\FinishedForm.cs",
+              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.cs",
+              "RelativeToolTip": "Nea Maze Solving Application\\FinishedForm.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAswCIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-08T00:40:21.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MazeFileHandler.cs",
+              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeFileHandler.cs",
+              "RelativeDocumentMoniker": "Nea Maze Solving Application\\MazeFileHandler.cs",
+              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeFileHandler.cs",
+              "RelativeToolTip": "Nea Maze Solving Application\\MazeFileHandler.cs",
+              "ViewState": "AQIAALIAAAAAAAAAAAAiwMkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-07T23:23:45.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MazeFunctions.cs",
+              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeFunctions.cs",
+              "RelativeDocumentMoniker": "Nea Maze Solving Application\\MazeFunctions.cs",
+              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeFunctions.cs",
+              "RelativeToolTip": "Nea Maze Solving Application\\MazeFunctions.cs",
+              "ViewState": "AQIAAFMAAAAAAAAAAAAmwG4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-07T23:23:46.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainForm.cs [Design]",
+              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MainForm.cs",
+              "RelativeDocumentMoniker": "Nea Maze Solving Application\\MainForm.cs",
+              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MainForm.cs [Design]",
+              "RelativeToolTip": "Nea Maze Solving Application\\MainForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-06T19:56:33.852Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "MazeSolver.cs",
               "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeSolver.cs",
               "RelativeDocumentMoniker": "Nea Maze Solving Application\\MazeSolver.cs",
               "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeSolver.cs",
               "RelativeToolTip": "Nea Maze Solving Application\\MazeSolver.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAL8AAAAAAAAAAAAqwMQAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T21:23:54.459Z"
+              "WhenOpened": "2024-03-06T21:23:54.459Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -112,110 +189,65 @@
               "RelativeDocumentMoniker": "Nea Maze Solving Application\\MazeGenerator.cs",
               "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeGenerator.cs",
               "RelativeToolTip": "Nea Maze Solving Application\\MazeGenerator.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIYAAAAJAAAA",
+              "ViewState": "AQIAAHAAAAAAAAAAAAAUwIoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-07T23:23:45.912Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Program.cs",
-              "RelativeDocumentMoniker": "Nea Maze Solving Application\\Program.cs",
-              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Program.cs",
-              "RelativeToolTip": "Nea Maze Solving Application\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-07T23:23:48.386Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UpPriQu.cs",
-              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\UpPriQu.cs",
-              "RelativeDocumentMoniker": "Nea Maze Solving Application\\UpPriQu.cs",
-              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\UpPriQu.cs",
-              "RelativeToolTip": "Nea Maze Solving Application\\UpPriQu.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAmwAIAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-07T23:23:48.912Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MazeFunctions.cs",
-              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeFunctions.cs",
-              "RelativeDocumentMoniker": "Nea Maze Solving Application\\MazeFunctions.cs",
-              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeFunctions.cs",
-              "RelativeToolTip": "Nea Maze Solving Application\\MazeFunctions.cs",
-              "ViewState": "AQIAADsAAAAAAAAAAAAwwB4AAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-07T23:23:46.681Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MazeFileHandler.cs",
-              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeFileHandler.cs",
-              "RelativeDocumentMoniker": "Nea Maze Solving Application\\MazeFileHandler.cs",
-              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeFileHandler.cs",
-              "RelativeToolTip": "Nea Maze Solving Application\\MazeFileHandler.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAAwBMAAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-07T23:23:45.221Z",
+              "WhenOpened": "2024-02-07T23:23:45.912Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MazeCell.cs",
-              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeCell.cs",
-              "RelativeDocumentMoniker": "Nea Maze Solving Application\\MazeCell.cs",
-              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeCell.cs",
-              "RelativeToolTip": "Nea Maze Solving Application\\MazeCell.cs",
-              "ViewState": "AQIAAFsAAAAAAAAAAAAUwHwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T00:39:24.177Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "AlgorithmFunctions.cs",
               "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\AlgorithmFunctions.cs",
               "RelativeDocumentMoniker": "Nea Maze Solving Application\\AlgorithmFunctions.cs",
               "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\AlgorithmFunctions.cs",
               "RelativeToolTip": "Nea Maze Solving Application\\AlgorithmFunctions.cs",
-              "ViewState": "AQIAAFAAAAAAAAAAAAAgwIgAAAARAAAA",
+              "ViewState": "AQIAAHYAAAAAAAAAAAA2wJEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-08T00:24:31.829Z"
+              "WhenOpened": "2024-02-08T00:24:31.829Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
+              "Title": "MazeCell.cs",
+              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeCell.cs",
+              "RelativeDocumentMoniker": "Nea Maze Solving Application\\MazeCell.cs",
+              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MazeCell.cs",
+              "RelativeToolTip": "Nea Maze Solving Application\\MazeCell.cs",
+              "ViewState": "AQIAAGEAAAAAAAAAAAAiwHwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-06T00:39:24.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MainForm.cs",
               "RelativeDocumentMoniker": "Nea Maze Solving Application\\MainForm.cs",
               "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MainForm.cs",
               "RelativeToolTip": "Nea Maze Solving Application\\MainForm.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAgwJoAAAAuAAAA",
+              "ViewState": "AQIAADUAAAAAAAAAAAAIwDwAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-07T23:24:02.88Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MainForm.cs [Design]",
-              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MainForm.cs",
-              "RelativeDocumentMoniker": "Nea Maze Solving Application\\MainForm.cs",
-              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MainForm.cs [Design]",
-              "RelativeToolTip": "Nea Maze Solving Application\\MainForm.cs [Design]",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Program.cs",
+              "RelativeDocumentMoniker": "Nea Maze Solving Application\\Program.cs",
+              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\Program.cs",
+              "RelativeToolTip": "Nea Maze Solving Application\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T19:56:33.852Z"
+              "WhenOpened": "2024-02-07T23:23:48.386Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "FinishedForm.Designer.cs",
               "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.Designer.cs",
               "RelativeDocumentMoniker": "Nea Maze Solving Application\\FinishedForm.Designer.cs",
@@ -223,34 +255,12 @@
               "RelativeToolTip": "Nea Maze Solving Application\\FinishedForm.Designer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T00:25:19.661Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "FinishedForm.cs [Design]",
-              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.cs",
-              "RelativeDocumentMoniker": "Nea Maze Solving Application\\FinishedForm.cs",
-              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.cs [Design]",
-              "RelativeToolTip": "Nea Maze Solving Application\\FinishedForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-08T00:36:01.653Z"
+              "WhenOpened": "2024-03-06T00:25:19.661Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "FinishedForm.cs",
-              "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.cs",
-              "RelativeDocumentMoniker": "Nea Maze Solving Application\\FinishedForm.cs",
-              "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\FinishedForm.cs",
-              "RelativeToolTip": "Nea Maze Solving Application\\FinishedForm.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAABQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-08T00:40:21.466Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
               "Title": "MainForm.Designer.cs",
               "DocumentMoniker": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MainForm.Designer.cs",
               "RelativeDocumentMoniker": "Nea Maze Solving Application\\MainForm.Designer.cs",
@@ -258,7 +268,8 @@
               "RelativeToolTip": "Nea Maze Solving Application\\MainForm.Designer.cs",
               "ViewState": "AQIAACwAAAAAAAAAAAAqwD0AAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-08T00:16:04.04Z"
+              "WhenOpened": "2024-02-08T00:16:04.04Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -281,7 +292,8 @@
               "ToolTip": "C:\\Actual Files\\CodingProjects\\Nea Maze Solving Application\\NEA-Maze-Solving-Application\\Nea Maze Solving Application\\MainForm.resx",
               "RelativeToolTip": "Nea Maze Solving Application\\MainForm.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2024-02-28T18:07:20.736Z"
+              "WhenOpened": "2024-02-28T18:07:20.736Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -196,7 +196,7 @@ namespace Nea_Maze_Solving_Application
             //Gets the full file path from the folder path with the extension combined with the filename from the time prepended to .json                           
             string filePath = Path.Combine(GetDefaultFolderPath(extensionPath), time + ".json");
             //Adds the file path to the stack of file paths, and then converts to the maze to a json stored at the file paths location
-            mazeHistory.Push(filePath);
+            if(!mazeHistory.Contains(filePath)){mazeHistory.Push(filePath);}
             MazeToJsonFile(filePath);
 
         }

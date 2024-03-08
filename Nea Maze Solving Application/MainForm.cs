@@ -274,8 +274,7 @@ namespace Nea_Maze_Solving_Application
         private void RecentMazeHistory_Click(object sender, EventArgs e)
         {
             UpdateUndoQueue();
-            string path = Path.Combine("NEAMazeSolver", "MazeHistory");
-            mazeFileHandler.OpenFileExplorer(path);
+            mazeFileHandler.OpenFileExplorer("MazeHistory");
         }
 
         /// <summary>
@@ -304,6 +303,7 @@ namespace Nea_Maze_Solving_Application
                 mazeFunctions.UpdateMaze(path);
                 FinishedAnimating();
             }
+            UpdateUndoQueue();
 
         }
         
