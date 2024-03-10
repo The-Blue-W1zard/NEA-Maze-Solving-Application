@@ -47,11 +47,14 @@
             RandomDFS = new Button();
             RecursiveBacktracker = new Button();
             UndoAction = new Button();
+            Kruskal = new Button();
+            DepthFirst = new Button();
+            Prims = new Button();
             SuspendLayout();
             // 
             // generateMaze
             // 
-            generateMaze.Location = new Point(1720, 138);
+            generateMaze.Location = new Point(1720, 167);
             generateMaze.Name = "generateMaze";
             generateMaze.Size = new Size(206, 23);
             generateMaze.TabIndex = 0;
@@ -61,7 +64,7 @@
             // 
             // Clear
             // 
-            Clear.Location = new Point(1828, 461);
+            Clear.Location = new Point(1828, 490);
             Clear.Name = "Clear";
             Clear.Size = new Size(98, 23);
             Clear.TabIndex = 5;
@@ -71,7 +74,7 @@
             // 
             // ChangeStart
             // 
-            ChangeStart.Location = new Point(1720, 167);
+            ChangeStart.Location = new Point(1720, 196);
             ChangeStart.Name = "ChangeStart";
             ChangeStart.Size = new Size(102, 23);
             ChangeStart.TabIndex = 6;
@@ -81,7 +84,7 @@
             // 
             // ChangeEnd
             // 
-            ChangeEnd.Location = new Point(1828, 167);
+            ChangeEnd.Location = new Point(1828, 196);
             ChangeEnd.Name = "ChangeEnd";
             ChangeEnd.Size = new Size(102, 23);
             ChangeEnd.TabIndex = 7;
@@ -91,7 +94,7 @@
             // 
             // ReloadFromFile
             // 
-            ReloadFromFile.Location = new Point(1720, 560);
+            ReloadFromFile.Location = new Point(1720, 589);
             ReloadFromFile.Name = "ReloadFromFile";
             ReloadFromFile.Size = new Size(206, 23);
             ReloadFromFile.TabIndex = 8;
@@ -101,7 +104,7 @@
             // 
             // ExportToFile
             // 
-            ExportToFile.Location = new Point(1720, 531);
+            ExportToFile.Location = new Point(1720, 560);
             ExportToFile.Name = "ExportToFile";
             ExportToFile.Size = new Size(206, 23);
             ExportToFile.TabIndex = 9;
@@ -111,7 +114,7 @@
             // 
             // RecentMazeHistory
             // 
-            RecentMazeHistory.Location = new Point(1720, 490);
+            RecentMazeHistory.Location = new Point(1720, 519);
             RecentMazeHistory.Name = "RecentMazeHistory";
             RecentMazeHistory.Size = new Size(206, 23);
             RecentMazeHistory.TabIndex = 10;
@@ -125,7 +128,7 @@
             label1.BackColor = Color.Transparent;
             label1.FlatStyle = FlatStyle.Flat;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(1720, 202);
+            label1.Location = new Point(1720, 231);
             label1.Name = "label1";
             label1.Size = new Size(158, 21);
             label1.TabIndex = 11;
@@ -137,7 +140,7 @@
             label2.BackColor = Color.Transparent;
             label2.FlatStyle = FlatStyle.Flat;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(1720, 291);
+            label2.Location = new Point(1720, 320);
             label2.Name = "label2";
             label2.Size = new Size(122, 21);
             label2.TabIndex = 12;
@@ -145,7 +148,7 @@
             // 
             // Slow
             // 
-            Slow.Location = new Point(1720, 315);
+            Slow.Location = new Point(1720, 344);
             Slow.Name = "Slow";
             Slow.Size = new Size(102, 23);
             Slow.TabIndex = 13;
@@ -154,7 +157,7 @@
             // 
             // Medium
             // 
-            Medium.Location = new Point(1828, 315);
+            Medium.Location = new Point(1828, 344);
             Medium.Name = "Medium";
             Medium.Size = new Size(102, 23);
             Medium.TabIndex = 14;
@@ -163,7 +166,7 @@
             // 
             // Fast
             // 
-            Fast.Location = new Point(1720, 344);
+            Fast.Location = new Point(1720, 373);
             Fast.Name = "Fast";
             Fast.Size = new Size(102, 23);
             Fast.TabIndex = 15;
@@ -172,7 +175,7 @@
             // 
             // SolveMaze
             // 
-            SolveMaze.Location = new Point(1720, 386);
+            SolveMaze.Location = new Point(1720, 415);
             SolveMaze.Name = "SolveMaze";
             SolveMaze.Size = new Size(206, 32);
             SolveMaze.TabIndex = 16;
@@ -182,7 +185,7 @@
             // 
             // Dijkstra
             // 
-            Dijkstra.Location = new Point(1720, 226);
+            Dijkstra.Location = new Point(1720, 255);
             Dijkstra.Name = "Dijkstra";
             Dijkstra.Size = new Size(102, 23);
             Dijkstra.TabIndex = 17;
@@ -191,7 +194,7 @@
             // 
             // BreadthFirst
             // 
-            BreadthFirst.Location = new Point(1828, 226);
+            BreadthFirst.Location = new Point(1828, 255);
             BreadthFirst.Name = "BreadthFirst";
             BreadthFirst.Size = new Size(102, 23);
             BreadthFirst.TabIndex = 18;
@@ -200,7 +203,7 @@
             // 
             // AStar
             // 
-            AStar.Location = new Point(1720, 255);
+            AStar.Location = new Point(1720, 284);
             AStar.Name = "AStar";
             AStar.Size = new Size(102, 23);
             AStar.TabIndex = 19;
@@ -227,7 +230,7 @@
             // 
             // UndoAction
             // 
-            UndoAction.Location = new Point(1720, 461);
+            UndoAction.Location = new Point(1720, 490);
             UndoAction.Name = "UndoAction";
             UndoAction.Size = new Size(102, 23);
             UndoAction.TabIndex = 22;
@@ -235,12 +238,42 @@
             UndoAction.UseVisualStyleBackColor = true;
             UndoAction.Click += UndoAction_Click;
             // 
+            // Kruskal
+            // 
+            Kruskal.Location = new Point(1720, 138);
+            Kruskal.Name = "Kruskal";
+            Kruskal.Size = new Size(102, 23);
+            Kruskal.TabIndex = 23;
+            Kruskal.Text = "Kruskal";
+            Kruskal.UseVisualStyleBackColor = true;
+            // 
+            // DepthFirst
+            // 
+            DepthFirst.Location = new Point(1828, 284);
+            DepthFirst.Name = "DepthFirst";
+            DepthFirst.Size = new Size(102, 23);
+            DepthFirst.TabIndex = 24;
+            DepthFirst.Text = "Depth First";
+            DepthFirst.UseVisualStyleBackColor = true;
+            // 
+            // Prims
+            // 
+            Prims.Location = new Point(1828, 138);
+            Prims.Name = "Prims";
+            Prims.Size = new Size(102, 23);
+            Prims.TabIndex = 25;
+            Prims.Text = "Prims";
+            Prims.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaGreen;
             ClientSize = new Size(1984, 1161);
+            Controls.Add(Prims);
+            Controls.Add(DepthFirst);
+            Controls.Add(Kruskal);
             Controls.Add(UndoAction);
             Controls.Add(RecursiveBacktracker);
             Controls.Add(RandomDFS);
@@ -289,5 +322,8 @@
         private Button RandomDFS;
         private Button RecursiveBacktracker;
         private Button UndoAction;
+        private Button Kruskal;
+        private Button DepthFirst;
+        private Button Prims;
     }
 }

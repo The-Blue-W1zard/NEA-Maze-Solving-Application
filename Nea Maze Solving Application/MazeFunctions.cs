@@ -91,7 +91,8 @@ namespace Nea_Maze_Solving_Application
                 try
                 {
                     //Checks if the cell is the start or end cell, preventing the program from changing its colour.
-                    if (maze[p.X, p.Y].isStartCell || maze[p.X, p.Y].isEndCell) { continue; }
+                    if (maze[p.X, p.Y].isStartCell || maze[p.X, p.Y].isEndCell || maze[p.X,p.Y].isWall) { continue; }
+                    
                     maze[p.X, p.Y].ToggleExplored();
                     Thread.Sleep(delay);
                     Application.DoEvents();
@@ -99,12 +100,5 @@ namespace Nea_Maze_Solving_Application
                 catch { Debug.WriteLine("Coordinates bad"); }
             }
         }
-
-        
-
-
-
-
-
     }
 }

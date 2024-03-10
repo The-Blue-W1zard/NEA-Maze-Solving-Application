@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Nea_Maze_Solving_Application
 {
@@ -19,7 +22,7 @@ namespace Nea_Maze_Solving_Application
         /// <param name="dist">How far out cells should be searched.</param>
         /// <param name="visited">List containing all previously explored cells.</param>
         /// <returns>List of possible neighbour cell locations.</returns>
-        public static List<Point> Neighbours(MazeCell[,] maze, Point current, int dist, List<Point>? visited = default)
+        public static List<Point> Neighbours(MazeCell[,] maze, Point current, int dist, HashSet<Point>? visited = default)
         {
             //Arrays store distance to explore horizontally and vertically, dependent on dist passed attribute 
             int[] checksRows = [0, 0, dist, -dist];
@@ -29,8 +32,8 @@ namespace Nea_Maze_Solving_Application
             int col = current.Y;
             List<Point> neighbours = [];
 
-            //If no visited list is passed, sets to empty list so cells never contained within visited. Essentially doesn't check if they are.
-            if (visited == default) { visited = new List<Point>(); }
+            //If no visited hashset is passed, sets to empty list so cells never contained within visited. Essentially doesn't check if they are.
+            if (visited == default) { visited = new HashSet<Point>(); }
 
             //Iterates through the 4 directions being explored
             for (int t = 0; t < 4; t++)
@@ -52,6 +55,43 @@ namespace Nea_Maze_Solving_Application
             }
             return neighbours;
         }
+        public Point RandomVisitedNeighbour(MazeCell[,] maze, Point current, int dist, HashSet<Point>? visited = default)
+        {
+            //Arrays store distance to explore horizontally and vertically, dependent on dist passed attribute 
+            int[] checksRows = [0, 0, dist, -dist];
+            int[] checksCols = [dist, -dist, 0, 0];
+            //Gets the number of rows and columns in the maze
+            int row = current.X;
+            int col = current.Y;
+            List<Point> neighbours = [];
+
+            //If no visited hashset is passed, sets to empty list so cells never contained within visited. Essentially doesn't check if they are.
+            if (visited == default) { visited = new HashSet<Point>(); }
+
+            //Iterates through the 4 directions being explored
+            for (int t = 0; t < 4; t++)
+            {
+                try
+                {
+                    //Nested in a try loop in case tries to access maze cell outside the boundaries of the 2D array 
+                    if (!maze[row + checksRows[t], col + checksCols[t]].isWall && visited.Contains(new Point(row + checksRows[t], col + checksCols[t])))
+                    {
+                        //If cell isn't a wall and isn't contained in explored it is added to the list of possible neighbours
+                        neighbours.Add(new Point(row + checksRows[t], col + checksCols[t]));
+                    }
+
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+            neighbours = ShuffleList(neighbours);
+            if (neighbours.Count != 0) { return neighbours[0]; }
+
+            return new Point(-1, -1);
+        }
+
 
         /// <summary>
         /// Gets a random unvisited neighbour cell. 
@@ -61,7 +101,7 @@ namespace Nea_Maze_Solving_Application
         /// <param name="dist">How far out cells should be searched.</param>
         /// <param name="visited">List containing all previously explored cells.</param>
         /// <returns>Point specifying cell if one is possible, else a default none value.</returns>
-        public Point RandomUnvisitedNeighbour(MazeCell[,] maze, Point current,int dist, ref List<Point> visited)
+        public Point RandomNeighbour(MazeCell[,] maze, Point current,int dist, HashSet<Point>? visited = null)
         {
             //Gets a list of unvisited neighbours and shuffles it
             List<Point> neighbours = Neighbours(maze, current, dist, visited);
@@ -74,13 +114,14 @@ namespace Nea_Maze_Solving_Application
 
         }
 
+        
         /// <summary>
         /// Works through dictionary of previous cells finding path from end to start if possible.
         /// </summary>
         /// <param name="prev">Dictionary of each cells previous cell.</param>
         /// <param name="initial">Cell backtracking from, target cell of solving algorithm.</param>
         /// <returns>List containing coordinates of cells that make the found path.</returns>
-        public List<Point> RecallPath(Dictionary<Point, Point> prev, Point initial)
+        public List<Point> RecallPath(MazeCell[,] maze, Dictionary<Point, Point> prev, Point initial)
         {
             Point none = new(-1, -1);
             Point current = initial;
@@ -89,6 +130,7 @@ namespace Nea_Maze_Solving_Application
             //While hasn't reached dead end (none) adds current cell to path then sets new current to be previous cell of the current cell
             while (current != none)
             {
+                if (maze[current.X,current.Y].isWall) {break; Debug.WriteLine("Wall");}
                 path.Add(current);
                 current = prev[current];
             }
@@ -140,6 +182,22 @@ namespace Nea_Maze_Solving_Application
                 (list[n], list[k]) = (list[k], list[n]);
             }
             return list;
+        }
+
+        public Dictionary<Point, Point> SetDefaultPreviousDictionary(MazeCell[,] maze)
+        {
+            Dictionary<Point, Point> prev = new Dictionary<Point, Point>();
+            for (int row = 0; row < maze.GetLength(0); row++)
+            {
+                for (int col = 0; col < maze.GetLength(1); col++)
+                {
+                    Point point = new(row, col);
+                    prev.Add(point, new Point(-1, -1));
+;
+                }
+            }
+
+            return prev;
         }
     }
 }

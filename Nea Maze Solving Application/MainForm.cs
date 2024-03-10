@@ -48,8 +48,8 @@ namespace Nea_Maze_Solving_Application
         private void InitializeGroupedButtons()
         {
             speedButtons = [Slow, Medium, Fast];
-            algorithmButtons = [Dijkstra, BreadthFirst, AStar];
-            generatorButtons = [RandomDFS, RecursiveBacktracker];
+            algorithmButtons = [Dijkstra, BreadthFirst, AStar, DepthFirst];
+            generatorButtons = [RandomDFS, RecursiveBacktracker, Kruskal, Prims];
             foreach (Button button in speedButtons) { button.Click += SpeedButton_Click; }
             foreach (Button button in algorithmButtons) { button.Click += AlgorithmButton_Click; }
             foreach (Button button in generatorButtons) { button.Click += GeneratorButton_Click; }
@@ -156,12 +156,14 @@ namespace Nea_Maze_Solving_Application
         {
             //Stores maze before anything has happened in undo queue.
             UpdateUndoQueue();
-            MazeGenerator generator = new MazeGenerator(maze);
+            MazeGenerator generator = new MazeGenerator(maze,startCell);
             mazeFunctions.ClearMaze();
-            //Checks algorithm has been selected and runs relevant one
+            //Checks which algorithm has been selected and runs relevant one
             if (generatorAlgorithm == "None") { MessageBox.Show("No algorithm selected."); }
-            else if (generatorAlgorithm == "RandomDFS") { generator.GenerateDFSMaze(startCell); }
-            else if (generatorAlgorithm == "RecursiveBacktracker") { generator.GenerateBacktrackedMaze(startCell); }
+            else if (generatorAlgorithm == "RandomDFS") { generator.GenerateDFSMaze(); }
+            else if (generatorAlgorithm == "RecursiveBacktracker") { generator.GenerateBacktrackedMaze(); }
+            else if (generatorAlgorithm ==  "Kruskal"){generator.GenerateKruskalMaze();}
+            else if (generatorAlgorithm == "Prims"){generator.GeneratePrimsMaze();}
             //Updates history of generated mazes
             mazeFileHandler.UpdateGeneratedMazeHistory(ref mazeHistory);
             //And prompts user to change the start and end cells
@@ -293,10 +295,11 @@ namespace Nea_Maze_Solving_Application
             else if (algorithm == "AStar") { path = solver.AStarSearch(out animationSteps); }
             else if (algorithm == "Dijkstra") { path = solver.DijkstraSearch(out animationSteps); }
             else if (algorithm == "BreadthFirst") { path = solver.BreadthFirstSearch(out animationSteps); }
+            else if (algorithm == "DepthFirst"){ path = solver.DepthFirstSearch(out animationSteps);}
             //Animates maze exploration using animationSteps list, with delay specified by speed button pressed previously
             mazeFunctions.AnimateMaze(animationSteps, animationDelay);
             //Checks whether path has been found 
-            if (path.Count == 1) { MessageBox.Show("No path found"); }
+            if (!path.Contains(startCell)) { MessageBox.Show("No path found"); FinishedAnimating();}
             else
             {
                 //And animates it if has been

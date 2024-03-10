@@ -1,6 +1,10 @@
 ﻿
 
 
+using System.Collections;
+using static System.Formats.Asn1.AsnWriter;
+using System.Security.Policy;
+
 namespace Nea_Maze_Solving_Application
 {
     /// <summary>
@@ -21,10 +25,11 @@ namespace Nea_Maze_Solving_Application
         {
             //Creates priority queue used to store cells to explore next, and dictionary to store cells connected to each other
             UpPriQu priorityQueue = new();
-            Dictionary<Point, Point> prev = [];
-            Point none = new(-1, -1);
+            Dictionary<Point, Point> prev = SetDefaultPreviousDictionary(maze);
+            HashSet<Point> visited = new HashSet<Point>();
             //List to store order cells are explored
             animationSteps = new List<Point>();
+
 
             //Iterates through the maze setting each cells priority to a maximum value
             for (int row = 0; row < maze.GetLength(0); row++)
@@ -33,11 +38,9 @@ namespace Nea_Maze_Solving_Application
                 {
                     Point point = new(row, col);
                     priorityQueue.Enqueue(point, int.MaxValue);
-                    prev.Add(point, none);
 
                 }
             }
-
 
             //Changes the priority of the start cell to 0
             priorityQueue.Update(start, 0);
@@ -48,6 +51,7 @@ namespace Nea_Maze_Solving_Application
                 //Dequeues the cell with the shortest associated distance and adds it to the list of cells to animate
                 Point current = priorityQueue.Dequeue();
                 animationSteps.Add(current);
+                visited.Add(current);
 
                 //Then checks if the dequeued cell is the goal cell
                 if (current == goal)
@@ -57,7 +61,7 @@ namespace Nea_Maze_Solving_Application
                 }
 
                 //Else iterates though each neighbouring cell of the dequeued cell
-                foreach (Point neighbour in Neighbours(maze, current, 1))
+                foreach (Point neighbour in Neighbours(maze, current, 1,visited))
                 {
                     //Checks that the priority queue contains the neighbour cell
                     if (!priorityQueue.Contains(neighbour)) { continue; }
@@ -75,7 +79,7 @@ namespace Nea_Maze_Solving_Application
                 //Loops until end cell found or all cells have been explored
             }
             //Returns the path from goal to start using the prev dictionary
-            return RecallPath(prev, goal);
+            return RecallPath(maze,prev, goal);
 
 
         }
@@ -89,7 +93,7 @@ namespace Nea_Maze_Solving_Application
         {
             //Creates a queue to store which cells to explore next and a dictionary to store cells that are connected to each other 
             Queue<Point> queue = new();
-            Dictionary<Point, Point> prev = [];
+            Dictionary<Point, Point> prev = SetDefaultPreviousDictionary(maze);
             //Hashset created to store cells that have been explored
             HashSet<Point> visited = new HashSet<Point>();
             //List stores order cells are explored to animate algorithm searching
@@ -125,7 +129,7 @@ namespace Nea_Maze_Solving_Application
                         queue.Enqueue(nextCell);
                         visited.Add(nextCell);
                         //And stores the neighbour cells previous cell as the dequeued cell
-                        prev.Add(nextCell, currentCell);
+                        prev[nextCell] = currentCell;
                     }
                 }
 
@@ -133,7 +137,7 @@ namespace Nea_Maze_Solving_Application
             while (queue.Count > 0);
             //While the queue isn't empty
             //Then returns the path from goal to start using the prev dictionary
-            return RecallPath(prev, goal);
+            return RecallPath(maze, prev, goal);
 
         }
         /// <summary>
@@ -149,8 +153,8 @@ namespace Nea_Maze_Solving_Application
             Dictionary<Point, int> gScore = new();
             //fScore = Current best guess of length of path from chosen cell to end cell
             Dictionary<Point, int> fScore = new();
-            //Creates dictionary to store cell each cell is connected to and list to store order cells are explored to animate algorithm searching
-            Dictionary<Point, Point> prev = new();
+            //Creates dictionary to store cell each cell is connected to and hashset to store order cells are explored to animate algorithm searching
+            Dictionary<Point, Point> prev = SetDefaultPreviousDictionary(maze);
             animationSteps = new List<Point>();
             Point none = new(-1, -1);
 
@@ -162,7 +166,6 @@ namespace Nea_Maze_Solving_Application
                     Point point = new(row, col);
                     gScore.Add(point, int.MaxValue);
                     fScore.Add(point, -1);
-                    prev.Add(point, none);
                 }
             }
 
@@ -211,7 +214,60 @@ namespace Nea_Maze_Solving_Application
             //This loop repeats till the priority queue is empty or the end cell has been found 
             //Then returns the path from goal to start using the prev dictionary
 
-            return RecallPath(prev, goal);
+            return RecallPath(maze, prev, goal);
+
+        }
+
+        /// <summary>
+        /// Private recursive function for executing a depth first search on the maze.
+        /// </summary>
+        /// <param name="current">Cell current recursive call starts from.</param>
+        /// <param name="visited">Hashset of visited cells.</param>
+        /// <param name="prev">Dictionary storing cell each cell is connected to.</param>
+        private bool RecursiveDepthFirstSearch(Point current, ref HashSet<Point> visited,ref Dictionary<Point,Point> prev)
+        {
+            //Adds the current cell to the hashset of visited cells
+            visited.Add(current);
+            //Checks that the goal cell hasn't been explored yet
+            if(current == goal){return true;}
+
+            //If it hasn't iterates through each neighbour of the current selected cell
+            foreach (Point nextCell in Neighbours(maze, current, 1, visited))
+            {
+                //Setting the neighbour cells previous cell to be the current cell
+                prev[nextCell] = current;
+                //Then recursively calls itself to explore the neighbouring cell
+                if (RecursiveDepthFirstSearch(nextCell, ref visited, ref prev))
+                {
+                    //If call returns true goal has been found so returns true to previous recursive call
+                    return true;
+                }
+                
+            }
+            //If goal hasn't been found returns false so algorithm keeps searching
+            return false;
+
+
+        }
+
+        /// <summary>
+        /// Public function that initialises variables and executes the DFS on the maze.
+        /// </summary>
+        /// <param name="animationSteps">Order that cells where explored so can be animated correctly.</param>
+        /// <returns>List of points specifying the path found between the start and end points</returns>
+        public List<Point> DepthFirstSearch(out List<Point> animationSteps)
+        {
+            //Creates hashset to store visited cells and dictionary to store each cells previous cell
+            HashSet<Point> visited = new HashSet<Point>();
+            Dictionary<Point, Point> prev = SetDefaultPreviousDictionary(maze);
+            //Calls recursive depth first search method to start solving the maze
+            RecursiveDepthFirstSearch(start, ref visited, ref prev);
+            //Sets previous value of the start cell to be none so recall path stops
+            prev[start] = new(-1, -1);
+            //As each recursive call adds cell being visited currently to visited hashset can convert it to list to show list of steps to animate
+            animationSteps = visited.ToList();
+            //Returns the path from goal to start using the prev dictionary
+            return RecallPath(maze, prev, goal);
 
         }
 
