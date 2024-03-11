@@ -119,7 +119,7 @@ namespace Nea_Maze_Solving_Application
         /// </summary>
         private void KruskalsAlgorithm()
         {
-            //List stores walls to be connected in maze and hashset stores hashsets that will be grouped together
+            //List stores walls to be connected in maze and hash set stores hashsets that will be grouped together
             List<Point> walls = new List<Point>();
             HashSet<HashSet<Point>> sets = new HashSet<HashSet<Point>>();
 
@@ -181,166 +181,51 @@ namespace Nea_Maze_Solving_Application
             }
         }
 
-        public void PrimsAlgorithm()
+        /// <summary>
+        /// Executes prims algorithm on the maze, randomly branching different paths forwards
+        /// </summary>
+        private void PrimsAlgorithm()
         {
+            //Hash-sets used to store which cells have been visited and which cells are on the frontier of exploration 
             HashSet<Point> visited = new HashSet<Point>();
             HashSet<Point> frontier = new HashSet<Point>();
-
-            Random random = new Random();
-
-            Point current = start;
-
-            visited.Add(current);
-            do
-            {
-                List<Point> neighbours = Neighbours(maze, current, 2, visited);
-                foreach (Point p in neighbours)
-                {
-                    frontier.Add(p);
-                }
-
-                Point nextCell = neighbours.ElementAt(random.Next(neighbours.Count));
-                visited.Add(nextCell);
-                frontier.Remove(nextCell);
-                ConnectCells(maze, current, nextCell);
-                current = nextCell;
-                Application.DoEvents();
-                //Thread.Sleep(10);
-            } while (frontier.Count > 0);
-
-        }
-        public void PrimsAlgorithmV2()
-        {
-            HashSet<Point> visited = new HashSet<Point>();
-            HashSet<Point> cellsWithNeighbours = new HashSet<Point>();
-
+            //Creates random generator to randomly select cells
             Random r = new Random();
-
-            Point current = start;
-            visited.Add(current);
-            do
-            {
-                if (Neighbours(maze, current, 2, visited).Count > 0)
-                {
-                    cellsWithNeighbours.Add(current);
-                }
-                else
-                {
-                    if (cellsWithNeighbours.Contains(current))
-                    {
-                        cellsWithNeighbours.Remove(current);
-                    }
-                    continue;
-                }
-
-                Point nextCell = RandomNeighbour(maze, current, 2, visited);
-                cellsWithNeighbours.Add(nextCell);
-                visited.Add(nextCell);
-                ConnectCells(maze, current, nextCell);
-                current = cellsWithNeighbours.ElementAt(r.Next(cellsWithNeighbours.Count));
-                Application.DoEvents();
-
-            } while (cellsWithNeighbours.Count > 0);
-
-        }
-        public void PrimsAlgorithmV3()
-        {
-            HashSet<Point> visited = new HashSet<Point>();
-            List<Point> frontier = new List<Point>();
-
-            Random random = new Random();
-           
-            frontier.Add(start);
-
-            while (frontier.Count > 0)
-            {
-                int index = random.Next(frontier.Count);
-                Point current = frontier[index];
-                frontier.RemoveAt(index);
-
-                visited.Add(current);
-
-                List<Point> neighbours = Neighbours(maze, current, 2, visited);
-
-                foreach (Point neighbour in neighbours)
-                {
-                    if (!frontier.Contains(neighbour))
-                    {
-                        frontier.Add(neighbour);
-                    }
-                }
-
-                if (neighbours.Count > 0)
-                {
-                    index = random.Next(neighbours.Count);
-                    Point randomNeighbour = neighbours[index];
-                    ConnectCells(maze,current,RandomNeighbour(maze,current,2,visited));
-                    Application.DoEvents();
-                }
-            }
-
-        }
-
-        public void PrimsAlgorithmV4()
-        {
-            HashSet<Point> visited = new HashSet<Point>();
-            HashSet<Point> frontier = new HashSet<Point>();
-            Random r = new Random();
-            //Point current = new Point(r.Next(maze.GetLength(0)), r.Next(maze.GetLength(1)));
-            Point current = start;
-            foreach (Point neighbours in Neighbours(maze,current, 2, visited)) {frontier.Add(neighbours); }
-
-            while (frontier.Count > 0)
-            {
-                int index = r.Next(frontier.Count);
-                current = frontier.ElementAt(index);
-                visited.Add(current);
-                frontier.Remove(current);
-
-                List<Point> neighbours = Neighbours(maze,current,2,visited);
-                index = r.Next(neighbours.Count);
-                Point randomNeighbour = neighbours.ElementAt(index);
-                ConnectCells(maze, current, randomNeighbour);
-                foreach (Point p in Neighbours(maze, randomNeighbour, 2, visited)) { frontier.Add(p); }
-                frontier.Remove(randomNeighbour);
-                Thread.Sleep(100);
-                Application.DoEvents();
-
-            }
-
-
-
-        }
-        public void PrimsAlgorithmV5()
-        {
-            HashSet<Point> visited = new HashSet<Point>();
-            HashSet<Point> frontier = new HashSet<Point>();
-            Random r = new Random();
-            //Point current = new Point(r.Next(maze.GetLength(0)), r.Next(maze.GetLength(1)));
+            //Initializes the current cell as the start cell and adds it to the list of visited cells 
             Point current = start;
             visited.Add(current);
 
+            //Does...
             do
             {
+                //Finds the unvisited neighbours of the current cell and adds them to the set of frontier cells
                 foreach (Point neighbours in Neighbours(maze, current, 2, visited)) { frontier.Add(neighbours); }
+                //Then randomly selects a frontier cell, setting it to be the new current cell
                 int index = r.Next(frontier.Count);
                 current = frontier.ElementAt(index);
+                //Adding it to the set of visited cells, and removing it from the frontier cells
                 visited.Add(current);
                 frontier.Remove(current);
+                //Then finds a random visited neighbour of the frontier cell
                 Point visitedCell = RandomVisitedNeighbour(maze, current, 2, visited);
+                //And connects it to the frontier cell
                 ConnectCells(maze, current, visitedCell);
+                Application.DoEvents();
 
             } while (frontier.Count > 0);
-
+            //While there are still frontier cells to explore
 
 
 
         }
 
+        /// <summary>
+        /// Accessible function that starts executing prims algorithm on the maze.
+        /// </summary>
         public void GeneratePrimsMaze()
         {
             GenerateGrid();
-            PrimsAlgorithmV5();
+            PrimsAlgorithm ();
         }
         /// <summary>
         /// Accessible function that starts executing the recursive backtracked algorithm on the maze.

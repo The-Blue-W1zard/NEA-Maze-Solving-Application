@@ -61,8 +61,13 @@ namespace Nea_Maze_Solving_Application
         /// <param name="filePath">File being loaded.</param>
         public void JsonToMaze(string filePath)
         {
-
-            string jsonString = File.ReadAllText(filePath);
+            string jsonString = null;
+            try
+            {
+                jsonString = File.ReadAllText(filePath);
+            }
+            catch { MessageBox.Show("File Failed to Load"); return; }
+            
             //Makes sure that the inputted file type ends with json so doesn't try to load wrong
             //CHANGE BACK BEFORE HAND IN
             //if (!jsonString.EndsWith("json")) { MessageBox.Show(filePath);return; }
@@ -86,7 +91,7 @@ namespace Nea_Maze_Solving_Application
         /// Opens a file explorer window where user can select a json file to load maze from.
         /// </summary>
         /// <param name="initialDirectory">Folder file explorer will start at.</param>
-        public void OpenFileExplorer(string initialDirectory)
+        public void OpenFileExplorer(string initialDirectory, ref Stack<string> mazeHistory)
         {
             //Opens file explorer window with settings to make sure...
             OpenFileDialog ofd = new OpenFileDialog()
@@ -112,6 +117,7 @@ namespace Nea_Maze_Solving_Application
             //If the user selects an ok file
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                ExportTimedFile(ref mazeHistory, "UndoQueue");
                 //Loads the file to the maze
                 JsonToMaze(ofd.FileName);
             }
@@ -162,12 +168,13 @@ namespace Nea_Maze_Solving_Application
         /// Updates the stored collection of the 10 most recently generated mazes, removing any older ones. 
         /// </summary>
         /// <param name="mazeHistory">Stack of file paths for recent changes</param>
-        public void UpdateGeneratedMazeHistory(ref Stack<string> mazeHistory)
+        public void UpdateGeneratedMazeHistory()
         {   
-             
+            //Empty stack created to pass into exportTimedFile method
+            Stack<string> emptyStack = null;
             DirectoryInfo dir = new DirectoryInfo(GetDefaultFolderPath("MazeHistory"));
             //If there's less than 10 files stored simply exports it
-            if (dir.GetFiles().Length < 10) { ExportTimedFile(ref mazeHistory, "MazeHistory"); }
+            if (dir.GetFiles().Length < 10) { ExportTimedFile(ref emptyStack, "MazeHistory", false); }
             else
             {
                 //Else deletes the oldest one then exports the file
@@ -177,9 +184,8 @@ namespace Nea_Maze_Solving_Application
                     //Uses last write time to compare file ages
                     if (file.LastWriteTime.CompareTo(oldestFile.LastWriteTime) > 0) { oldestFile = file; }
                 }
-                Debug.WriteLine(oldestFile.FullName);
                 oldestFile.Delete();
-                ExportTimedFile(ref mazeHistory, "MazeHistory");
+                ExportTimedFile(ref emptyStack, "MazeHistory", false);
             }
 
         }
@@ -188,15 +194,19 @@ namespace Nea_Maze_Solving_Application
         /// </summary>
         /// <param name="mazeHistory">Stack of file paths showing locations of exported files.</param>
         /// <param name="extensionPath">Optional folder path extension to store file at.</param>
-        public void ExportTimedFile(ref Stack<string> mazeHistory, string? extensionPath = null )
+        /// <param name="updateHistory">Optional parameterex shows whether to update the maze history.</param>
+        public void ExportTimedFile(ref Stack<string> mazeHistory, string? extensionPath = null, bool updateHistory = true)
         {           
             //Gets the current date to use as the file name using DateTime
             DateTime currentDate = DateTime.Now;
             string time = currentDate.ToString("dd-MM-yyyy-HH-mm-ss");
             //Gets the full file path from the folder path with the extension combined with the filename from the time prepended to .json                           
             string filePath = Path.Combine(GetDefaultFolderPath(extensionPath), time + ".json");
-            //Adds the file path to the stack of file paths, and then converts to the maze to a json stored at the file paths location
-            if(!mazeHistory.Contains(filePath)){mazeHistory.Push(filePath);}
+            //Adds the file path to the stack of file paths if required, and then converts to the maze to a json stored at the file paths location
+            if (updateHistory)
+            {
+                if (!mazeHistory.Contains(filePath)) { mazeHistory.Push(filePath); }
+            }
             MazeToJsonFile(filePath);
 
         }

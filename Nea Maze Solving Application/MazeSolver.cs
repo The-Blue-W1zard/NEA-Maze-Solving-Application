@@ -1,7 +1,4 @@
-﻿
-
-
-using System.Collections;
+﻿using System.Collections;
 using static System.Formats.Asn1.AsnWriter;
 using System.Security.Policy;
 
@@ -37,6 +34,7 @@ namespace Nea_Maze_Solving_Application
                 for (int col = 0; col < maze.GetLength(1); col++)
                 {
                     Point point = new(row, col);
+                    if (maze[row, col].isWall) { continue; }
                     priorityQueue.Enqueue(point, int.MaxValue);
 
                 }
@@ -182,7 +180,7 @@ namespace Nea_Maze_Solving_Application
                 Point current = priorityQueue.Dequeue();
                 //And checks whether the chosen cell is the end cell
                 if (current == goal) { break; }
-                //If it isn't the cell is added to list of cells to animate
+                //If it isn't the cell is added to list,, of cells to animate
                 animationSteps.Add(current);
 
                 //Then the algorithm iterates through each neighbouring cell of the dequeued cell
@@ -219,57 +217,86 @@ namespace Nea_Maze_Solving_Application
         }
 
         /// <summary>
-        /// Private recursive function for executing a depth first search on the maze.
+        /// Private DFS solver class used to execute a recursive DFS on the maze. 
         /// </summary>
-        /// <param name="current">Cell current recursive call starts from.</param>
-        /// <param name="visited">Hashset of visited cells.</param>
-        /// <param name="prev">Dictionary storing cell each cell is connected to.</param>
-        private bool RecursiveDepthFirstSearch(Point current, ref HashSet<Point> visited,ref Dictionary<Point,Point> prev)
+        private class DepthFirstSearchSolver : AlgorithmFunctions
         {
-            //Adds the current cell to the hashset of visited cells
-            visited.Add(current);
-            //Checks that the goal cell hasn't been explored yet
-            if(current == goal){return true;}
+            private HashSet<Point> visited;
+            private Dictionary<Point, Point> prev;
+            private Point goal;
+            private Point start;
+            private MazeCell[,] maze;
 
-            //If it hasn't iterates through each neighbour of the current selected cell
-            foreach (Point nextCell in Neighbours(maze, current, 1, visited))
+            /// <summary>
+            /// Class constructor initialises variables for DFS solver.
+            /// </summary>
+            /// <param name="maze">Maze being searched</param>
+            /// <param name="start"></param>
+            /// <param name="goal"></param>
+            public DepthFirstSearchSolver(MazeCell[,] maze, Point start, Point goal)
             {
-                //Setting the neighbour cells previous cell to be the current cell
-                prev[nextCell] = current;
-                //Then recursively calls itself to explore the neighbouring cell
-                if (RecursiveDepthFirstSearch(nextCell, ref visited, ref prev))
-                {
-                    //If call returns true goal has been found so returns true to previous recursive call
-                    return true;
-                }
-                
+                this.maze = maze;
+                this.start = start;
+                this.goal = goal;
+                visited = new HashSet<Point>();
+                prev = SetDefaultPreviousDictionary(maze);
             }
-            //If goal hasn't been found returns false so algorithm keeps searching
-            return false;
 
+            /// <summary>
+            /// Private recursive function to execute depth first search on the maze
+            /// </summary> 
+            /// <param name="current">Cell call is searching from.</param>
+            /// <returns>Boolean value signifying if end has been found yet.</returns>
+            private bool RecursiveDepthFirstSearch(Point current)
+            {
+                //Adds the current cell to the hash set of visited cells
+                visited.Add(current);
 
+                //Checks that the current cell isn't the goal cell
+                if (current == goal) { return true; }
+
+                //If it isn't iterates through each neighbour of the current selected cell
+                foreach (Point nextCell in Neighbours(maze, current, 1, visited))
+                {
+                    //Setting the neighbour cells previous cell to be the current cell
+                    prev[nextCell] = current;
+
+                    //Then recursively calls itself to explore the neighbouring cell
+                    if (RecursiveDepthFirstSearch(nextCell))
+                    {
+                        //If call returns true goal has been found so returns true to previous recursive call
+                        return true;
+                    }
+                }
+                //If goal hasn't been found returns false
+                return false;
+            }
+
+            /// <summary>
+            /// Public function within class used to start executing DFS on the maze.
+            /// </summary>
+            /// <param name="animationSteps">Order that cells where explored so can be animated correctly.</param>
+            /// <returns>List of points specifying the path found between the start and end points.</returns>
+            public List<Point> ExecuteDepthFirstSearch(out List<Point> animationSteps)
+            {
+                RecursiveDepthFirstSearch(start);
+                prev[start] = new Point(-1, -1);
+                animationSteps = visited.ToList();
+                return RecallPath(maze, prev, goal);
+            }
         }
 
         /// <summary>
-        /// Public function that initialises variables and executes the DFS on the maze.
+        /// Public function that creates a DFS object and executes it on the maze.
         /// </summary>
         /// <param name="animationSteps">Order that cells where explored so can be animated correctly.</param>
-        /// <returns>List of points specifying the path found between the start and end points</returns>
+        /// <returns>List of points specifying the path found between the start and end points.</returns>
         public List<Point> DepthFirstSearch(out List<Point> animationSteps)
         {
-            //Creates hashset to store visited cells and dictionary to store each cells previous cell
-            HashSet<Point> visited = new HashSet<Point>();
-            Dictionary<Point, Point> prev = SetDefaultPreviousDictionary(maze);
-            //Calls recursive depth first search method to start solving the maze
-            RecursiveDepthFirstSearch(start, ref visited, ref prev);
-            //Sets previous value of the start cell to be none so recall path stops
-            prev[start] = new(-1, -1);
-            //As each recursive call adds cell being visited currently to visited hashset can convert it to list to show list of steps to animate
-            animationSteps = visited.ToList();
-            //Returns the path from goal to start using the prev dictionary
-            return RecallPath(maze, prev, goal);
-
+            DepthFirstSearchSolver DFSSolver = new DepthFirstSearchSolver(maze, start, goal);
+            return DFSSolver.ExecuteDepthFirstSearch(out animationSteps);
+            
         }
-
+        
     }
 }

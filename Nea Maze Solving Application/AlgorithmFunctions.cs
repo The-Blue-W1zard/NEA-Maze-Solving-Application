@@ -20,7 +20,7 @@ namespace Nea_Maze_Solving_Application
         /// <param name="maze">Maze to be checked.</param>
         /// <param name="current">Initial cell to search from.</param>
         /// <param name="dist">How far out cells should be searched.</param>
-        /// <param name="visited">List containing all previously explored cells.</param>
+        /// <param name="visited">Hashset containing all previously explored cells.</param>
         /// <returns>List of possible neighbour cell locations.</returns>
         public static List<Point> Neighbours(MazeCell[,] maze, Point current, int dist, HashSet<Point>? visited = default)
         {
@@ -32,7 +32,7 @@ namespace Nea_Maze_Solving_Application
             int col = current.Y;
             List<Point> neighbours = [];
 
-            //If no visited hashset is passed, sets to empty list so cells never contained within visited. Essentially doesn't check if they are.
+            //If no visited hashset is passed, sets to empty set so neighbour cells are never contained within visited.
             if (visited == default) { visited = new HashSet<Point>(); }
 
             //Iterates through the 4 directions being explored
@@ -43,7 +43,7 @@ namespace Nea_Maze_Solving_Application
                     //Nested in a try loop in case tries to access maze cell outside the boundaries of the 2D array 
                     if (!maze[row + checksRows[t], col + checksCols[t]].isWall && !visited.Contains(new Point(row + checksRows[t], col + checksCols[t])))
                     {
-                        //If cell isn't a wall and isn't contained in explored it is added to the list of possible neighbours
+                        //If cell isn't a wall and isn't contained in visited it is added to the list of possible neighbours
                         neighbours.Add(new Point(row + checksRows[t], col + checksCols[t]));
                     }
 
@@ -55,7 +55,16 @@ namespace Nea_Maze_Solving_Application
             }
             return neighbours;
         }
-        public Point RandomVisitedNeighbour(MazeCell[,] maze, Point current, int dist, HashSet<Point>? visited = default)
+
+        /// <summary>
+        /// Gets a random visited neighbour cell (required for prims algorithm) 
+        /// </summary>
+        /// <param name="maze">Maze to be checked.</param>
+        /// <param name="current">Initial cell to search from.</param>
+        /// <param name="dist">How far out cells should be searched.</param>
+        /// <param name="visited">List containing all previously explored cells.</param>
+        /// <returns>Point specifying visited neighbour cell.</returns>
+        public Point RandomVisitedNeighbour(MazeCell[,] maze, Point current, int dist, HashSet<Point> visited)
         {
             //Arrays store distance to explore horizontally and vertically, dependent on dist passed attribute 
             int[] checksRows = [0, 0, dist, -dist];
@@ -64,10 +73,7 @@ namespace Nea_Maze_Solving_Application
             int row = current.X;
             int col = current.Y;
             List<Point> neighbours = [];
-
-            //If no visited hashset is passed, sets to empty list so cells never contained within visited. Essentially doesn't check if they are.
-            if (visited == default) { visited = new HashSet<Point>(); }
-
+          
             //Iterates through the 4 directions being explored
             for (int t = 0; t < 4; t++)
             {
@@ -76,7 +82,7 @@ namespace Nea_Maze_Solving_Application
                     //Nested in a try loop in case tries to access maze cell outside the boundaries of the 2D array 
                     if (!maze[row + checksRows[t], col + checksCols[t]].isWall && visited.Contains(new Point(row + checksRows[t], col + checksCols[t])))
                     {
-                        //If cell isn't a wall and isn't contained in explored it is added to the list of possible neighbours
+                        //If cell isn't a wall and is contained in visited set it is added to the list of possible neighbours
                         neighbours.Add(new Point(row + checksRows[t], col + checksCols[t]));
                     }
 
@@ -87,19 +93,17 @@ namespace Nea_Maze_Solving_Application
                 }
             }
             neighbours = ShuffleList(neighbours);
-            if (neighbours.Count != 0) { return neighbours[0]; }
-
-            return new Point(-1, -1);
+            return neighbours[0];
         }
 
 
         /// <summary>
-        /// Gets a random unvisited neighbour cell. 
+        /// Gets a random, unvisited neighbour cell. 
         /// </summary>
         /// <param name="maze">Maze to be checked.</param>
         /// <param name="current">Initial cell searching from.</param>
         /// <param name="dist">How far out cells should be searched.</param>
-        /// <param name="visited">List containing all previously explored cells.</param>
+        /// <param name="visited">Hashset containing all previously explored cells.</param>
         /// <returns>Point specifying cell if one is possible, else a default none value.</returns>
         public Point RandomNeighbour(MazeCell[,] maze, Point current,int dist, HashSet<Point>? visited = null)
         {
@@ -130,7 +134,7 @@ namespace Nea_Maze_Solving_Application
             //While hasn't reached dead end (none) adds current cell to path then sets new current to be previous cell of the current cell
             while (current != none)
             {
-                if (maze[current.X,current.Y].isWall) {break; Debug.WriteLine("Wall");}
+                if (maze[current.X,current.Y].isWall) {break;}
                 path.Add(current);
                 current = prev[current];
             }
@@ -184,9 +188,15 @@ namespace Nea_Maze_Solving_Application
             return list;
         }
 
+        /// <summary>
+        /// Sets previous value of each maze cell to default value.
+        /// </summary>
+        /// <param name="maze">Maze being iterated through.</param>
+        /// <returns>Dictionary with default previous values.</returns>
         public Dictionary<Point, Point> SetDefaultPreviousDictionary(MazeCell[,] maze)
         {
             Dictionary<Point, Point> prev = new Dictionary<Point, Point>();
+            //Iterates through every maze cell setting previous to be (-1,-1)
             for (int row = 0; row < maze.GetLength(0); row++)
             {
                 for (int col = 0; col < maze.GetLength(1); col++)

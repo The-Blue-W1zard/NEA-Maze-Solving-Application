@@ -34,7 +34,7 @@ namespace Nea_Maze_Solving_Application
             mazeFunctions = new MazeFunctions(maze);
             mazeFileHandler = new MazeFileHandler(maze);
             mazeFileHandler.GenerateAppData();
-            InitializeGroupedButtons();
+            InitialiseGroupedButtons();
 
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace Nea_Maze_Solving_Application
         /// <summary>
         /// Adds different click event handlers to relevant buttons.
         /// </summary>
-        private void InitializeGroupedButtons()
+        private void InitialiseGroupedButtons()
         {
             speedButtons = [Slow, Medium, Fast];
             algorithmButtons = [Dijkstra, BreadthFirst, AStar, DepthFirst];
@@ -165,7 +165,7 @@ namespace Nea_Maze_Solving_Application
             else if (generatorAlgorithm ==  "Kruskal"){generator.GenerateKruskalMaze();}
             else if (generatorAlgorithm == "Prims"){generator.GeneratePrimsMaze();}
             //Updates history of generated mazes
-            mazeFileHandler.UpdateGeneratedMazeHistory(ref mazeHistory);
+            mazeFileHandler.UpdateGeneratedMazeHistory();
             //And prompts user to change the start and end cells
             MessageBox.Show("Change the start and end cells using the buttons highlighted to the right.");
             ChangeStart.BackColor = Color.Yellow; ChangeEnd.BackColor = Color.Yellow;
@@ -256,7 +256,7 @@ namespace Nea_Maze_Solving_Application
         private void ReloadFromFile_Click(object sender, EventArgs e)
         {
             UpdateUndoQueue();
-            mazeFileHandler.OpenFileExplorer("NEAMazeSolver");
+            mazeFileHandler.OpenFileExplorer("NEAMazeSolver", ref mazeHistory);
 
         }
         /// <summary>
@@ -264,7 +264,6 @@ namespace Nea_Maze_Solving_Application
         /// </summary>
         private void ExportToFile_Click(object sender, EventArgs e)
         {
-            UpdateUndoQueue();
             mazeFileHandler.ExportTimedFile(ref mazeHistory);
             //Informs the user when maze has finished exporting
             MessageBox.Show("Finished Exporting Maze"); 
@@ -275,8 +274,7 @@ namespace Nea_Maze_Solving_Application
         /// </summary>
         private void RecentMazeHistory_Click(object sender, EventArgs e)
         {
-            UpdateUndoQueue();
-            mazeFileHandler.OpenFileExplorer("MazeHistory");
+            mazeFileHandler.OpenFileExplorer("MazeHistory", ref mazeHistory);
         }
 
         /// <summary>
